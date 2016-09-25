@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:background="@color/primary"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/accent"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:src="@color/accent"
+            android:id="@+id/contact_image"
+            android:layout_width="102dp"
+            android:layout_height="142dp"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/contact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="sans-serif-medium"
+                android:text="Keshav Kedarnath"
+                android:textColor="#ffffff"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/contact_designation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="President"
+                android:textColor="#fff"
+                android:textSize="18sp" />
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/call"
+                    android:layout_width="wrap_content"
+                    android:padding="8dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/phoneImage"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:tint="#000000"
+                        android:src="@drawable/ic_call_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/phoneno"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/phoneImage"
+                        android:text="9999999999"
+                        android:textColor="#fff" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:padding="8dp"
+                    android:layout_below="@+id/call"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:tint="#000000"
+                        android:id="@+id/emailImage"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_email_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/emailTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/emailImage"
+                        android:text="abcd@bits-atmos.org"
+                        android:textColor="#fff" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:orientation="horizontal">
+
+                <Button
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="call"
+                    android:textColor="@android:color/white" />
+
+                <Button
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:text="E-mail"
+
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

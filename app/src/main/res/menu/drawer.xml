@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_menu"
+            android:checked="true"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/events"
+            android:title="Events" />
+        <item
+            android:id="@+id/schedule"
+            android:title="Schedule" />
+
+        <item
+            android:id="@+id/register"
+            android:title="Register" />
+        <item
+            android:id="@+id/favourites"
+            android:title="Favourites" />
+        <item
+            android:id="@+id/feed"
+            android:title="Feed" />
+
+        <item
+            android:id="@+id/Guide"
+            android:title="Guide"/>
+
+        <item
+            android:id="@+id/AppCredits"
+            android:title="App Credits" />
+
+        <item
+            android:id="@+id/reachCampus"
+            android:title="Reach Campus" />
+        <item
+            android:id="@+id/campusMap"
+            android:title="Campus Map" />
+
+        <item
+            android:id="@+id/contactUs"
+            android:title="Contact Us" />
+
+        <item
+            android:id="@+id/Sponsers"
+            android:title="Sponsers"/>
+
+    </group>
+</menu>
