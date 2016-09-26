@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.shreeda.atmos2k16.Set.EventSet;
+
 import java.util.ArrayList;
 
 /**
