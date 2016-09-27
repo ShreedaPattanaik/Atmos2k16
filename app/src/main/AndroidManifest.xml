@@ -6,18 +6,36 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name="App.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".Set.SplashScreen">
+            android:name=".EventDetailsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".Set.SplashScreen"
+            android:label="Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+
+        <service
+            android:name=".Services.ScheduleUpdateService"
+            android:exported="false"></service>
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

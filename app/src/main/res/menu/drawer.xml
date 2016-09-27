@@ -16,9 +16,7 @@
         <item
             android:id="@+id/register"
             android:title="Register" />
-        <item
-            android:id="@+id/favourites"
-            android:title="Favourites" />
+
         <item
             android:id="@+id/feed"
             android:title="Feed" />
@@ -31,16 +29,6 @@
             android:id="@+id/AppCredits"
             android:title="App Credits" />
 
-        <item
-            android:id="@+id/reachCampus"
-            android:title="Reach Campus" />
-        <item
-            android:id="@+id/campusMap"
-            android:title="Campus Map" />
-
-        <item
-            android:id="@+id/contactUs"
-            android:title="Contact Us" />
 
         <item
             android:id="@+id/Sponsers"

@@ -11,8 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 
 import Helper.RecyclerClickListener;
 
-import static com.example.shreeda.atmos2k16.R.id.recyclerView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -48,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
 //
 
 
-        setContentView(R.layout.activity_main2);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        final MyAdapter mAdapter = new MyAdapter(this);
+        setContentView(R.layout.activity_main);
+//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        final MyAdapter mAdapter = new MyAdapter(this);
 
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//        mRecyclerView.setAdapter(mAdapter);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
 
@@ -91,21 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                     break;
 
-                case R.id.reachCampus:
 
-                    transaction.commit();
-                    menuItem.setChecked(true);
-                    mDrawer.closeDrawer(Gravity.LEFT);
-
-                    break;
-
-                case R.id.campusMap:
-
-                    transaction.commit();
-                    menuItem.setChecked(true);
-                    mDrawer.closeDrawer(Gravity.LEFT);
-
-                    break;
                 case R.id.schedule:
 
                     transaction.commit();
@@ -126,29 +109,47 @@ public class MainActivity extends AppCompatActivity {
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
+                    startActivity(new Intent(MainActivity.this, EventDetailsActivity.class));
 
                     break;
-                case R.id.contactUs:
 
-                    fragment = new ContactsFragment();
-                    transaction.replace(R.id.main_scroll, fragment, "contacts");
-                    transaction.commit();
-                    menuItem.setChecked(true);
-                    mDrawer.closeDrawer(Gravity.LEFT);
 
-                    break;
-                case R.id.favourites:
-
-                    transaction.commit();
-                    menuItem.setChecked(true);
-                    mDrawer.closeDrawer(Gravity.LEFT);
-
-                    break;
                 case R.id.feed:
 
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
+
+                    break;
+
+                case R.id.Guide:
+
+
+                    transaction.commit();
+                    menuItem.setChecked(true);
+                    mDrawer.closeDrawer(Gravity.LEFT);
+
+                    break;
+
+
+                case R.id.AppCredits:
+
+
+                    transaction.commit();
+                    menuItem.setChecked(true);
+                    mDrawer.closeDrawer(Gravity.LEFT);
+
+                    break;
+
+                case R.id.Sponsers:
+
+                    fragment = new SponsorsFragment();
+                    transaction.replace(R.id.container, fragment, "Sponsors");
+                    transaction.commit();
+                    menuItem.setChecked(true);
+                    mDrawer.closeDrawer(Gravity.LEFT);
+
+                    break;
 
 
             }

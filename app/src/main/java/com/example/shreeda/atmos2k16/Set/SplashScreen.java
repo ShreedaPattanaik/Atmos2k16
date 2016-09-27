@@ -2,15 +2,20 @@ package com.example.shreeda.atmos2k16.Set;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.example.shreeda.atmos2k16.MainActivity;
 import com.example.shreeda.atmos2k16.R;
+import com.example.shreeda.atmos2k16.Services.ScheduleUpdateService;
 import com.squareup.picasso.Picasso;
+
+import App.Config;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -63,5 +68,15 @@ public class SplashScreen extends AppCompatActivity {
             }
         },1000);
 
+        service();
+    }
+
+    private void service() {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!sharedPreferences.getBoolean(Config.LastUpdated, false)) {
+            Intent intent = new Intent(this, ScheduleUpdateService.class);
+            startService(intent);
+        }
     }
 }

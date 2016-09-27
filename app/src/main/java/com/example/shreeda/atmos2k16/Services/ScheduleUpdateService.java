@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import App.Config;
 import App.ControllerConstant;
 import App.VolleySingleton;
 
@@ -161,7 +162,7 @@ public class ScheduleUpdateService extends IntentService {
                     }
                     scheduleTableManager.close();
 
-                    SharedPreferences preferences=getApplicationContext().getSharedPreferences(PACKAGE_NAME,MODE_PRIVATE);
+                    SharedPreferences preferences=getApplicationContext().getSharedPreferences(Config.LastUpdated,MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putLong("last" , updatedAt);
                     editor.apply();
@@ -183,8 +184,8 @@ public class ScheduleUpdateService extends IntentService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> temp = new HashMap<>();
                 temp.put("tag", "check_time");
-                SharedPreferences prefs=getApplicationContext().getSharedPreferences(PACKAGE_NAME,MODE_PRIVATE);
-                temp.put("check_time", "0");
+                SharedPreferences preferences=getApplicationContext().getSharedPreferences(Config.LastUpdated,MODE_PRIVATE);
+                temp.put("check_time", "last");
                 return temp;
             }
         };

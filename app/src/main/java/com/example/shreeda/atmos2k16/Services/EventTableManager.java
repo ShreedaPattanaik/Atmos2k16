@@ -3,6 +3,7 @@ package com.example.shreeda.atmos2k16.Services;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -228,9 +229,11 @@ public class EventTableManager {
         cv.put(KEY_IMAGE_DOWNLOAD  ,0);
         cv.put(KEY_FAVOURITE       ,0);
 
-        open();
-        success = ourDatabase.insert(DATABASE_TABLE, null, cv);
-//        close();
+        try {
+            success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
+        }catch (SQLiteConstraintException e){
+            success=ourDatabase.update(DATABASE_TABLE,cv,KEY_ID+"="+id,null);
+        }
 
         return success;
     }
