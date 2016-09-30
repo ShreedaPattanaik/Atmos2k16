@@ -6,6 +6,7 @@ package App;
 
 public class ControllerConstant {
     public static String url="http://spjimrsprint.com/android/android_spjimr_api/index.php";
+    public static String url1= "http://www.bits-atmos.org/App";
     public static final String SENT_TOKEN_TO_SERVER = "com.dota.tech.pearl2k16.token_sent";
     public static String[] names = {"Main Gate", "Bus Stop", "Cafetaria", "Auditorium", "Stage 1", "Stage 2", "Connaught Place", "SBH & ATM", "Viceroy Restaurant",
             "More Shopping mall", "Mess 1", "Mess 2", "Rock Garden", "F-Block", "Student Activity Center", "G-Block"};

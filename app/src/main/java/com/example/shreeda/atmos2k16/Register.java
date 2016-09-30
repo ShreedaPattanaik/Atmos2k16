@@ -12,8 +12,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.support.v7.app.ActionBarActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -21,7 +25,12 @@ import org.json.JSONObject;
 
 import  com.example.shreeda.atmos2k16.MultiSelectionSpinner;
 
+import java.util.Map;
 
+import App.AppController;
+import App.VolleySingleton;
+
+import static App.ControllerConstant.url1;
 
 
 /**
@@ -63,14 +72,14 @@ public class Register extends AppCompatActivity {
             @Override
 
             public void onClick(View v) {
-                final String name = Name.getEditText().toString();
-                final String College = college.getEditText().toString();
-                final String Email = emailid.getEditText().toString();
-                final int phoneno = Integer.parseInt(phone.getEditText().toString());
+                final String name = Name.getEditText().getText().toString();
+                final String College = college.getEditText().getText().toString();
+                final String Email = emailid.getEditText().getText().toString();
+                final int phoneno = Integer.parseInt(phone.getEditText().getText().toString());
 
 
 
-                final Response.Listener<String> responseListener = new Response.Listener<String>() {
+                /*final Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -92,8 +101,33 @@ public class Register extends AppCompatActivity {
                 } ;
 
                 RegisterRequest registerRequest = new RegisterRequest(name, College, Email, phoneno, responseListener);
-                RequestQueue requestQueue= Volley.newRequestQueue(Register.this);
-                requestQueue.add(registerRequest);
+                RequestQueue requestQueue= Volley.newRequestQueue(Register.this);*/
+
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, url1, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String s) {
+                       try{
+                           JSONObject JsonResponse = new JSONObject();
+                           boolean success = JsonResponse.getBoolean("success");
+
+
+                       } catch (JSONException e) {
+                           e.printStackTrace();
+                       }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Toast.makeText(Register.this, "Could not complete registration", Toast.LENGTH_LONG).show();
+
+                    }
+                }){
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        return super.getParams();
+                    }
+                };
+                VolleySingleton.getInstance().getRequestQueue().add(stringRequest);
             }
         });
 
