@@ -14,7 +14,7 @@
         android:text="Sponsors"
         android:fontFamily=""
         android:textSize="30sp"
-        android:textColor="@color/common_action_bar_splitter"
+        android:textColor="@color/colorPrimary"
         android:layout_gravity="center"/>
 
 

@@ -23,11 +23,13 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.shreeda.atmos2k16.Set.CampusMap;
+
 import Helper.RecyclerClickListener;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     Toolbar toolbar;
     DrawerLayout mDrawer;
@@ -90,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                 case R.id.schedule:
-
+                    Fragment fragment1 = new CampusMap();
+                    transaction.replace(R.id.container,fragment1,"campusmap");
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
@@ -125,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.Guide:
 
 
+
+                    fragment =new Guidefragment();
+                    transaction.replace(R.id.container, fragment, "events");
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
@@ -143,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.Sponsers:
 
-                    fragment = new SponsorsFragment();
-                    transaction.replace(R.id.container, fragment, "Sponsors");
+                //    fragment = new SponsorsFragment();
+                  //  transaction.replace(R.id.container, fragment, "Sponsors");
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
@@ -212,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+
 
     private class CustomActionBarDrawerToggle extends ActionBarDrawerToggle {
         public CustomActionBarDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar) {
@@ -293,5 +301,11 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return resources.length;
         }
+
     }
-}
+
+
+
+
+
+ }

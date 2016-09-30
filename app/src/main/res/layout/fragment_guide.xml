@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".Guidefragment">
+
+    <LinearLayout
+        android:gravity="center"
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:id="@+id/topbuttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/atmoslogo"
+                android:layout_margin="8dp"
+                android:id="@+id/about_us"
+                android:fontFamily="monospace"
+                android:layout_width="140dp"
+                android:layout_height="140dp" />
+            <ImageButton
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/atmoslogo"
+                android:layout_margin="8dp"
+                android:id="@+id/reach_campus"
+                android:onClick="addreachcampus"
+                android:fontFamily="monospace"
+                android:layout_width="140dp"
+                android:layout_height="140dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_below="@+id/topbuttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/atmoslogo"
+                android:layout_margin="8dp"
+                android:id="@+id/campus_map"
+                android:fontFamily="monospace"
+                android:layout_width="140dp"
+                android:layout_height="140dp" />
+            <ImageButton
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/atmoslogo"
+                android:layout_margin="8dp"
+                android:id="@+id/contact_us"
+                android:fontFamily="monospace"
+                android:layout_width="140dp"
+                android:layout_height="140dp" />
+        </LinearLayout>
+        <!--<LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_margin="8dp"
+                android:id="@+id/app_credits"
+                android:text="App Credits"
+                android:fontFamily="monospace"
+                android:layout_width="140dp"
+                android:layout_height="140dp" />
+        </LinearLayout>-->
+    </LinearLayout>
+
+</RelativeLayout>

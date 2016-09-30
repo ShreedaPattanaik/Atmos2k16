@@ -9,4 +9,7 @@
     <string name="sender_id">398638332372</string>
     <string name="google_maps_key">AIzaSyDxdSYFrRGQ4YmyWoN0ZXL-n-caISRkCJY</string>
     <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_campus_map">Map</string>
+    <string name="title_activity_event_list">event_list</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
