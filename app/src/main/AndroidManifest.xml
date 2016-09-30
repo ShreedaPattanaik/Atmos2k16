@@ -21,6 +21,13 @@
         </activity>
 
         <activity
+            android:name=".Register"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
             android:name=".Set.SplashScreen"
             android:label="Splash">
             <intent-filter>
@@ -37,6 +44,7 @@
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".RegisteredActivity" />
     </application>
 
 </manifest>

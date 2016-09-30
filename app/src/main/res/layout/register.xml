@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundspons">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGISTER"
+        android:textColor="#000"
+        android:textSize="40sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        />
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Name"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="45dp"
+            android:layout_width="307dp"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/college"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:hint="College/University Name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailAd"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="308dp"
+                android:layout_height="wrap_content"
+                android:hint="Email Address" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:weightSum="1">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:hint="Phone"
+                android:layout_weight="0.16" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--</ScrollView>-->
+
+
+        <com.example.shreeda.atmos2k16.MultiSelectionSpinner
+            android:id="@+id/myevents"
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+        <Button
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:text="check"
+            android:id="@+id/check"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGISTER HERE"
+            android:id="@+id/register"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
 
 </LinearLayout>

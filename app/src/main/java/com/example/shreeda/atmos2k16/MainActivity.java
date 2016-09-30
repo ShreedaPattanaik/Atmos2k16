@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager manager;
     int backNumber;
     RecyclerView mRecyclerView;
+    FloatingActionButton fab;
 
 
     @Override
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 //        mRecyclerView.setAdapter(mAdapter);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -97,10 +100,13 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.register:
-
+                    Intent intent = new Intent(MainActivity.this, Register.class);
+                    startActivity(intent);
                     transaction.commit();
                     menuItem.setChecked(true);
                     mDrawer.closeDrawer(Gravity.LEFT);
+                    fab.hide();
+
 
                     break;
                 case R.id.events:
