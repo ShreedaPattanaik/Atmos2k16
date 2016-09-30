@@ -12,4 +12,5 @@
     <string name="title_activity_campus_map">Map</string>
     <string name="title_activity_event_list">event_list</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="your_atmos_id_is">Your Atmos ID is</string>
 </resources>

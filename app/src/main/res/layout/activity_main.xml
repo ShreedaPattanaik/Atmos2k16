@@ -84,7 +84,12 @@
             android:layout_gravity="start"
             android:background="#8C000000"
             app:itemTextColor="@color/white"
-            app:menu="@menu/drawer" />
+            app:menu="@menu/drawer"
+            android:backgroundTint="@color/white"
+            app:itemIconTint="@color/cardview_dark_background"
+            app:itemTextAppearance="@color/secondary_text"
+            app:headerLayout="@layout/navigation_header"
+            />
 
 
     </android.support.v4.widget.DrawerLayout>
