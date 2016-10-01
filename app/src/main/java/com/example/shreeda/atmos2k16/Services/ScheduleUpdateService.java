@@ -8,7 +8,6 @@ import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.BuildConfig;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,11 +20,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import App.AppController;
 import App.Config;
 import App.ControllerConstant;
 import App.VolleySingleton;
-
-import static android.support.multidex.BuildConfig.PACKAGE_NAME;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -38,17 +36,44 @@ public class ScheduleUpdateService extends IntentService {
     public ScheduleUpdateService() {
         super("ScheduleUpdateService");
     }
+
     EventTableManager eventTableManager;
+
     @Override
     protected void onHandleIntent(Intent intent) {
 //        if (intent != null) {
 //            mReceiver = intent.getParcelableExtra(AppConfig.RECEIVER);
 //
 //        }
-        eventTableManager=new EventTableManager(this);
+        eventTableManager = new EventTableManager(this);
         addDummyData();
-        sendRequest();
+//        sendRequest();
+        sendEventRequest();
     }
+
+    private void sendEventRequest() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ControllerConstant.url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e("Event resp", s);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("Event Error", volleyError.toString());
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "getEventDetails");
+                params.put("updated_at", "0"/*todo change */);
+                return params;
+            }
+        };
+        AppController.getInstance().addToRequestQueue(stringRequest);
+    }
+
 
     private void addDummyData() {
         /*eventTableManager.addEntry(4, "Music", "Carrom",
@@ -162,9 +187,9 @@ public class ScheduleUpdateService extends IntentService {
                     }
                     scheduleTableManager.close();
 
-                    SharedPreferences preferences=getApplicationContext().getSharedPreferences(Config.LastUpdated,MODE_PRIVATE);
-                    SharedPreferences.Editor editor=preferences.edit();
-                    editor.putLong("last" , updatedAt);
+                    SharedPreferences preferences = getApplicationContext().getSharedPreferences(Config.LastUpdated, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putLong("last", updatedAt);
                     editor.apply();
                     deliverResultToReceiver(1, "Refreshed");
 
@@ -184,7 +209,7 @@ public class ScheduleUpdateService extends IntentService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> temp = new HashMap<>();
                 temp.put("tag", "check_time");
-                SharedPreferences preferences=getApplicationContext().getSharedPreferences(Config.LastUpdated,MODE_PRIVATE);
+                SharedPreferences preferences = getApplicationContext().getSharedPreferences(Config.LastUpdated, MODE_PRIVATE);
                 temp.put("check_time", "last");
                 return temp;
             }

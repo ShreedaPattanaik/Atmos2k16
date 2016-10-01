@@ -20,17 +20,25 @@ public class EventTableManager {
     public static final String KEY_ID = "_id";
     public static final String KEY_EVENT_ID = "EventID";
     //public static final String KEY_TAG = "EventTag";
+    public static final String KEY_TYPE = "Type";
     public static final String KEY_TAB = "EventTab";
     public static final String KEY_NAME = "Name";
     //public static final String KEY_START_TIME = "StartTime";
     //public static final String KEY_END_TIME = "EndTime";
     //public static final String KEY_VENUE = "Venue";
-    public static final String KEY_DETAILS = "Details";
+    public static final String KEY_DESCRIPTION = "Description";
     public static final String KEY_CONTACTS = "Contacts";
     public static final String KEY_IMAGE_LINK = "ImageLink";
     public static final String KEY_IMAGE_DOWNLOAD = "ImageDownloaded";
     //public static final String KEY_COST = "Cost";
     public static final String KEY_FAVOURITE = "Favourite";
+    public static final String KEY_PRIZE = "Prize";
+    public static final String KEY_PROBST = "Problem Statement";
+    public static final String KEY_FBURL = "Fb url";
+    public static final String KEY_PDFLINK = "Pdf link";
+
+
+
 
 
     public static final String TAG = "TransactionTable";
@@ -191,12 +199,17 @@ public class EventTableManager {
         public void onCreate(SQLiteDatabase db) {
 
             String query = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
-                    KEY_ID              + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    KEY_EVENT_ID        + " INTEGER UNIQUE NOT NULL, " +
+                    KEY_EVENT_ID              + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_ID              + " INTEGER UNIQUE NOT NULL, " +
                     KEY_TAB             + " TEXT NOT NULL, " +
                     KEY_NAME            + " TEXT NOT NULL, " +
-                    KEY_DETAILS         + " TEXT NOT NULL,  " +
+                    KEY_DESCRIPTION         + " TEXT NOT NULL,  " +
+                    KEY_FBURL           + " TEXT NOT NULL,  " +
                     KEY_CONTACTS        + " TEXT NOT NULL,  " +
+                    KEY_PDFLINK         + " TEXT NOT NULL,  " +
+                    KEY_TYPE            + " TEXT NOT NULL,  " +
+                    KEY_PRIZE           + " INTEGER UNIQUE NOT NULL, " +
+                    KEY_PROBST          + " TEXT NOT NULL,  " +
                     KEY_IMAGE_LINK      + " TEXT,  " +
                     KEY_IMAGE_DOWNLOAD  + " TEXT,  " +
                     KEY_FAVOURITE       + " INTEGER NOT NULL); ";
@@ -213,9 +226,11 @@ public class EventTableManager {
     public long addEntry( int       id,
                           String    tab,
                           String    name,
-                          String    details,
+                          String    description,
                           String    contacts,
-                          String    image_link) {
+                          String    image_link
+
+                           ) {
         long success=-1;
 
         ContentValues cv = new ContentValues();
@@ -223,11 +238,13 @@ public class EventTableManager {
         cv.put(KEY_EVENT_ID        ,id);
         cv.put(KEY_TAB             ,tab);
         cv.put(KEY_NAME            ,name);
-        cv.put(KEY_DETAILS         ,details);
+        cv.put(KEY_DESCRIPTION     ,description);
         cv.put(KEY_CONTACTS        ,contacts);
         cv.put(KEY_IMAGE_LINK      ,image_link);
         cv.put(KEY_IMAGE_DOWNLOAD  ,0);
         cv.put(KEY_FAVOURITE       ,0);
+
+
 
         try {
             success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);

@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:textSize="25dp"
-        android:text="You are successfully registered for these events"
+        android:textSize="25sp"
+        android:text="@string/you_are_successfully_registered_for_these_events"
         />
 
     <TextView
@@ -23,9 +23,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/your_atmos_id_is"
+        android:text="@string/your_temporary_atmos_id_is"
         android:layout_gravity="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         />
 
     <TextView

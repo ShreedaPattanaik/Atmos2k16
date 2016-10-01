@@ -72,11 +72,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void service() {
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (!sharedPreferences.getBoolean(Config.LastUpdated, false)) {
             Intent intent = new Intent(this, ScheduleUpdateService.class);
             startService(intent);
         }
     }
-}
+
