@@ -37,47 +37,13 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigation;
     FragmentManager manager;
     int backNumber;
-    RecyclerView mRecyclerView;
     FloatingActionButton fab;
-    RecyclerClickListener clickListener = new RecyclerClickListener() {
-        @Override
-        public void onClick(View v, int pos) {
-            switch (pos) {
-                case 0:
-
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-
-                    break;
-                case 4:
-
-
-            }
-        }
-    };
-    LayoutInflater inflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//
-
-
         setContentView(R.layout.activity_main);
-//        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-//        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        final MyAdapter mAdapter = new MyAdapter(this);
-
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-//        mRecyclerView.setAdapter(mAdapter);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -196,29 +162,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawer.closeDrawer(Gravity.LEFT);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-
-        if (id == R.id.home) {
-            mDrawer.openDrawer(Gravity.LEFT);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     protected void onResume() {
@@ -254,54 +197,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
-
-        ImageButton imageButton;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            imageButton = (ImageButton) itemView.findViewById(R.id.main_events);
-            if (clickListener != null) {
-                imageButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        clickListener.onClick(v, getLayoutPosition());
-                    }
-                });
-            }
-        }
-    }
-
-    class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
-
-        Context context;
-        int[] resources;
-
-
-        public MyAdapter(MainActivity context) {
-            this.context = context;
-            inflater = LayoutInflater.from(context);
-            resources = new int[]{R.drawable.events, R.drawable.events, R.drawable.events, R.drawable.events, R.drawable.events};
-
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new MyViewHolder(inflater.inflate(R.layout.custom_main_row, parent, false));
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-
-            holder.imageButton.setImageResource(resources[position]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return resources.length;
-        }
-
-    }
 
 
 }
