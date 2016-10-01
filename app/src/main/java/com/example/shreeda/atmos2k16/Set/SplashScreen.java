@@ -34,7 +34,7 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         Picasso.with(this).load(R.drawable.landinglogo)
-                .fit()
+                .fit().centerInside()
                 .into((ImageView) findViewById(R.id.logoContainer));
 //        GifClass gifClass= (GifClass) findViewById(R.id.logoContainer);
 //        if (gifClass!=null) {
@@ -66,7 +66,7 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
                 // close this activity
             }
-        },1000);
+        }, 1000);
 
         service();
     }
