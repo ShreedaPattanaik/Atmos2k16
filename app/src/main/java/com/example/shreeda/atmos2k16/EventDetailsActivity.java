@@ -65,7 +65,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         eventTableManager = new EventTableManager(this);
         cursor = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
         if (cursor != null && cursor.moveToFirst()) {
-            description.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_DETAILS))));
+            description.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_DESCRIPTION))));
             if(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_IMAGE_LINK)).isEmpty()){
                 kb.setImageResource(R.color.accent);
             }else {
