@@ -108,18 +108,15 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.schedule:
-                        transaction = manager.beginTransaction();
-                        Fragment fragment1 = new CampusMap();
-                        transaction.replace(R.id.container, fragment1, "campusmap");
-                        transaction.commit();
-                        menuItem.setChecked(true);
+                        Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
+                        startActivity(intent);
                         mDrawer.closeDrawer(Gravity.LEFT);
                         break;
 
                     case R.id.register:
                         transaction = manager.beginTransaction();
-                        Intent intent = new Intent(MainActivity.this, Register.class);
-                        startActivity(intent);
+                        Fragment fragment2 = new Register();
+                        transaction.replace(R.id.container, fragment2, "campusmap");
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
@@ -155,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-
+                        fab.hide();
                         break;
 
 

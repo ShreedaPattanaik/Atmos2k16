@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,13 +30,14 @@ import java.util.Map;
 import App.VolleySingleton;
 
 import static App.ControllerConstant.url;
+import static com.example.shreeda.atmos2k16.R.id.register;
 
 
 /**
  * Created by SHREEDA on 28-09-2016.
  */
 
-public class Register extends AppCompatActivity {
+public class Register extends Fragment {
 
 
     MultiSelectionSpinner spinner;
@@ -42,22 +45,28 @@ public class Register extends AppCompatActivity {
     public static String TAG;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.register, container, false);
+    }
 
-        spinner = (MultiSelectionSpinner) findViewById(R.id.myevents);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        final TextInputLayout Name = (TextInputLayout) findViewById(R.id.Name);
-        final TextInputLayout college = (TextInputLayout) findViewById(R.id.college);
-        final TextInputLayout emailid = (TextInputLayout) findViewById(R.id.emailAd);
-        final TextInputLayout phone = (TextInputLayout) findViewById(R.id.phone);
-        final Button register = (Button) findViewById(R.id.register);
+        spinner = (MultiSelectionSpinner) view.findViewById(R.id.myevents);
+
+        final TextInputLayout Name = (TextInputLayout) view.findViewById(R.id.Name);
+        final TextInputLayout college = (TextInputLayout) view.findViewById(R.id.college);
+        final TextInputLayout emailid = (TextInputLayout) view.findViewById(R.id.emailAd);
+        final TextInputLayout phone = (TextInputLayout) view.findViewById(R.id.phone);
+        final Button register = (Button) view.findViewById(R.id.register);
 
         String[] array = {"Algomaniac", "Anatomy of Murder", "Case Study", "ChemE Car", "Code Jam", "Court Room", "Cubing Atmosphere", "Designing Industrial Unit", "Enigma", "D.I.Y", "Ground Reality", "Hackathon", "iNavigate", "Junkyard Wars", "Law Follower,", "Maze Perilious", "Mini GP", "nCrypton", "Paper presentation", "Phygure it", "PyBits Conference", "Quadcopter", "Reverse Coding", "Robowars", "Suit up", "Tech expo", "The Bot Shot", "The Sci-Tech Quiz"};
         spinner.setItems(array);
 
-        Button bt = (Button) findViewById(R.id.check);
+        Button bt = (Button) view.findViewById(R.id.check);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,29 +113,29 @@ public class Register extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String s) {
-                        try {
-                            JSONObject jsonObject = new JSONObject();
+//                        try {
+                        JSONObject jsonObject = new JSONObject();
 
-                            boolean success = jsonObject.getBoolean("error");
+//                            boolean error = jsonObject.getBoolean("error");
+//
+                        FragmentManager manager;
+                        manager = getActivity().getSupportFragmentManager();
+                        Fragment fragment;
+                        fragment = RegisteredFragment.newInstance(s);
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.replace(R.id.container, fragment, "registered");
+                        transaction.commit();
 
-                                FragmentManager manager;
-                                manager = getSupportFragmentManager();
-                                Fragment fragment;
-                                fragment = RegisteredFragment.newInstance(s);
-                                FragmentTransaction transaction = manager.beginTransaction();
-                                transaction.replace(R.id.regpage, fragment, "home");
-                                transaction.commit();
 
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                         Log.e(TAG, "onResponse: Data received" + s);
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(Register.this, "Could not complete registration", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Could not complete registration", Toast.LENGTH_LONG).show();
 
                     }
                 }) {
@@ -146,7 +155,10 @@ public class Register extends AppCompatActivity {
                 VolleySingleton.getInstance().getRequestQueue().add(stringRequest);
             }
         });
-
-
     }
+
 }
+
+
+
+

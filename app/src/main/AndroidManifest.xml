@@ -49,8 +49,9 @@
             android:name=".Services.ScheduleUpdateService"
             android:exported="false"></service>
 
-        <activity android:name=".RegisteredActivity" />
+
         <activity android:name=".MainActivity" />
+        <activity android:name=".TimelineActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
