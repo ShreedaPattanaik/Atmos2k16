@@ -24,6 +24,7 @@ import App.AppController;
 import App.Config;
 import App.ControllerConstant;
 import App.VolleySingleton;
+import Helper.UpdatedTimeManager;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -31,13 +32,12 @@ import App.VolleySingleton;
 
 public class ScheduleUpdateService extends IntentService {
 
+    EventTableManager eventTableManager;
     private ResultReceiver mReceiver;
 
     public ScheduleUpdateService() {
         super("ScheduleUpdateService");
     }
-
-    EventTableManager eventTableManager;
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -46,16 +46,34 @@ public class ScheduleUpdateService extends IntentService {
 //
 //        }
         eventTableManager = new EventTableManager(this);
-        addDummyData();
 //        sendRequest();
         sendEventRequest();
     }
 
     private void sendEventRequest() {
+        final EventTableManager eventTableManager = new EventTableManager(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ControllerConstant.url, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 Log.e("Event resp", s);
+
+                try {
+                    JSONObject object = new JSONObject(s);
+                    if (!object.getBoolean("error")) {
+                        JSONArray array = object.getJSONArray("data");
+                        for (int i = 0; i < array.length(); i++) {
+                            //todo check delete tag when done
+                            if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
+                                UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -67,85 +85,12 @@ public class ScheduleUpdateService extends IntentService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "getEventDetails");
-                params.put("updated_at", "0"/*todo change */);
+                params.put("updated_at", String.valueOf(UpdatedTimeManager.getEventTime(ScheduleUpdateService.this)));
                 return params;
             }
         };
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
-
-
-    private void addDummyData() {
-        /*eventTableManager.addEntry(4, "Music", "Carrom",
-                "<div class=\"tab-pane active\" id=\"rules_carrom\">\n" +
-                        "                                    <p class=\"text\">\n" +
-                        "                                        1. There will be only 1 team from the institute comprising of minimum 4 players. \n" +
-                        "                                        <br>\n" +
-                        "                                        2. There will be 3 singles and 2 doubles based upon the Davis Cup format. \n" +
-                        "                                        <br>\n" +
-                        "                                        3. All the international rules will be followed as per the carrom federation website. \n" +
-                        "                                        <br>\n" +
-                        "                                        4. The format will be knockout or round robin based on number of participating teams. \n" +
-                        "                                        <br>\n" +
-                        "                                        5. The refereeâ€™s decision will be deemed final in any case of controversy and that will stand above any challenge by any team. \n" +
-                        "                                    </p>\n" +
-                        "                                </div>",
-                "[{\"name\":\"Payal Shand\",\"contact\":\"7506732696\"}]",
-                "http://www.spjimrsprint.com/images/events/carrom.jpg"
-        );
-        eventTableManager.addEntry(3, "Music", "Carrom",
-                "<div class=\"tab-pane active\" id=\"rules_carrom\">\n" +
-                        "                                    <p class=\"text\">\n" +
-                        "                                        1. There will be only 1 team from the institute comprising of minimum 4 players. \n" +
-                        "                                        <br>\n" +
-                        "                                        2. There will be 3 singles and 2 doubles based upon the Davis Cup format. \n" +
-                        "                                        <br>\n" +
-                        "                                        3. All the international rules will be followed as per the carrom federation website. \n" +
-                        "                                        <br>\n" +
-                        "                                        4. The format will be knockout or round robin based on number of participating teams. \n" +
-                        "                                        <br>\n" +
-                        "                                        5. The refereeâ€™s decision will be deemed final in any case of controversy and that will stand above any challenge by any team. \n" +
-                        "                                    </p>\n" +
-                        "                                </div>",
-                "[{\"name\":\"Payal Shand\",\"contact\":\"7506732696\"}]",
-                "http://www.spjimrsprint.com/images/events/carrom.jpg"
-        );
-        eventTableManager.addEntry(5, "Music", "Carrom",
-                "<div class=\"tab-pane active\" id=\"rules_carrom\">\n" +
-                        "                                    <p class=\"text\">\n" +
-                        "                                        1. There will be only 1 team from the institute comprising of minimum 4 players. \n" +
-                        "                                        <br>\n" +
-                        "                                        2. There will be 3 singles and 2 doubles based upon the Davis Cup format. \n" +
-                        "                                        <br>\n" +
-                        "                                        3. All the international rules will be followed as per the carrom federation website. \n" +
-                        "                                        <br>\n" +
-                        "                                        4. The format will be knockout or round robin based on number of participating teams. \n" +
-                        "                                        <br>\n" +
-                        "                                        5. The refereeâ€™s decision will be deemed final in any case of controversy and that will stand above any challenge by any team. \n" +
-                        "                                    </p>\n" +
-                        "                                </div>",
-                "[{\"name\":\"Payal Shand\",\"contact\":\"7506732696\"}]",
-                "http://www.spjimrsprint.com/images/events/carrom.jpg"
-        );
-        eventTableManager.addEntry(6, "Music", "Carrom",
-                "<div class=\"tab-pane active\" id=\"rules_carrom\">\n" +
-                        "                                    <p class=\"text\">\n" +
-                        "                                        1. There will be only 1 team from the institute comprising of minimum 4 players. \n" +
-                        "                                        <br>\n" +
-                        "                                        2. There will be 3 singles and 2 doubles based upon the Davis Cup format. \n" +
-                        "                                        <br>\n" +
-                        "                                        3. All the international rules will be followed as per the carrom federation website. \n" +
-                        "                                        <br>\n" +
-                        "                                        4. The format will be knockout or round robin based on number of participating teams. \n" +
-                        "                                        <br>\n" +
-                        "                                        5. The refereeâ€™s decision will be deemed final in any case of controversy and that will stand above any challenge by any team. \n" +
-                        "                                    </p>\n" +
-                        "                                </div>",
-                "[{\"name\":\"Payal Shand\",\"contact\":\"7506732696\"}]",
-                "http://www.spjimrsprint.com/images/events/carrom.jpg"
-        );*/
-    }
-
 
     private void sendRequest() {
         final ScheduleTableManager scheduleTableManager = new ScheduleTableManager(this);

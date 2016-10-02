@@ -15,6 +15,7 @@
         android:paddingBottom="32dp">
 
         <ImageView
+            android:transitionName="logo"
             android:id="@+id/logoContainer"
             android:layout_width="match_parent"
             android:layout_height="200dp"
