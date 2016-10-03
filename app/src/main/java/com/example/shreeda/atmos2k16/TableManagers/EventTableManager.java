@@ -1,4 +1,4 @@
-package com.example.shreeda.atmos2k16.Services;
+package com.example.shreeda.atmos2k16.TableManagers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -205,6 +205,15 @@ public class EventTableManager {
         }
         close();
         return success;
+    }
+
+    public void deleteEntry(JSONObject jsonObject) throws JSONException {
+
+        int id=jsonObject.getInt("event_id");
+        open();
+        ourDatabase.delete(DATABASE_TABLE,KEY_EVENT_ID+"="+id,null);
+        close();
+
     }
 
 

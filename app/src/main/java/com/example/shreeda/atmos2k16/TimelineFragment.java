@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.shreeda.atmos2k16.Services.ScheduleTableManager;
+import com.example.shreeda.atmos2k16.TableManagers.ScheduleTableManager;
 import com.example.shreeda.atmos2k16.Set.ScheduleSet;
 
 import java.text.SimpleDateFormat;

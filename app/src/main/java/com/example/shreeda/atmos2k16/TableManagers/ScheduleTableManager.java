@@ -1,4 +1,4 @@
-package com.example.shreeda.atmos2k16.Services;
+package com.example.shreeda.atmos2k16.TableManagers;
 
 import android.content.ContentValues;
 import android.content.Context;

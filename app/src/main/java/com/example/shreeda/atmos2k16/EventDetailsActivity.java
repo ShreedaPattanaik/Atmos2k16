@@ -16,7 +16,7 @@ import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.shreeda.atmos2k16.Services.EventTableManager;
+import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.kogitune.activity_transition.ExitActivityTransition;
 import com.squareup.picasso.Callback;

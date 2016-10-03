@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.Guide:
 
-                        transaction = manager.beginTransaction();
+                        /*transaction = manager.beginTransaction();
 
                         fragment = new Guidefragment();
                         transaction.replace(R.id.container, fragment, "events");
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+                        fab.hide();*/
                         break;
 
 

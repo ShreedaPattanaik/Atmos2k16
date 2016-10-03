@@ -12,6 +12,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
+import com.example.shreeda.atmos2k16.TableManagers.ScheduleTableManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,18 +64,28 @@ public class ScheduleUpdateService extends IntentService {
                     if (!object.getBoolean("error")) {
                         JSONArray array = object.getJSONArray("data");
                         for (int i = 0; i < array.length(); i++) {
-                            //todo check delete tag when done
-                            if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
-                                UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                            JSONObject jsonObject = array.getJSONObject(i);
+                            if (jsonObject.has("delete")) {
+                                if (jsonObject.getInt("delete") == 1) {
+                                    eventTableManager.deleteEntry(jsonObject);
+                                } else {
+                                    if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
+                                        UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                    }
+                                }
                             } else {
-                                break;
+                                if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
+                                    UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                }
                             }
+
                         }
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                sendScheduleRequest();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -92,7 +104,7 @@ public class ScheduleUpdateService extends IntentService {
         AppController.getInstance().addToRequestQueue(stringRequest);
     }
 
-    private void sendRequest() {
+    private void sendScheduleRequest() {
         final ScheduleTableManager scheduleTableManager = new ScheduleTableManager(this);
 
         StringRequest request = new StringRequest(Request.Method.POST, ControllerConstant.url, new Response.Listener<String>() {
@@ -100,19 +112,8 @@ public class ScheduleUpdateService extends IntentService {
             public void onResponse(String s) {
                 Log.e("Schedule.class", s);
 
-                /*try {
-                    JSONArray array=new JSONArray(s);
-                    for(int i=0; i<array.length(); i++){
-                        JSONObject a=array.getJSONObject(i);
-                        JSONObject venue=new JSONObject(a.getString("venue"));
-                        Log.e("Schedule service",venue.getString("id"));
-                    }
-                } catch (JSONException e) {
-                    Log.e("Schedule service",e.toString());
-                    e.printStackTrace();
-                }*/
 
-
+/*
                 try {
                     Long updatedAt = 0l;
                     JSONArray array = new JSONArray(s);
@@ -141,7 +142,7 @@ public class ScheduleUpdateService extends IntentService {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e("Schedule service", e.toString());
-                }
+                }*/
             }
         }, new Response.ErrorListener() {
             @Override
@@ -153,9 +154,9 @@ public class ScheduleUpdateService extends IntentService {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> temp = new HashMap<>();
-                temp.put("tag", "check_time");
+                temp.put("tag", "getSchedule");
                 SharedPreferences preferences = getApplicationContext().getSharedPreferences(Config.LastUpdated, MODE_PRIVATE);
-                temp.put("check_time", "last");
+                temp.put("updated_at", "last");
                 return temp;
             }
         };
