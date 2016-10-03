@@ -1,4 +1,4 @@
-/*
+
 package com.example.shreeda.atmos2k16;
 
 
@@ -20,12 +20,12 @@ import android.support.v7.widget.CardView;
 
 import com.example.shreeda.atmos2k16.Set.CampusMap;
 
-*/
-/**
- * Created by lakshmi sravani on 29-09-2016.
- *//*
 
-public class Guidefragment extends Fragment {
+
+// * Created by lakshmi sravani on 29-09-2016.
+// *//*
+
+public class Guidefragment extends Fragment  {
 
     FragmentManager manager;
 
@@ -34,7 +34,7 @@ public class Guidefragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.guide_fragment, container, false);
 
-      //  ImageButton camBt = (ImageButton) v.findViewById(R.id.reach_campus);
+      // ImageButton camBt = (ImageButton) v.findViewById(R.id.reach_campus);
        // camBt.setOnClickListener(listener);
         return v;
     }
@@ -105,4 +105,4 @@ public class Guidefragment extends Fragment {
 }
 
 
-*/
+
