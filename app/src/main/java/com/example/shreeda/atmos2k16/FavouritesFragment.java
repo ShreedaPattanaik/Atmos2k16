@@ -2,12 +2,10 @@ package com.example.shreeda.atmos2k16;
 
 import android.content.Intent;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.CursorAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,15 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.shreeda.atmos2k16.Services.EventTableManager;
-import com.example.shreeda.atmos2k16.Set.EventSet;
+import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
 import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 
-import java.util.ArrayList;
-
 import Helper.CursorRecyclerAdapter;
-import Helper.RecyclerClickListener;
 
 /**
  * Created by SHREEDA on 27-09-2016.

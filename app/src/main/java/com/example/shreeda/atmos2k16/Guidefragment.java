@@ -1,3 +1,4 @@
+/*
 package com.example.shreeda.atmos2k16;
 
 
@@ -19,9 +20,11 @@ import android.support.v7.widget.CardView;
 
 import com.example.shreeda.atmos2k16.Set.CampusMap;
 
+*/
 /**
  * Created by lakshmi sravani on 29-09-2016.
- */
+ *//*
+
 public class Guidefragment extends Fragment {
 
     FragmentManager manager;
@@ -102,3 +105,4 @@ public class Guidefragment extends Fragment {
 }
 
 
+*/
