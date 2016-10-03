@@ -45,15 +45,21 @@ public class TimelineFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.container);
-
+        TextView textView=(TextView)view.findViewById(R.id.notpresent);
         mTableManager = new ScheduleTableManager(getActivity());
 
         times = mTableManager.getDistinctTime(getArguments().getInt("day"));
-        MyAdapter mAdapter=new MyAdapter(getActivity());
-        mAdapter.setTimes(times);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.e("Day "+getArguments().getInt("day"), String.valueOf(times.size()));
+        if(times.isEmpty()){
+            recyclerView.setVisibility(View.GONE);
+            textView.setVisibility(View.VISIBLE);
+        }else{
+            MyAdapter mAdapter=new MyAdapter(getActivity());
+            mAdapter.setTimes(times);
+            recyclerView.setAdapter(mAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            Log.e("Day "+getArguments().getInt("day"), String.valueOf(times.size()));
+        }
+
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
