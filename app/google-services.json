@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "198959728532",
+    "firebase_url": "https://atmos2k16-fc3fa.firebaseio.com",
+    "project_id": "atmos2k16-fc3fa",
+    "storage_bucket": "atmos2k16-fc3fa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198959728532:android:4e150a86f6bd0f66",
+        "android_client_info": {
+          "package_name": "com.example.shreeda.atmos2k16"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198959728532-v04l9dah2n68ofqh9oh76usf0gihd7ab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shreeda.atmos2k16",
+            "certificate_hash": "A1CEFA9F5E6BEB40114F5BAD9A6DF9C768A8EEAD"
+          }
+        },
+        {
+          "client_id": "198959728532-i5vek632akss70jjv7ebhcd1qp3fpc18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcUNfMXagvKMUVO-3HTeknEOkKdZ1LkY4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198959728532-i5vek632akss70jjv7ebhcd1qp3fpc18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

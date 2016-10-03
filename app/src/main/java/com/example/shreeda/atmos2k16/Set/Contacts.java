@@ -14,6 +14,7 @@ public class Contacts {
         this.designation = designation;
         this.mobile = mobile;
         this.email = email;
+
     }
 
     public int getImage()
@@ -29,7 +30,8 @@ public class Contacts {
         return designation;
     }
 
-    public String getMobile() { return mobile; }
+    public String getMobile() {
+        return mobile; }
 
     public String getEmail() {
         return email;

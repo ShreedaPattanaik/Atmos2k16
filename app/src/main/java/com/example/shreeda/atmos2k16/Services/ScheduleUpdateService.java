@@ -1,6 +1,7 @@
 package com.example.shreeda.atmos2k16.Services;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -23,7 +24,7 @@ import java.util.Map;
 import App.AppController;
 import App.ControllerConstant;
 import App.VolleySingleton;
-import Helper.UpdatedTimeManager;
+import Helper.SharedPrefDataManager;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -43,6 +44,42 @@ public class ScheduleUpdateService extends IntentService {
 
         eventTableManager = new EventTableManager(this);
         sendEventRequest();
+
+        sendTokenToServer();
+    }
+
+    private void sendTokenToServer() {
+        if (SharedPrefDataManager.tokenNeedToBeSent(this)) {
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, ControllerConstant.url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
+                    Log.d("Token resp", s);
+                    try {
+                        JSONObject jsonObject = new JSONObject(s);
+                        if (!jsonObject.getBoolean("error")) {
+                            SharedPrefDataManager.tokenSentToServer(ScheduleUpdateService.this);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.e("Token Error", volleyError.toString());
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("tag", "add_token");
+                    params.put("token", SharedPrefDataManager.getToken(ScheduleUpdateService.this));
+                    return params;
+                }
+            };
+            VolleySingleton.getInstance().getRequestQueue().add(stringRequest);
+        }
     }
 
     private void sendEventRequest() {
@@ -63,12 +100,12 @@ public class ScheduleUpdateService extends IntentService {
                                     eventTableManager.deleteEntry(jsonObject);
                                 } else {
                                     if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
-                                        UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                        SharedPrefDataManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
                                     }
                                 }
                             } else {
                                 if (eventTableManager.addEntry(array.getJSONObject(i)) >= 0) {
-                                    UpdatedTimeManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                    SharedPrefDataManager.updateEventTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
                                 }
                             }
 
@@ -90,7 +127,7 @@ public class ScheduleUpdateService extends IntentService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "getEventDetails");
-                params.put("updated_at", String.valueOf(UpdatedTimeManager.getEventTime(ScheduleUpdateService.this)));
+                params.put("updated_at", String.valueOf(SharedPrefDataManager.getEventTime(ScheduleUpdateService.this)));
                 return params;
             }
         };
@@ -115,12 +152,12 @@ public class ScheduleUpdateService extends IntentService {
                                     scheduleTableManager.deleteEntry(jsonObject);
                                 } else {
                                     if (scheduleTableManager.addEntry(array.getJSONObject(i)) >= 0) {
-                                        UpdatedTimeManager.updateScheduleTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                        SharedPrefDataManager.updateScheduleTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
                                     }
                                 }
                             } else {
                                 if (scheduleTableManager.addEntry(array.getJSONObject(i)) >= 0) {
-                                    UpdatedTimeManager.updateScheduleTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                                    SharedPrefDataManager.updateScheduleTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
                                 }
                             }
 
@@ -142,7 +179,7 @@ public class ScheduleUpdateService extends IntentService {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> temp = new HashMap<>();
                 temp.put("tag", "getSchedule");
-                temp.put("updated_at", String.valueOf(UpdatedTimeManager.getScheduleTime(ScheduleUpdateService.this)));
+                temp.put("updated_at", String.valueOf(SharedPrefDataManager.getScheduleTime(ScheduleUpdateService.this)));
                 return temp;
             }
         };

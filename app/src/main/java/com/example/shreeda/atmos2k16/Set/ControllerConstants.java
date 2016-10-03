@@ -6,6 +6,7 @@ package com.example.shreeda.atmos2k16.Set;
 
 public class ControllerConstants {
 
+
     public static String[] names = {"Main Gate", "Bus Stop", "Cafetaria", "Auditorium", "Stage 1", "Stage 2", "Connaught Place", "SBH & ATM", "Viceroy Restaurant",
             "More Shopping mall", "Mess 1", "Mess 2", "Rock Garden", "F-Block", "Student Activity Center", "G-Block"};
     public static    double[] latitudes = {17.547152,
@@ -40,4 +41,5 @@ public class ControllerConstants {
             78.571040,
             78.575273,
             78.571507};
+
 }

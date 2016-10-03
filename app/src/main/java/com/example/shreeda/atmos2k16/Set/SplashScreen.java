@@ -1,12 +1,8 @@
 package com.example.shreeda.atmos2k16.Set;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.multidex.MultiDex;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
@@ -20,12 +16,6 @@ import com.squareup.picasso.Picasso;
  */
 
 public class SplashScreen extends AppCompatActivity {
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(newBase);
-        MultiDex.install(this);
-    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
