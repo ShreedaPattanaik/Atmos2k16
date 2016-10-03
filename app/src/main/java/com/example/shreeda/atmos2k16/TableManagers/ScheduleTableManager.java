@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.shreeda.atmos2k16.Set.ScheduleSet;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -54,7 +57,7 @@ public class ScheduleTableManager {
                          String name,
                          Long start_time,
                          String venue) {
-        int id=0;
+        int id = 0;
         long success = -1;
 
         ContentValues cv = new ContentValues();
@@ -68,8 +71,8 @@ public class ScheduleTableManager {
 
         try {
             success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
-        }catch (SQLiteConstraintException e){
-            success=ourDatabase.update(DATABASE_TABLE,cv,KEY_ID+"="+id,null);
+        } catch (SQLiteConstraintException e) {
+            success = ourDatabase.update(DATABASE_TABLE, cv, KEY_ID + "=" + id, null);
         }
 
         return success;
@@ -78,14 +81,14 @@ public class ScheduleTableManager {
 
     public ArrayList<ScheduleSet> getSchedule(long time) {
         open();
-        ArrayList<ScheduleSet> sets=new ArrayList<>();
+        ArrayList<ScheduleSet> sets = new ArrayList<>();
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
-                " WHERE "+KEY_START_TIME+"='"+time+"'", null);
-        if(cursor.moveToFirst()){
-            do{
-                ScheduleSet set=new ScheduleSet(cursor.getString(3),cursor.getString(2),cursor.getString(5),cursor.getLong(4),cursor.getInt(1));
+                " WHERE " + KEY_START_TIME + "='" + time + "'", null);
+        if (cursor.moveToFirst()) {
+            do {
+                ScheduleSet set = new ScheduleSet(cursor.getString(3), cursor.getString(2), cursor.getString(5), cursor.getLong(4), cursor.getInt(1));
                 sets.add(set);
-            }while (cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
         close();
@@ -129,6 +132,34 @@ public class ScheduleTableManager {
     public void deleteAllEntry() {
         open();
         ourDatabase.delete(DATABASE_TABLE, null, null);
+        close();
+    }
+
+    public long addEntry(JSONObject jsonObject) throws JSONException {
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(KEY_EVENT_NAME, jsonObject.getString("event_name"));
+        cv.put(KEY_EVENT_ID, jsonObject.getInt("event_id"));
+        cv.put(KEY_EVENT_ROUND, jsonObject.getString("round_name"));
+        cv.put(KEY_START_TIME, jsonObject.getLong("event_date") * 1000);
+        cv.put(KEY_VENUE, jsonObject.getString("event_venue"));
+        cv.put(KEY_ID, jsonObject.getInt("id"));
+
+        open();
+        try {
+            ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
+        } catch (SQLiteConstraintException e) {
+            cv.remove(KEY_ID);
+            ourDatabase.update(DATABASE_TABLE, cv, KEY_ID + "=" + jsonObject.getInt("id"), null);
+        }
+        close();
+        return 1;
+    }
+
+    public void deleteEntry(JSONObject jsonObject) throws JSONException {
+        open();
+        ourDatabase.delete(DATABASE_TABLE, KEY_ID + "=" + jsonObject.getInt("id"), null);
         close();
     }
 
