@@ -37,6 +37,12 @@
             android:title="App Credits"
             android:icon="@drawable/ic_group_black_24dp"/>
 
+        <item
+            android:id="@+id/Contactus"
+            android:title="Contact Us"
+            android:icon="@drawable/ic_call_black_24dp"/>
+
+
 
         <item
             android:id="@+id/Sponsers"

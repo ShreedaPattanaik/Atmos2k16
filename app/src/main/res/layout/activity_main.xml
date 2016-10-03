@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/secondary_text"
+    android:background="@drawable/gradient_background"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -24,9 +24,10 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:backgroundTint="@color/darktool"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent" />
+                />
 
             <LinearLayout
                 android:layout_below="@+id/toolbar"
@@ -85,8 +86,7 @@
             android:background="#8C000000"
             app:itemTextColor="@color/white"
             app:menu="@menu/drawer"
-            android:backgroundTint="@color/white"
-            app:itemIconTint="@color/cardview_dark_background"
+            app:itemIconTint="@color/white"
             app:itemTextAppearance="@color/secondary_text"
             app:headerLayout="@layout/navigation_header"
             />

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.register:
                         transaction = manager.beginTransaction();
-                        Fragment fragment2 = new Register();
+                        Fragment fragment2 = new Register2();
                         transaction.replace(R.id.container, fragment2, "campusmap");
                         transaction.commit();
                         menuItem.setChecked(true);
@@ -130,6 +130,17 @@ public class MainActivity extends AppCompatActivity {
                         mDrawer.closeDrawer(Gravity.LEFT);
 
                         break;
+
+                    case R.id.Contactus:
+                        transaction = manager.beginTransaction();
+                        fragment = new ContactsFragment();
+                        transaction.replace(R.id.container, fragment, "ContactUs");
+                        transaction.commit();
+                        menuItem.setChecked(true);
+                        mDrawer.closeDrawer(Gravity.LEFT);
+                        fab.hide();
+                        break;
+
 
                     case R.id.Sponsers:
                         transaction = manager.beginTransaction();
