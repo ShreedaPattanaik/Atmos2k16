@@ -1,7 +1,6 @@
 package com.example.shreeda.atmos2k16;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,20 +12,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
-
-import com.example.shreeda.atmos2k16.Set.CampusMap;
-
-import Helper.RecyclerClickListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,9 +63,13 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.schedule:
-                        Intent intent = new Intent(MainActivity.this, TimelineActivity.class);
-                        startActivity(intent);
+                        transaction = manager.beginTransaction();
+                        Fragment fragment3 = new ScheduleFragment();
+                        transaction.replace(R.id.container, fragment3, "Timeline");
+                        transaction.commit();
+                        menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
+                        fab.hide();
                         break;
 
                     case R.id.register:
@@ -96,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     transaction.commit();*/
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        startActivity(new Intent(MainActivity.this, EventDetailsActivity.class));
+                        startActivity(new Intent(MainActivity.this, event_list.class));
 
                         break;
 
@@ -168,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
         mNavigation.getMenu().getItem(0).setChecked(true);
         mDrawer.closeDrawer(Gravity.LEFT);
+        fab.show();
     }
 
 

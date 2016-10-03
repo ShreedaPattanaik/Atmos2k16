@@ -1,42 +1,45 @@
 package com.example.shreeda.atmos2k16;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * Created by SHREEDA on 02-10-2016.
  */
 
-public class TimelineActivity extends AppCompatActivity {
+public class ScheduleFragment extends Fragment{
     TabLayout mTabs;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+    }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.schedulefragment, container, false);
+    }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) view.findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mTabs = (TabLayout) findViewById(R.id.tabLayout);
+        mTabs = (TabLayout) view.findViewById(R.id.tabLayout);
         mTabs.setupWithViewPager(mViewPager);
-
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -51,7 +54,7 @@ public class TimelineActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             Bundle args=new Bundle();
             args.putInt("day",position);
-            TimelineFragment frag=new TimelineFragment();
+            TimelinePagerFragment frag=new TimelinePagerFragment();
             frag.setArguments(args);
             return frag;
         }

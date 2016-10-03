@@ -25,11 +25,11 @@ import java.util.Calendar;
  * Created by SHREEDA on 02-10-2016.
  */
 
-public class TimelineFragment extends Fragment {
+public class TimelinePagerFragment extends Fragment {
     ArrayList<Long> times;
 
 
-    public TimelineFragment() {
+    public TimelinePagerFragment() {
         // Required empty public constructor
     }
 
