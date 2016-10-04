@@ -6,7 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +27,7 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
     ContactAdapter contactAdapter;
     RecyclerView recyclerView;
     ArrayList<Contacts> data;
+    int num = 2;
 
     @Nullable
     @Override
@@ -39,10 +40,11 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
         super.onViewCreated(view, savedInstanceState);
         data = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.contacts_recycler);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), num );
         contactAdapter = new ContactAdapter(getActivity());
         contactAdapter.setClickListener(this);
         recyclerView.setAdapter(contactAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(layoutManager);
         contactAdapter.setArrayList(data);
         feedData();
 
