@@ -20,8 +20,8 @@ public class RegisteredFragment extends Fragment {
 
     TextView tv;
 
-    public static FavouritesFragment newInstance(String stringData) {
-        FavouritesFragment fragment = new FavouritesFragment();
+    public static RegisteredFragment newInstance(String stringData) {
+        RegisteredFragment fragment = new RegisteredFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, stringData);
         fragment.setArguments(args);

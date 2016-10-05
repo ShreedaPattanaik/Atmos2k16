@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -185,6 +187,13 @@ public class Register extends Fragment {
                     if (object.has("error")) {
 
                     } else {
+                        FragmentManager manager;
+                        manager = getActivity().getSupportFragmentManager();
+                        Fragment fragment;
+                        fragment = RegisteredFragment.newInstance(s);
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        transaction.replace(R.id.container, fragment, "registered");
+                        transaction.commit();
 
                     }
                     Log.e("response", object.toString());

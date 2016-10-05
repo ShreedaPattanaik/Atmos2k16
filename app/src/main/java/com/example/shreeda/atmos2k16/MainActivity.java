@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.register:
                         transaction = manager.beginTransaction();
-                        Fragment fragment2 = new Register2();
+                        Fragment fragment2 = new Register();
                         transaction.replace(R.id.container, fragment2, "campusmap");
                         transaction.commit();
                         menuItem.setChecked(true);
