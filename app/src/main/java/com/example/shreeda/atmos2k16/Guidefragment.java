@@ -42,16 +42,18 @@ public class Guidefragment extends Fragment  {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        manager= getActivity().getSupportFragmentManager();
         CardView cd = (CardView) view.findViewById(R.id.card);
         cd.setOnClickListener(new CardView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                manager= getActivity().getSupportFragmentManager();
+
                 FragmentTransaction transaction= manager.beginTransaction();
                 Fragment fragment3 = new ReachCampus();
                 transaction.replace(R.id.container,fragment3, "reach campus");
+                transaction.addToBackStack("reach campus");
                 transaction.commit();
+
             }
         });
 
@@ -62,7 +64,9 @@ public class Guidefragment extends Fragment  {
                 FragmentTransaction transaction= manager.beginTransaction();
                 Fragment fragment4 = new CampusMap();
                 transaction.replace(R.id.container,fragment4, "campus map");
+                transaction.addToBackStack("campus map");
                 transaction.commit();
+
             }
         });
 
@@ -73,6 +77,8 @@ public class Guidefragment extends Fragment  {
                 FragmentTransaction transaction= manager.beginTransaction();
                 Fragment fragment4 = new CampusMap();
                 transaction.replace(R.id.container,fragment4, "campus map");
+                transaction.addToBackStack("campus map");
+                transaction.commit();
             }
         });
 

@@ -84,12 +84,13 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.events:
-                    /*transaction =manager.beginTransaction()
-
-                    transaction.commit();*/
+                        transaction = manager.beginTransaction();
+                        Fragment Events = new EventListFragment();
+                        transaction.replace(R.id.container, Events, "events");
+                        transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        startActivity(new Intent(MainActivity.this, event_list.class));
+                        fab.hide();
 
                         break;
 
