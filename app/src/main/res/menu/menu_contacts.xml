@@ -5,10 +5,12 @@
     <item
         android:id="@+id/phone"
         android:orderInCategory="100"
-        android:title="call"
+        android:title="Call"
+        android:icon="@drawable/ic_call_black_24dp"
         app:showAsAction="never" />
     <item
+        android:icon="@drawable/ic_email_black_24dp"
         android:id="@+id/email"
-        android:title="email"/>
+        android:title="E-Mail"/>
 
 </menu>
