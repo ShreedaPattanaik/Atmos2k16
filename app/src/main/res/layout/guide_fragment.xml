@@ -1,117 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient_background"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<android.support.v7.widget.CardView
-    android:id="@+id/card"
-    android:layout_marginRight="26dp"
-    android:layout_marginLeft="26dp"
-    android:layout_marginTop="50dp"
-    app:cardCornerRadius="60dp"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="@drawable/guideicon"
-    app:cardBackgroundColor="#2856A1"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="32dp">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="40dp"
-        android:text="Reach Campus"
-        android:textStyle=""
-        android:layout_marginLeft="160dp"
-        android:gravity="center"
-        android:background="@layout/rounded_textview"
-        android:padding="10dp"
-        />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="110dp"
-        android:layout_height="110dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/compass"
-        />
-</android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-android:id="@+id/card1"
-android:layout_marginRight="26dp"
-android:layout_marginLeft="26dp"
-android:layout_marginTop="40dp"
-app:cardCornerRadius="60dp"
-android:layout_width="match_parent"
-android:layout_height="120dp"
-app:cardBackgroundColor="#2856A1"
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<TextView
-    android:id="@+id/textView2"
-    android:layout_width="130dp"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true"
-    android:layout_marginTop="40dp"
-    android:text="Campus Map"
-    android:layout_marginLeft="55dp"
-    android:gravity="center"
-    android:background="@layout/rounded_textview"
-    android:padding="10dp"
-    />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="205dp"
-            android:background="@drawable/maps"
-
-            android:id="@+id/circleImageView2" />
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/card2"
-        android:layout_marginRight="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="40dp"
-        app:cardCornerRadius="60dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        app:cardBackgroundColor="#2856A1"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="40dp"
-            android:text="About Us"
-            android:layout_marginLeft="160dp"
-            android:gravity="center"
-            android:background="@layout/rounded_textview"
-            android:padding="10dp"
-            />
+        <android.support.v7.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/guideicon"
+            app:cardBackgroundColor="#2856A1"
+            app:cardCornerRadius="65dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="40dp"
-            android:background="@drawable/iwallaicon"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-            android:id="@+id/circleImageView" />
-    </android.support.v7.widget.CardView>
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/compass" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@layout/rounded_textview"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Reach Campus"
+                    android:textStyle="" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card1"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/guideicon"
+            app:cardBackgroundColor="#2856A1"
+            app:cardCornerRadius="65dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dp"
+                    android:background="@layout/rounded_textview"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Campus Map"
+                    android:textStyle="" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/maps" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card2"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/guideicon"
+            app:cardBackgroundColor="#2856A1"
+            app:cardCornerRadius="65dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="105dp"
+                    android:layout_height="105dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/iwallaicon" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@layout/rounded_textview"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="About Us"
+                    android:textStyle="" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
     </LinearLayout>
+</LinearLayout>
