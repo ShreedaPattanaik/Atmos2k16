@@ -1,5 +1,6 @@
 package com.example.shreeda.atmos2k16;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
@@ -36,7 +37,7 @@ import static App.ControllerConstant.url;
  * Created by SHREEDA on 28-09-2016.
  */
 
-public class Register extends Fragment {
+public class RegisterFragment extends Fragment {
 
 
     MultiSelectionSpinner spinner;
@@ -46,7 +47,7 @@ public class Register extends Fragment {
     String College;
     String Email;
     String phoneno;
-
+    ProgressDialog progressDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -115,6 +116,14 @@ public class Register extends Fragment {
             @Override
 
             public void onClick(View v) {
+
+               /* int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                if (currentapiVersion >= android.os.Build.VERSION_CODES.LOLLIPOP){
+                    progressDialog = new ProgressDialog(getActivity(),
+                            R.style.AppTheme_Dark_Dialog);
+                } else{
+                    progressDialog = new ProgressDialog(getActivity());
+                }*/
                 int success = 1;
                 name = Name.getEditText().getText().toString();
                 College = college.getEditText().getText().toString();
@@ -142,37 +151,15 @@ public class Register extends Fragment {
                         Toast.makeText(getActivity(), "Please select event", Toast.LENGTH_LONG).show();
                         spinner.performClick();
                     } else {
+                        progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setMessage("Registering...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
                         SendRequest();
                     }
 
                 }
-
-
-
-                /*final Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject JSONResponse = new JSONObject(response);
-                            boolean success = JSONResponse.getBoolean("success");
-
-                            if (success) {
-                                Toast.makeText(Register.this, Name + "Registered Succesfully", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Register.this, RegisteredActivity.class);
-                                intent.putExtra(KEY_SELECTED , spinner.getSelectedItemsAsString());
-                                startActivity(intent);
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                } ;
-
-                RegisterRequest registerRequest = new RegisterRequest(name, College, Email, phoneno, responseListener);
-                RequestQueue requestQueue= Volley.newRequestQueue(Register.this);*/
-
 
             }
         });
@@ -184,48 +171,37 @@ public class Register extends Fragment {
             public void onResponse(String s) {
                 try {
                     JSONObject object = new JSONObject(s);
-                    if (object.has("error")) {
-
+                    Log.e("response", object.toString());
+                    if (object.getBoolean("error")) {
+                        progressDialog.cancel();
+                        Toast.makeText(getActivity(), "error Try again", Toast.LENGTH_LONG).show();
                     } else {
+                        Toast.makeText(getActivity(), "registered", Toast.LENGTH_LONG).show();
+                        progressDialog.cancel();
                         FragmentManager manager;
                         manager = getActivity().getSupportFragmentManager();
                         Fragment fragment;
-                        fragment = RegisteredFragment.newInstance(s);
+                        Log.e("Register",spinner.getSelectedItemsAsString());
+                        fragment = OnRegisteredFragment.newInstance(spinner.getSelectedItemsAsString(),object.getString("id"),object.getString("email"));
                         FragmentTransaction transaction = manager.beginTransaction();
                         transaction.replace(R.id.container, fragment, "registered");
                         transaction.commit();
+//{"id":"ATMH2008","college":"rfg","phone":"1234567890","registration":1,"error":false,"email":"r@g.v","name":"ffh"} Response on success
 
                     }
-                    Log.e("response", object.toString());
+
                     Toast.makeText(getActivity(), object.toString(), Toast.LENGTH_LONG).show();
                     Log.e(TAG, "onResponse: Data received" + object.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                        try {
-              /*  JSONObject jsonObject = new JSONObject();
-
-//                            boolean error = jsonObject.getBoolean("error");
-//
-                FragmentManager manager;
-                manager = getActivity().getSupportFragmentManager();
-                Fragment fragment;
-                fragment = RegisteredFragment.newInstance(s);
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.container, fragment, "registered");
-                transaction.commit();*/
-
-
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getActivity(), "Could not complete registration", Toast.LENGTH_LONG).show();
-
+                progressDialog.cancel();
+                //Toast.makeText(getActivity(), "Could not complete registration", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), volleyError.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
