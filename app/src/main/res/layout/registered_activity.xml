@@ -1,37 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
         android:text="@string/you_are_successfully_registered_for_these_events"
-        />
+        android:textSize="25sp" />
 
     <TextView
-        android:layout_marginTop="10dp"
+        android:id="@+id/EVENTList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/eventnames"
-        />
+        android:gravity="center"
+        android:text="Algomaniac"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="@string/your_temporary_atmos_id_is"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/REGID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="ATM1888"
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/your_temporary_atmos_id_is"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        />
-
+        android:layout_gravity="center_horizontal"
+        android:padding="5dp"
+        android:text="All the details has been sent to the registered mail" />
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/REGID"
-        />
-
+        android:text="rajatjain27695@gmail.com"
+        android:id="@+id/EMAIL"
+        android:textStyle="italic"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>
