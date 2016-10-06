@@ -1,64 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
 
     <android.support.v7.widget.CardView
-        android:layout_width="160dp"
-        android:layout_height="220dp"
+        android:id="@+id/card_left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/card_left">
+        android:layout_marginTop="10dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:weightSum="1">
+            android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="36dp"
-                android:layout_height="34dp"
-                android:src="@drawable/ic_more_vert_black_24dp"
-                android:layout_gravity="right"
-                android:background="#fffefd"
-                android:id="@+id/menu_left"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_height="118dp"
-            android:layout_width="131dp"
-            android:layout_gravity="center"
-                app:civ_fill_color="@color/darktool"
-                android:id="@+id/pic_left"
-                android:layout_weight="0.59" />
+                <ImageButton
+                    android:id="@+id/menu_left"
+                    android:layout_width="36dp"
+                    android:layout_height="34dp"
+                    android:layout_alignParentRight="true"
+                    android:background="#fffefd"
+                    android:src="@drawable/ic_more_vert_black_24dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:textAllCaps="true"
-                android:layout_gravity="center_horizontal"
-                android:text="Keshav Kedarnath"
-                android:id="@+id/name_left"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/pic_left"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_centerInParent="true"
+                    android:layout_margin="16dp"
+                    app:civ_fill_color="@color/darktool" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:textSize="13sp"
-                android:text="President"
-                android:gravity="center"
-                android:id="@+id/post_left"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
+                <TextView
+                    android:singleLine="true"
+                    android:ellipsize="marquee"
 
+                    android:id="@+id/name_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Keshav Kedarnath"
+                    android:textAllCaps="true" />
 
+                <TextView
+                    android:id="@+id/post_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="President"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
 
-
-    </LinearLayout>
+</LinearLayout>

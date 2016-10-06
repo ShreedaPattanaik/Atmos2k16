@@ -64,12 +64,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         myViewHolder.name.setText(arrayList.get(i).getName());
         myViewHolder.designation.setText((arrayList.get(i).getDesignation()));
         myViewHolder.imageView.setImageResource(arrayList.get(i).getImage());
-        myViewHolder.more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showpopupmenu(myViewHolder.more, i);
-            }
-        });
+
     }
 
     private void showpopupmenu(View view, final int pos) {
@@ -116,6 +111,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             name=(TextView) itemView.findViewById(R.id.name_left);
             designation=(TextView)itemView.findViewById(R.id.post_left);
             more = (ImageButton) itemView.findViewById(R.id.menu_left);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showpopupmenu(more, getLayoutPosition());
+                }
+            });
+            more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showpopupmenu(more, getLayoutPosition());
+                }
+            });
 //            mobile=(RelativeLayout)itemView.findViewById(R.id.call);
 //            email=(RelativeLayout)itemView.findViewById(R.id.email);
 //            numberTV=(TextView) itemView.findViewById(R.id.phoneno);

@@ -7,12 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 
 import com.example.shreeda.atmos2k16.Set.CampusMap;
 
@@ -40,19 +44,25 @@ public class Guidefragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         manager = getActivity().getSupportFragmentManager();
+
+        final CircleImageView[] circleImageView = new CircleImageView[3];
+        circleImageView[0] = (CircleImageView) view.findViewById(R.id.circleImage1);
+        circleImageView[1] = (CircleImageView) view.findViewById(R.id.circleImage2);
+        circleImageView[2] = (CircleImageView) view.findViewById(R.id.circleImage3);
+
+
         CardView cd = (CardView) view.findViewById(R.id.card);
         cd.setOnClickListener(new CardView.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FragmentTransaction transaction = manager.beginTransaction();
                 Fragment fragment3 = new ReachCampus();
                 transaction.replace(R.id.container, fragment3, "reach campus");
                 transaction.addToBackStack("reach campus");
                 transaction.commit();
-
             }
         });
+
 
         CardView cd1 = (CardView) view.findViewById(R.id.card1);
         cd1.setOnClickListener(new CardView.OnClickListener() {
@@ -90,23 +100,21 @@ public class Guidefragment extends Fragment {
         cd1.startAnimation(slideLeft);
         cd2.startAnimation(slideRight2);
 
-        CircleImageView[] circleImageView = new CircleImageView[3];
-        circleImageView[0] = (CircleImageView) view.findViewById(R.id.circleImage1);
-        circleImageView[1] = (CircleImageView) view.findViewById(R.id.circleImage2);
-        circleImageView[2] = (CircleImageView) view.findViewById(R.id.circleImage3);
 
         for (int i = 0; i < 3; i++) {
             Animation anim = new ScaleAnimation(
                     0f, 1f,
                     0f, 1f,
-                    Animation.RELATIVE_TO_SELF,0.5f,
-                    Animation.RELATIVE_TO_SELF,0.5f
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f
             );
             anim.setDuration(200);
             anim.setStartOffset(300 + i * 100);
             anim.setFillAfter(true); // Needed to keep the result of the animation
             circleImageView[i].startAnimation(anim);
         }
+
+
 
      /*   TranslateAnimation slideInRight=new TranslateAnimation(-100,0,0,0);
         slideInRight.setDuration(300);
@@ -123,29 +131,23 @@ public class Guidefragment extends Fragment {
 
 
     }
+/*
 
+    class GestureTap extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            Log.i("onSingleTap :", "" + e.getAction());
+            return false;
+        }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        manager = getFragmentManager();
-//    }
-//    ImageButton.OnClickListener listener = new ImageButton.OnClickListener() {
-//
-//        @Override
-//        public void onClick(View arg0) {
-//        //    Toast.makeText(getActivity(), "kjsadk", Toast.LENGTH_LONG).show();
-//        }
-//    };
-//
-//    public void addreachcampus() {
-//        ReachCampus r = new ReachCampus();
-//        FragmentTransaction Transaction = manager.beginTransaction();
-//        Transaction.add(R.id.reach_campus, r, "reach_campus");
-//        Transaction.commit();
-//        Toast.makeText(getActivity(),"yolo",Toast.LENGTH_LONG).show();}
-//
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+
+            Log.i("onSingleTap :", "" + e.getAction());
+            return true;
+        }
+    }*/
+
 
 }
 

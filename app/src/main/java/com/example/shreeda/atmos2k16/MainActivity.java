@@ -1,7 +1,6 @@
 package com.example.shreeda.atmos2k16;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigation;
     FragmentManager manager;
     int backNumber;
-    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -69,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
                         break;
 
                     case R.id.register:
@@ -79,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
 
 
                         break;
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
 
                         break;
 
@@ -116,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
                         break;
 
 
@@ -151,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
 
-
                 }
 
                 return false;
@@ -167,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
         mNavigation.getMenu().getItem(0).setChecked(true);
         mDrawer.closeDrawer(Gravity.LEFT);
-        fab.show();
+
     }
 
 
@@ -184,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
             mDrawer.closeDrawer(Gravity.LEFT);
         } else if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             super.onBackPressed();
+        } else if (((HomeFragment) getSupportFragmentManager().findFragmentByTag("home")) == null) {
+            setHomeFragment();
+
         } else if (backNumber < 1) {
             backNumber++;
             Toast.makeText(this, "Press Back again to exit", Toast.LENGTH_SHORT).show();

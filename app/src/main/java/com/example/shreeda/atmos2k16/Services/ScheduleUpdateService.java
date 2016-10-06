@@ -41,10 +41,8 @@ public class ScheduleUpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
         eventTableManager = new EventTableManager(this);
         sendEventRequest();
-
         sendTokenToServer();
     }
 
@@ -186,4 +184,5 @@ public class ScheduleUpdateService extends IntentService {
 
         VolleySingleton.getInstance().getRequestQueue().add(request);
     }
+    //todo download feeds when done
 }
