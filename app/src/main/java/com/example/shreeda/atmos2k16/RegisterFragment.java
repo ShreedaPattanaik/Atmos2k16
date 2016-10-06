@@ -40,14 +40,15 @@ import static App.ControllerConstant.url;
 public class RegisterFragment extends Fragment {
 
 
-    MultiSelectionSpinner spinner;
     public static String KEY_SELECTED = "Selected";
     public static String TAG;
+    MultiSelectionSpinner spinner;
     String name;
     String College;
     String Email;
     String phoneno;
     ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -174,15 +175,15 @@ public class RegisterFragment extends Fragment {
                     Log.e("response", object.toString());
                     if (object.getBoolean("error")) {
                         progressDialog.cancel();
-                        Toast.makeText(getActivity(), "error Try again", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), object.getString("error_msg"), Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getActivity(), "registered", Toast.LENGTH_LONG).show();
                         progressDialog.cancel();
                         FragmentManager manager;
                         manager = getActivity().getSupportFragmentManager();
                         Fragment fragment;
-                        Log.e("Register",spinner.getSelectedItemsAsString());
-                        fragment = OnRegisteredFragment.newInstance(spinner.getSelectedItemsAsString(),object.getString("id"),object.getString("email"));
+                        Log.e("Register", spinner.getSelectedItemsAsString());
+                        fragment = OnRegisteredFragment.newInstance(spinner.getSelectedItemsAsString(), object.getString("id"), object.getString("email"));
                         FragmentTransaction transaction = manager.beginTransaction();
                         transaction.replace(R.id.container, fragment, "registered");
                         transaction.commit();
@@ -201,7 +202,7 @@ public class RegisterFragment extends Fragment {
             public void onErrorResponse(VolleyError volleyError) {
                 progressDialog.cancel();
                 //Toast.makeText(getActivity(), "Could not complete registration", Toast.LENGTH_LONG).show();
-                Toast.makeText(getActivity(), volleyError.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Please check your internet connection", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

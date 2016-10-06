@@ -184,4 +184,5 @@ public class ScheduleUpdateService extends IntentService {
 
         VolleySingleton.getInstance().getRequestQueue().add(request);
     }
+    //todo download feeds when done
 }
