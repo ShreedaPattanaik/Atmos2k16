@@ -100,8 +100,8 @@ public class ScheduleTableManager {
         Calendar start = Calendar.getInstance(), end = Calendar.getInstance();
         start.setTimeZone(TimeZone.getTimeZone("GMT"));
         end.setTimeZone(TimeZone.getTimeZone("GMT"));
-        start.set(2016, Calendar.SEPTEMBER, 26 + day, 0, 0);
-        end.set(2016, Calendar.SEPTEMBER, 27 + day, 0, 0);
+        start.set(2016, Calendar.OCTOBER, 14 + day, 0, 0);
+        end.set(2016, Calendar.OCTOBER, 15 + day, 0, 0);
         open();
         ArrayList<Long> times = new ArrayList<>();
         Cursor cursor = ourDatabase.rawQuery("SELECT DISTINCT " + KEY_START_TIME + " FROM " + DATABASE_TABLE +
