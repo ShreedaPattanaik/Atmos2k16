@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView mNavigation;
     FragmentManager manager;
     int backNumber;
-    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
                         break;
 
                     case R.id.register:
@@ -78,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
 
 
                         break;
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
 
                         break;
 
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
                         break;
 
 
@@ -131,11 +129,11 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
+
                         break;
 
 
-                    case R.id.Sponsers:
+                    case R.id.Sponsors:
                         transaction = manager.beginTransaction();
                         fragment = new SponsorsFragment();
                         transaction.replace(R.id.container, fragment, "Sponsors");
@@ -159,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
         mNavigation.getMenu().getItem(0).setChecked(true);
         mDrawer.closeDrawer(Gravity.LEFT);
-        fab.show();
+
     }
 
 

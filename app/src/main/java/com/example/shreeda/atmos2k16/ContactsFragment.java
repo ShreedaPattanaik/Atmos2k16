@@ -27,7 +27,7 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
     ContactAdapter contactAdapter;
     RecyclerView recyclerView;
     ArrayList<Contacts> data;
-    int num = 2;
+
 
     @Nullable
     @Override
@@ -40,11 +40,11 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
         super.onViewCreated(view, savedInstanceState);
         data = new ArrayList<>();
         recyclerView = (RecyclerView) view.findViewById(R.id.contacts_recycler);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), num );
+
         contactAdapter = new ContactAdapter(getActivity());
         contactAdapter.setClickListener(this);
         recyclerView.setAdapter(contactAdapter);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2 ));
         contactAdapter.setArrayList(data);
         feedData();
 
@@ -56,8 +56,8 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
         Contacts temp3 = new Contacts("Prashant Balana", "Sponsorship and Marketing", "+919912248413","prashant.balana@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
         Contacts temp4 = new Contacts("Rahul Somu", "Publicity and Social Media Relations", "+918499966778","rahulsomu9@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
         Contacts temp5 = new Contacts("Rajat Bansal", "Technical Convener", "+919912283346","rajatbansal427@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp6 = new Contacts("Prudthviraj Vanaparthi", "Logistics & Operations", "+918096765563","prudthviraj666@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp7 = new Contacts("Akshay Borude", "Hospitality & Accommodation", "+919912366272","akshaykborude@gmail.comgmail.com", R.drawable.ic_insert_emoticon_black_24dp);
+        Contacts temp6 = new Contacts("Prudthviraj", "Logistics & Operations", "+918096765563","prudthviraj666@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
+        Contacts temp7 = new Contacts("Akshay Borude", "Hospitality & Accom", "+919912366272","akshaykborude@gmail.comgmail.com", R.drawable.ic_insert_emoticon_black_24dp);
         Contacts temp8 = new Contacts("Monil Shah", "Website & Creatives", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
         data.add(temp1);
         data.add(temp2);

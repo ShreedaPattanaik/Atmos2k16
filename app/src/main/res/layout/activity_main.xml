@@ -37,15 +37,6 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="30dp"
-            android:background="@null"
-            android:src="@drawable/ic_favorite_border_black_24dp"
-            app:backgroundTint="#c27f7f" />
 
     </android.support.design.widget.CoordinatorLayout>
 
