@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
-
 
                         break;
 
@@ -133,18 +131,16 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
                         break;
 
 
-                    case R.id.Sponsers:
+                    case R.id.Sponsors:
                         transaction = manager.beginTransaction();
                         fragment = new SponsorsFragment();
                         transaction.replace(R.id.container, fragment, "Sponsors");
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-                        fab.hide();
 
                         break;
 

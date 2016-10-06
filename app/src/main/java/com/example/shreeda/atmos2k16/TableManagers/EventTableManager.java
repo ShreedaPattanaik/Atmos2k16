@@ -209,9 +209,9 @@ public class EventTableManager {
 
     public void deleteEntry(JSONObject jsonObject) throws JSONException {
 
-        int id=jsonObject.getInt("event_id");
+        int id = jsonObject.getInt("event_id");
         open();
-        ourDatabase.delete(DATABASE_TABLE,KEY_EVENT_ID+"="+id,null);
+        ourDatabase.delete(DATABASE_TABLE, KEY_EVENT_ID + "=" + id, null);
         close();
 
     }
