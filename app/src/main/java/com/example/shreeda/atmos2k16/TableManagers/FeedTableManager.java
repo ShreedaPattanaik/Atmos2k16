@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.shreeda.atmos2k16.Set.FeedSet;
+
+import java.util.ArrayList;
+
 /**
  * Created by SHREEDA on 26-09-2016.
  */
@@ -91,10 +95,26 @@ public class FeedTableManager {
         return success;
     }
 
-    public Cursor getFeeds() {
+    public ArrayList<FeedSet> getFeeds() {
         open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE ,
+        ArrayList<FeedSet> feeds=new ArrayList<>();
+        open();
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +" order by "+KEY_RECEIVE_TIME+" desc " ,
                 null);
-        return cursor;
+        if (cursor.moveToFirst())
+            do{
+
+                FeedSet feed=new FeedSet(
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(4),
+                        cursor.getLong(3)
+                );
+                feeds.add(feed);
+            }while (cursor.moveToNext());
+        cursor.close();
+        close();
+        return feeds;
     }
-}
+    }
+

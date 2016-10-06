@@ -96,10 +96,14 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.feed:
-                   /* transaction =manager.beginTransaction();
-                    transaction.commit();
-                    menuItem.setChecked(true);*/
+                        transaction = manager.beginTransaction();
+                        Fragment Feed = new FeedFragment();
+                        transaction.replace(R.id.container, Feed, "feed");
+                        transaction.commit();
+                        menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
+                        fab.hide();
+
 
                         break;
 
@@ -143,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
+                        fab.hide();
 
                         break;
 

@@ -15,4 +15,7 @@
     <string name="your_atmos_id_is">Your Atmos ID is</string>
     <string name="your_temporary_atmos_id_is">Your temporary Atmos ID is</string>
     <string name="you_are_successfully_registered_for_these_events">You are successfully registered for these events</string>
+    <string name="co_title_sponsor">CO-TITLE SPONSOR</string>
+    <string name="civil_expo_title_sponsor">CIVIL EXPO TITLE SPONSOR</string>
+    <string name="gold_sponsor">GOLD SPONSOR</string>
 </resources>
