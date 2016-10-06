@@ -76,6 +76,37 @@
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
             android:orientation="vertical">
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="3dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:padding="8dp"
+                    android:text="Prize Money"
+                    android:textColor="#000000"
+                    android:textSize="24sp"/>
+                <TextView
+                    android:textColor="@android:color/black"
+                    android:textStyle="normal"
+                    android:fontFamily="sans-serif"
+                    android:id="@+id/event_prize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="2000K"
+                    android:textSize="18sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview1"
@@ -83,21 +114,109 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 app:cardCornerRadius="3dp">
-
-                <TextView
-                    android:textColor="@android:color/black"
-                    android:textStyle="normal"
-                    android:fontFamily="sans-serif"
-                    android:id="@+id/event_descrption"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text=""
-                    android:textSize="18sp" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif"
+                        android:padding="8dp"
+                        android:text="Event Description"
+                        android:textColor="#000000"
+                        android:textSize="24sp"/>
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:fontFamily="sans-serif"
+                        android:id="@+id/event_descrption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardview3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardCornerRadius="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif"
+                        android:padding="8dp"
+                        android:text="Problem Statment"
+                        android:textColor="#000000"
+                        android:textSize="24sp"/>
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:fontFamily="sans-serif"
+                        android:id="@+id/event_problem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:visibility="gone"
+                app:cardCornerRadius="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif"
+                        android:padding="8dp"
+                        android:text="Contacts"
+                        android:textColor="#000000"
+                        android:textSize="24sp"/>
+                    <TextView
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal"
+                        android:fontFamily="sans-serif"
+                        android:id="@+id/event_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text=""
+                        android:autoLink="all"
+                        android:textSize="18sp" />
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
-
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@color/blue"
+        android:src="@drawable/ic_star_white_24dp"
+        android:layout_gravity="bottom|end">
+    </android.support.design.widget.FloatingActionButton>
 </android.support.design.widget.CoordinatorLayout>

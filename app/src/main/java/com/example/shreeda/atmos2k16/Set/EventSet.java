@@ -1,8 +1,13 @@
 package com.example.shreeda.atmos2k16.Set;
 
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -36,6 +41,7 @@ public class EventSet {
         if (b) {
             this.description = c.getString(c.getColumnIndex(EventTableManager.KEY_DESCRIPTION));
             this.contacts = c.getString(c.getColumnIndex(EventTableManager.KEY_CONTACTS));
+            Log.e("eventset", c.getString(c.getColumnIndex(EventTableManager.KEY_CONTACTS)));
             this.pdfLink = c.getString(c.getColumnIndex(EventTableManager.KEY_PDFLINK));
             this.prize = c.getString(c.getColumnIndex(EventTableManager.KEY_PRIZE));
             this.probSt = c.getString(c.getColumnIndex(EventTableManager.KEY_PROBST));
@@ -64,8 +70,18 @@ public class EventSet {
         return fbUrl;
     }
 
-    public String getContacts() {
-        return contacts;
+    public JSONArray getContacts() {
+
+        try {
+            JSONArray array = new JSONArray(contacts);
+            Log.e("Evenset",array.toString());
+            return array;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("eventSetError",e.toString());
+
+        }
+        return null;
     }
 
     public String getPdfLink() {

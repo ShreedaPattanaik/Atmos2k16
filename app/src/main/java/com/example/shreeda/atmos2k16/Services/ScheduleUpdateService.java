@@ -60,6 +60,19 @@ public class ScheduleUpdateService extends IntentService {
             jsonObject.put("type", 1);
             jsonObject.put("tab", "Economics");
             jsonObject.put("event_name", "The Court Room");
+            JSONArray array=new JSONArray();
+            JSONObject object=new JSONObject();
+            object.put("name","harshit");
+            object.put("phone","1234567890");
+            array.put(object);
+            Log.e("ScheduleUpdateService",array.toString());
+            JSONObject object1=new JSONObject();
+            object1.put("name","Rajat");
+            object1.put("phone","0987456321");
+            array.put(object1);
+            Log.e("ScheduleUpdateService",array.toString());
+            jsonObject.put("contacts",array);
+            Log.e("ScheduleUpdateService",jsonObject.getString("contacts"));
 
             tableManager.addEntry(jsonObject);
 

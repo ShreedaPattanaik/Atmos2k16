@@ -4,16 +4,17 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,10 @@ import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
 import com.kogitune.activity_transition.ExitActivityTransition;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,10 +40,11 @@ import java.io.FileOutputStream;
 public class EventDetailsActivity extends AppCompatActivity {
     EventTableManager eventTableManager;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    TextView description;
+    TextView description, contact, prize, problem;
     ImageView Iv;
     EventSet data;
     ExitActivityTransition exitTransition;
+    CardView contacts_card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +54,22 @@ public class EventDetailsActivity extends AppCompatActivity {
 /*
         exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.view_parent)).duration(200).start(savedInstanceState);
 */
-
+        if (getIntent().getIntExtra("event_id", -1) == -1) {
+            finish();
+            return;
+        }
+        eventTableManager = new EventTableManager(this);
+        data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle(data.getName());
+            /*collapsingToolbarLayout.setTitle(data.getName());
+            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);*/
         }
 
 
@@ -65,25 +80,47 @@ public class EventDetailsActivity extends AppCompatActivity {
         animator.setDuration(100);
         animator.setStartDelay(100);
         animator.start();*/
-
+        contacts_card = (CardView) findViewById(R.id.card_contact);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         Iv = (ImageView) findViewById(R.id.kens_image);
         description = (TextView) findViewById(R.id.event_descrption);
-        eventTableManager = new EventTableManager(this);
-        data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
+        prize = (TextView) findViewById(R.id.event_prize);
+        problem = (TextView) findViewById(R.id.event_problem);
+        contact = (TextView) findViewById(R.id.event_contact);
+
         //todo checker insertion
         description.setText(Html.fromHtml(data.getDescription()));
+        prize.setText(data.getPrize());
+        problem.setText(Html.fromHtml(data.getProbSt()));
+        JSONArray jsonArray = data.getContacts();
+        if (jsonArray != null) {
+            contacts_card.setVisibility(View.VISIBLE);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObj = null;
+                try {
+                    jsonObj = jsonArray.getJSONObject(i);
+                    String name = jsonObj.getString("name");
+                    String phone = jsonObj.getString("phone");
+                    contact.setText(contact.getText() + name + " : " + phone + "\n");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println(jsonObj);
+            }
+
+        }
+
         if (data.getImg_link().isEmpty()) {
             Iv.setImageResource(R.color.accent);
         } else {
             setImage();
         }
-        collapsingToolbarLayout.setTitle(data.getName());
-        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -96,7 +133,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         final String name = data.getName();
         final int id = data.getId();
         String link = data.getImg_link();
-        if (data.isImage_downloaded()==false) {
+        if (data.isImage_downloaded() == false) {
             Picasso.with(this).load(data.getImg_link())
                     .placeholder(this.getResources().getDrawable(R.drawable.atmos16))
                     .error(this.getResources().getDrawable(R.drawable.atmos16))
