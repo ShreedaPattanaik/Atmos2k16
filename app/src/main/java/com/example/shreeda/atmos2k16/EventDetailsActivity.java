@@ -2,7 +2,6 @@ package com.example.shreeda.atmos2k16;
 
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -14,10 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.shreeda.atmos2k16.Set.EventSet;
 import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
-import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.kogitune.activity_transition.ExitActivityTransition;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -35,9 +36,10 @@ public class EventDetailsActivity extends AppCompatActivity {
     EventTableManager eventTableManager;
     CollapsingToolbarLayout collapsingToolbarLayout;
     TextView description;
-    KenBurnsView kb;
-    Cursor cursor;
+    ImageView Iv;
+    EventSet data;
     ExitActivityTransition exitTransition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +49,15 @@ public class EventDetailsActivity extends AppCompatActivity {
         exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.view_parent)).duration(200).start(savedInstanceState);
 */
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
 
 
         /*appBarLayout.setAlpha(0f);
@@ -60,46 +67,55 @@ public class EventDetailsActivity extends AppCompatActivity {
         animator.start();*/
 
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        kb = (KenBurnsView) findViewById(R.id.kens_image);
+        Iv = (ImageView) findViewById(R.id.kens_image);
         description = (TextView) findViewById(R.id.event_descrption);
         eventTableManager = new EventTableManager(this);
-        cursor = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
-        if (cursor != null && cursor.moveToFirst()) {
-            description.setText(Html.fromHtml(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_DESCRIPTION))));
-            if(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_IMAGE_LINK)).isEmpty()){
-                kb.setImageResource(R.color.accent);
-            }else {
-                setImage();
-            }
-            collapsingToolbarLayout.setTitle(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_NAME)));
-            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-            cursor.close();
+        data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
+        //todo checker insertion
+        description.setText(Html.fromHtml(data.getDescription()));
+        if (data.getImg_link().isEmpty()) {
+            Iv.setImageResource(R.color.accent);
+        } else {
+            setImage();
         }
+        collapsingToolbarLayout.setTitle(data.getName());
+        collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+
+
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setImage() {
-        final String name=cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_NAME));
-        final int id=cursor.getInt(cursor.getColumnIndex(EventTableManager.KEY_EVENT_ID));
-        String link=cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_IMAGE_LINK));
-        if (cursor.getInt(cursor.getColumnIndex(EventTableManager.KEY_IMAGE_DOWNLOAD))== 0) {
-            Picasso.with(this).load(cursor.getString(cursor.getColumnIndex(EventTableManager.KEY_IMAGE_LINK)))
+        final String name = data.getName();
+        final int id = data.getId();
+        String link = data.getImg_link();
+        if (data.isImage_downloaded()==false) {
+            Picasso.with(this).load(data.getImg_link())
                     .placeholder(this.getResources().getDrawable(R.drawable.atmos16))
                     .error(this.getResources().getDrawable(R.drawable.atmos16))
                     .resize(300, 200)
                     .centerCrop()
-                    .into(kb, new Callback() {
+                    .into(Iv, new Callback() {
                         @Override
                         public void onSuccess() {
-                            String path = saveToInternalSorage( ((BitmapDrawable) kb.getDrawable()).getBitmap(),name);
+                            String path = saveToInternalSorage(((BitmapDrawable) Iv.getDrawable()).getBitmap(), name);
                             eventTableManager.imageDownloaded(id, path);
                         }
+
                         @Override
                         public void onError() {
 
                         }
                     });
         } else {
-            kb.setImageBitmap(loadImageFromStorage(link,name));
+            Iv.setImageBitmap(loadImageFromStorage(link, name));
         }
     }
 
@@ -144,7 +160,6 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        cursor.close();
         eventTableManager.close();
         super.onDestroy();
     }

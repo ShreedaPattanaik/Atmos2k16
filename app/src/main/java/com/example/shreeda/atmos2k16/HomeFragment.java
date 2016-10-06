@@ -69,8 +69,6 @@ public class HomeFragment extends Fragment {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             Picasso.with(getActivity()).load(resources[position]).fit().centerCrop().into(holder.imageButton);
-//            holder.imageButton.setImageResource(resources[position]);
-
         }
 
         @Override

@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import Helper.SharedPrefDataManager;
+
 /**
  * Created by SHREEDA on 26-09-2016.
  */
@@ -38,9 +40,9 @@ public class EventTableManager {
     public static final String TAG = "TransactionTable";
 
     private static final String DATABASE_TABLE = "EVENTLIST";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "EVENTDatabase";
-    private Context context;
+    public Context context;
     private DBHelper ourHelper;
     private SQLiteDatabase ourDatabase;
 
@@ -59,63 +61,68 @@ public class EventTableManager {
         ourDatabase.close();
     }
 
-    public ArrayList<String> getDistinctTabs() {
+    public ArrayList<String> getDistinctTabs(int type) {
         ArrayList<String> temp = new ArrayList<>();
         open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT DISTINCT " + KEY_TAB + " FROM " + DATABASE_TABLE,
+        Cursor cursor = ourDatabase.rawQuery("SELECT DISTINCT " + KEY_TAB + " FROM " + DATABASE_TABLE +
+                        " WHERE " + KEY_TYPE + "=" + type,
                 null);
         if (cursor.moveToFirst())
             do {
                 temp.add(cursor.getString(0));
             } while (cursor.moveToNext());
         cursor.close();
-//        close();
+        close();
         return temp;
     }
 
-    public Cursor getEvents(String tab) {
+    public ArrayList<EventSet> getEvents(String tab, int type) {
         ArrayList<EventSet> events = new ArrayList<>();
         open();
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
-                        " WHERE " + KEY_TAB + " = '" + tab + "' ",
+                        " WHERE " + KEY_TAB + " = '" + tab + "' and " + KEY_TYPE + "=" + type,
                 null);
-//        close();
-        return cursor;
+        if (cursor.moveToFirst()) {
+            do {
+                EventSet set = new EventSet(cursor, false);
+                events.add(set);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        close();
+        return events;
     }
 
-    public Cursor getFavourites() {
+    public ArrayList<EventSet> getFavourites() {
         ArrayList<EventSet> events = new ArrayList<>();
         open();
-       /* Cursor cursor = ourDatabase.rawQuery("SELECT " + KEY_ID + ", " + KEY_EVENT_ID + ", " + KEY_NAME + ", " + KEY_IMAGE_LINK + ", " + KEY_IMAGE_DOWNLOAD + ", " + KEY_FAVOURITE + " FROM " + DATABASE_TABLE +
-                " WHERE " + KEY_FAVOURITE + " = 1", null);
-*/
-       /* if (cursor.moveToFirst())
-            do{
-
-                EventSet eventSet=new EventSet(
-                        cursor.getInt(0),
-                        cursor.getLong(2),
-                        cursor.getString(1),
-                        cursor.getString(4),
-                        cursor.getString(3),
-                        cursor.getInt(5),
-                        cursor.getInt(6)==1
-
-                );
-                events.add(eventSet);
-            }while (cursor.moveToNext());
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
+                        " WHERE " + KEY_FAVOURITE + " = " + 1,
+                null);
+        if (cursor.moveToFirst()) {
+            do {
+                EventSet set = new EventSet(cursor, false);
+                events.add(set);
+            } while (cursor.moveToNext());
+        }
         cursor.close();
-        close();*/
-        return null;
+        close();
+        return events;
     }
 
+    /**
+     * Notify table that image has been downloaded. And the new path generated is stored as image link
+     *
+     * @param id   event_id of the event
+     * @param path The path of the image
+     */
     public void imageDownloaded(int id, String path) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_IMAGE_LINK, path);
         contentValues.put(KEY_IMAGE_DOWNLOAD, 1);
         open();
         ourDatabase.update(DATABASE_TABLE, contentValues, KEY_EVENT_ID + " = " + id, null);
-//        close();
+        close();
     }
 
     public Boolean checkFavourite(int event_id) {
@@ -127,10 +134,17 @@ public class EventTableManager {
             if (cursor.getInt(0) == 1)
                 result = true;
         }
-//        close();
+        close();
+        cursor.close();
         return result;
     }
 
+    /**
+     * It toggles Favourite for the given event_id
+     *
+     * @param event_id
+     * @return the current value of Favourite.
+     */
     public boolean toggleFavourite(int event_id) {
         ContentValues cv = new ContentValues();
         boolean result;
@@ -143,43 +157,10 @@ public class EventTableManager {
         }
         open();
         ourDatabase.update(DATABASE_TABLE, cv, KEY_EVENT_ID + " = " + event_id, null);
-//        close();
+        close();
         return result;
     }
 
-
-    public String getEventName(int event_id) {
-        String name = "";
-        open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT " + KEY_NAME + " FROM " + DATABASE_TABLE +
-                        " WHERE " + KEY_EVENT_ID + " = " + event_id + " ",
-                null);
-        if (cursor.moveToFirst())
-            name = cursor.getString(0);
-        cursor.close();
-//        close();
-        return name;
-    }
-
-    public Cursor getEventData(int event_id) {
-        open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
-                        " WHERE " + KEY_EVENT_ID + " = " + event_id + " ",
-                null);
-        return cursor;
-
-    }
-
-    public boolean dataPresent() {
-        boolean result = false;
-        open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE, null);
-        if (cursor.moveToFirst()) {
-            result = true;
-        }
-//        close();
-        return result;
-    }
 
     public long addEntry(JSONObject jsonObject) throws JSONException {
 
@@ -216,11 +197,27 @@ public class EventTableManager {
 
     }
 
+    public EventSet getEventData(int event_id) {
+        EventSet eventSet = null;
+        open();
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_EVENT_ID + " = " + event_id + " ",
+                null);
+        if (cursor.moveToFirst()) {
+            eventSet = new EventSet(cursor,true);
+        }
+        close();
+        cursor.close();
+        return eventSet;
+    }
+
 
     private static class DBHelper extends SQLiteOpenHelper {
 
+        Context context;
+
         public DBHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            this.context = context;
         }
 
         @Override
@@ -234,7 +231,7 @@ public class EventTableManager {
                     KEY_FBURL + " TEXT,  " +
                     KEY_CONTACTS + " TEXT,  " +
                     KEY_PDFLINK + " TEXT,  " +
-                    KEY_TYPE + " TEXT NOT NULL,  " +
+                    KEY_TYPE + " INTEGER NOT NULL,  " +
                     KEY_PRIZE + " TEXT, " +
                     KEY_PROBST + " TEXT,  " +
                     KEY_IMAGE_LINK + " TEXT,  " +
@@ -247,6 +244,8 @@ public class EventTableManager {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
             onCreate(db);
+            SharedPrefDataManager.overrideEventTime(context, 0L);
         }
+
     }
 }

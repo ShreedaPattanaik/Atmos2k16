@@ -143,7 +143,14 @@ public class MainActivity extends AppCompatActivity {
                         mDrawer.closeDrawer(Gravity.LEFT);
 
                         break;
-
+                    case  R.id.favourites:
+                        transaction = manager.beginTransaction();
+                        fragment = new FavouriteFragment();
+                        transaction.replace(R.id.container, fragment, "favourite");
+                        transaction.commit();
+                        menuItem.setChecked(true);
+                        mDrawer.closeDrawer(Gravity.LEFT);
+                        break;
                 }
 
                 return false;

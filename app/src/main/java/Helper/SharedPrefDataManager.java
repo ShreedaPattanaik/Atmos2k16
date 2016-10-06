@@ -65,4 +65,12 @@ public class SharedPrefDataManager {
         editor.putBoolean(SENT_TOKEN_TO_SERVER, true);
         editor.commit();
     }
+
+    public static void overrideEventTime(Context context, long time) {
+
+        SharedPreferences.Editor editor = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE).edit();
+        editor.putLong("event", time);
+        editor.commit();
+
+    }
 }

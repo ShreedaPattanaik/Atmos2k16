@@ -31,15 +31,18 @@ import Helper.RecyclerClickListener;
 
 public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapter.MyViewHolder> {
 
+    EventTableManager tableManager;
+    ArrayList<EventSet> events;
+    RecyclerClickListener clickListener;
+    int previousPos;
     Context context;
     LayoutInflater inflater;
 
-    EventTableManager tableManager;
-
-    ArrayList<EventSet> events;
-    int defaultImage;
-    RecyclerClickListener clickListener;
-    int previousPos;
+    public EventListingAdapter(Context context) {
+        this.context = context;
+        inflater = LayoutInflater.from(context);
+        tableManager = new EventTableManager(context);
+    }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,8 +68,8 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
         else
             holder.favourite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
-        if (event.getImage_downloaded() == 0) {
-            Picasso.with(context).load(event.getImg_link()).placeholder(context.getResources().getDrawable(defaultImage))
+        if (!event.isImage_downloaded()) {
+            Picasso.with(context).load(event.getImg_link()).centerCrop().placeholder(context.getResources().getDrawable(R.drawable.chemecar))///todo default image
                     .resize(300, 200)
                     .centerCrop()
 
@@ -74,7 +77,6 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
                         @Override
                         public void onSuccess() {
                             String path = saveToInternalSorage(((BitmapDrawable) holder.image.getDrawable()).getBitmap(), event.getName());
-
                             tableManager.imageDownloaded(event.getId(), path);
                         }
 
@@ -112,6 +114,7 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
         }
         return directory.getAbsolutePath();
     }
+
     private Bitmap loadImageFromStorage(String path, String name) {
 
         try {
@@ -128,13 +131,13 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return events.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView image, favourite, share;
-        TextView name ;
+        TextView name;
 
         public MyViewHolder(View itemView) {
             super(itemView);

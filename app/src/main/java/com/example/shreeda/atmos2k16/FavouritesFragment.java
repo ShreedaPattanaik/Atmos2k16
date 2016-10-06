@@ -82,7 +82,7 @@ public class FavouritesFragment extends Fragment  {
         recyclerView = (RecyclerView) view.findViewById(R.id.favourite_container);
         nofav= (TextView) view.findViewById(R.id.no_favourite);
 
-        cursor=eventTableManager.getFavourites();
+        cursor=null;//eventTableManager.getFavourites();todo change
         if (cursor.getCount()==0){
             recyclerView.setVisibility(View.GONE);
             nofav.setText("Oops! Looks like you haven't added any event to your favourites.");

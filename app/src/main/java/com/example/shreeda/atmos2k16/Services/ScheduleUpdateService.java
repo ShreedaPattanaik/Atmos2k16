@@ -1,7 +1,6 @@
 package com.example.shreeda.atmos2k16.Services;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -44,6 +43,49 @@ public class ScheduleUpdateService extends IntentService {
         eventTableManager = new EventTableManager(this);
         sendEventRequest();
         sendTokenToServer();
+        addDummyData();
+    }
+
+    private void addDummyData() {
+        EventTableManager tableManager = new EventTableManager(this);
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("event_id", 0);
+            jsonObject.put("prize", 2000);
+            jsonObject.put("problem_statement", "<h2>Event Description</h2><p>Register in teams of two.</br>A case study will be provided 2 days prior to the competition. <br>Role of Plaintiff: Put up relevant arguments against the concerned firm.<br>Role of Defendant: Defend its maneuver, supported by relevant arguments. <br>The next day, teams choose to be the defendant or the plaintiff, entirely based on first come first basis. (This will be kept hidden from the participants.)On the day of the debate, each team will be paired with another (same side for that particular case). Hence forming teams of four, in a set of 8 for a particular case study. </p> <h2>Format Of Debate</h2> <p>Each contestant speaks for 2 minutes at most (minimum 1 minute), giving the whole set 16 minutes.Followed by a Cross-Questioning session between the two teams lasting 4 minutes.Followed by a Question-Answer session with the audience lasting 2 minutes. </p> <h2>Judging Criteria</h2> <ul> <li>Speaking Skills</li> <li>Argument relevance </li> <li>Spontaneity </li> <li>Body Language </li> <li>Marks to be deducted for a speech less than one minute.</li> <li>The ability of the team members to merge their content(continuity and  &nbsp;&nbsp;&nbsp; consistency of arguments). </li> <li>Marks to be deducted for excessive redundancy. </li> <li>Cross-questioning Ethics . </li> </ul><br> <b>Contact Details: </b><br>Aravind A S : +91 9553325392");
+            jsonObject.put("description", "<h2>Event Description</h2><p>Register in teams of two.</br>A case study will be provided 2 days prior to the competition. <br>Role of Plaintiff: Put up relevant arguments against the concerned firm.<br>Role of Defendant: Defend its maneuver, supported by relevant arguments. <br>The next day, teams choose to be the defendant or the plaintiff, entirely based on first come first basis. (This will be kept hidden from the participants.)On the day of the debate, each team will be paired with another (same side for that particular case). Hence forming teams of four, in a set of 8 for a particular case study. </p> <h2>Format Of Debate</h2> <p>Each contestant speaks for 2 minutes at most (minimum 1 minute), giving the whole set 16 minutes.Followed by a Cross-Questioning session between the two teams lasting 4 minutes.Followed by a Question-Answer session with the audience lasting 2 minutes. </p> <h2>Judging Criteria</h2> <ul> <li>Speaking Skills</li> <li>Argument relevance </li> <li>Spontaneity </li> <li>Body Language </li> <li>Marks to be deducted for a speech less than one minute.</li> <li>The ability of the team members to merge their content(continuity and  &nbsp;&nbsp;&nbsp; consistency of arguments). </li> <li>Marks to be deducted for excessive redundancy. </li> <li>Cross-questioning Ethics . </li> </ul><br> <b>Contact Details: </b><br>Aravind A S : +91 9553325392");
+            jsonObject.put("image_link", "http://bits-atmos.org/Events/img/courtroom.jpg");
+            jsonObject.put("fb_url", "https://www.facebook.com/search/top/?q=the%20court%20room");
+            jsonObject.put("type", 1);
+            jsonObject.put("tab", "Economics");
+            jsonObject.put("event_name", "The Court Room");
+
+            tableManager.addEntry(jsonObject);
+
+            jsonObject.put("event_id", 1);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 2);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 3);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 4);
+            tableManager.addEntry(jsonObject);
+
+            jsonObject.put("tab","Computer Science");
+            jsonObject.put("event_id", 5);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 6);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 7);
+            tableManager.addEntry(jsonObject);
+            jsonObject.put("event_id", 8);
+            tableManager.addEntry(jsonObject);
+
+        } catch (JSONException e) {
+
+        }
+
     }
 
     private void sendTokenToServer() {
@@ -185,4 +227,6 @@ public class ScheduleUpdateService extends IntentService {
         VolleySingleton.getInstance().getRequestQueue().add(request);
     }
     //todo download feeds when done
+
+
 }

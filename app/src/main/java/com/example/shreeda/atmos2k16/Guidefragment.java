@@ -19,6 +19,7 @@ import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
 import com.example.shreeda.atmos2k16.Set.CampusMap;
+import com.example.shreeda.atmos2k16.TableManagers.AboutusFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -82,9 +83,9 @@ public class Guidefragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transaction = manager.beginTransaction();
-                Fragment fragment4 = new CampusMap();
-                transaction.replace(R.id.container, fragment4, "campus map");
-                transaction.addToBackStack("campus map");
+                Fragment fragment5 = new AboutusFragment();
+                transaction.replace(R.id.container, fragment5, "about us");
+                transaction.addToBackStack("about us");
                 transaction.commit();
             }
         });
