@@ -41,10 +41,8 @@ public class ScheduleUpdateService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-
         eventTableManager = new EventTableManager(this);
         sendEventRequest();
-
         sendTokenToServer();
     }
 
