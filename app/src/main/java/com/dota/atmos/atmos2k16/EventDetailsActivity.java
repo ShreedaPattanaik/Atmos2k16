@@ -60,7 +60,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
         eventTableManager = new EventTableManager(this);
         data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
-        if(data==null){
+        if (data == null) {
             finish();
             return;
         }
@@ -71,9 +71,6 @@ public class EventDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle(data.getName());
-            /*collapsingToolbarLayout.setTitle(data.getName());
-            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);*/
         }
 
         contacts_card = (CardView) findViewById(R.id.card_contact);

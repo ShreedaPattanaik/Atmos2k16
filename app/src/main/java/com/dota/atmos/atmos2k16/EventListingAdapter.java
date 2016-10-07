@@ -1,10 +1,14 @@
 package com.dota.atmos.atmos2k16;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,7 +169,15 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        clickListener.onClick(v, getLayoutPosition());
+                        Intent intent = new Intent(context, EventDetailsActivity.class);
+                        intent.putExtra("event_id", events.get(getLayoutPosition()).getId());
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation((Activity) context, image, "event_image");
+                            context.startActivity(intent, options.toBundle());
+                        } else {
+                            context.startActivity(intent);
+                        }
                     }
                 });
                 share.setOnClickListener(new View.OnClickListener() {

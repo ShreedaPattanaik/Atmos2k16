@@ -12,7 +12,6 @@ import com.dota.atmos.atmos2k16.Set.EventSet;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.security.KeyFactory;
 import java.util.ArrayList;
 
 import Helper.SharedPrefDataManager;
@@ -78,7 +77,7 @@ public class EventTableManager {
     }
 
     public ArrayList<EventSet> getEvents(String tab, int type) {
-        tab=tab.toLowerCase();
+        tab = tab.toLowerCase();
         ArrayList<EventSet> events = new ArrayList<>();
         open();
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
@@ -176,7 +175,7 @@ public class EventTableManager {
         cv.put(KEY_TYPE, jsonObject.getInt("type"));
         cv.put(KEY_TAB, jsonObject.getString("tab").toLowerCase());
         cv.put(KEY_NAME, jsonObject.getString("event_name"));
-        cv.put(KEY_CONTACTS,jsonObject.getString("contacts"));
+        cv.put(KEY_CONTACTS, jsonObject.getString("contacts"));
         cv.put(KEY_IMAGE_DOWNLOAD, 0);
         cv.put(KEY_FAVOURITE, 0);
         long success = -1;
@@ -207,7 +206,7 @@ public class EventTableManager {
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_EVENT_ID + " = " + event_id + " ",
                 null);
         if (cursor.moveToFirst()) {
-            eventSet = new EventSet(cursor,true);
+            eventSet = new EventSet(cursor, true);
         }
         close();
         cursor.close();

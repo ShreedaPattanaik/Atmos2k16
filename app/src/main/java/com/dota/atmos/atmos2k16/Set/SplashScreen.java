@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import com.dota.atmos.atmos2k16.MainActivity;
@@ -24,6 +28,19 @@ public class SplashScreen extends AppCompatActivity {
         Picasso.with(this).load(R.drawable.landinglogo)
                 .fit().centerInside()
                 .into((ImageView) findViewById(R.id.logoContainer));
+        Picasso.with(this).load(R.drawable.cyient)
+                .fit().centerInside()
+                .into((ImageView) findViewById(R.id.title));
+        Picasso.with(this).load(R.drawable.wat)
+                .fit().centerInside()
+                .into((ImageView) findViewById(R.id.coPower1));
+        Picasso.with(this).load(R.drawable.prodigy)
+                .fit().centerInside()
+                .into((ImageView) findViewById(R.id.coPower2));
+        Picasso.with(this).load(R.drawable.sbi)
+                .fit().centerInside()
+                .into((ImageView) findViewById(R.id.association));
+
 //        GifClass gifClass= (GifClass) findViewById(R.id.logoContainer);
 //        if (gifClass!=null) {
 //            gifClass.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +53,42 @@ public class SplashScreen extends AppCompatActivity {
 //                }
 //            });
 //        }
+        View[] v = {findViewById(R.id.logoContainer), findViewById(R.id.title), findViewById(R.id.titleText),
+                findViewById(R.id.coPoweredText),
+                findViewById(R.id.coPower1), findViewById(R.id.coPower2),
+                findViewById(R.id.inAssociationText), findViewById(R.id.association)};
+
+        Animation[] animation = new Animation[v.length];
+        for (int i = 0; i < v.length; i++) {
+            animation[i] = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f);
+            animation[i].setDuration(300);
+            animation[i].setStartOffset(800);
+            animation[i].setInterpolator(new DecelerateInterpolator(1.5f));
+            animation[i].setFillAfter(true);
+        }
+        animation[0].setDuration(400);
+        animation[0].setStartOffset(0);
+        v[0].startAnimation(animation[0]);
+
+        for (int i = 1; i < v.length; i++)
+            v[i].startAnimation(animation[i]);
+           /* v[1].startAnimation(animation[1]);
+        animation[2].setStartOffset(0);
+        animation[2].setDuration(400);
+        v[2].startAnimation(animation[2]);
+        animation[3].setStartOffset(1800);
+        v[3].startAnimation(animation[3]);
+        animation[4].setStartOffset(1950);
+        v[4].startAnimation(animation[4]);
+        animation[5].setStartOffset(2150);
+        v[5].startAnimation(animation[5]);
+        animation[6].setStartOffset(2900);
+        v[6].startAnimation(animation[6]);
+        animation[7].setStartOffset(3100);
+        v[7].startAnimation(animation[7]);*/
+       /* animation.setStartOffset(1500);
+        v[6].startAnimation(animation);*/
 
         new Handler().postDelayed(new Runnable() {
 
@@ -53,7 +106,7 @@ public class SplashScreen extends AppCompatActivity {
                 finish();
                 // close this activity
             }
-        }, 1000);
+        }, 2000);
 
         service();
     }
