@@ -72,14 +72,6 @@ public class EventDetailsActivity extends AppCompatActivity {
             collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);*/
         }
 
-
-
-
-        /*appBarLayout.setAlpha(0f);
-        ObjectAnimator animator = ObjectAnimator.ofFloat(appBarLayout, "alpha", 0f, 1f);
-        animator.setDuration(100);
-        animator.setStartDelay(100);
-        animator.start();*/
         contacts_card = (CardView) findViewById(R.id.card_contact);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         Iv = (ImageView) findViewById(R.id.kens_image);
