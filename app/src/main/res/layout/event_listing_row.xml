@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -14,14 +15,14 @@
         <ImageView
             android:id="@+id/main_events"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:transitionName="event_image"
-            android:scaleType="centerCrop" />
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:transitionName="event_image" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:background="#30000000" />
+            android:layout_height="180dp"
+            android:background="@drawable/gradient_card" />
 
         <TextView
             android:id="@+id/event_name"
@@ -29,22 +30,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="98dp"
+            android:layout_marginTop="135dp"
             android:text="Robowars"
             android:textColor="@color/white"
-            android:textSize="30dp" />
+            android:textSize="24dp" />
 
 
-        <ImageView
-
+        <com.github.ivbaranov.mfb.MaterialFavoriteButton
             android:id="@+id/favourite_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_favorite_border_black_24dp"
-            android:tint="#ffffff" />
+            android:background="@null"
+            app:mfb_animate_favorite="true"
+            app:mfb_animate_unfavorite="true"
+            app:mfb_color="white"
+            app:mfb_type="heart" />
 
         <ImageView
             android:id="@+id/share_icon"
@@ -52,7 +54,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:layout_toLeftOf="@+id/favourite_icon"
-            android:padding="8dp"
+            android:padding="12dp"
             android:src="@drawable/ic_share_black_24dp"
             android:tint="#ffffff" />
     </RelativeLayout>

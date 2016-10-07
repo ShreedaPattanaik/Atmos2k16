@@ -27,11 +27,10 @@ public class SponsorsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        Picasso.with(getActivity()).load(R.drawable.spons12).fit().centerInside().into((ImageView) view.findViewById(R.id.title));
-        Picasso.with(getActivity()).load(R.drawable.spons13).fit().centerInside().into((ImageView) view.findViewById(R.id.cotitle1));
-        Picasso.with(getActivity()).load(R.drawable.spons14).fit().centerInside().into((ImageView) view.findViewById(R.id.cotitle2));
-        Picasso.with(getActivity()).load(R.drawable.spons15).fit().centerInside().into((ImageView) view.findViewById(R.id.civilExpo));
-        Picasso.with(getActivity()).load(R.drawable.sponsvel).fit().centerInside().into((ImageView) view.findViewById(R.id.gold));
+        Picasso.with(getActivity()).load(R.drawable.cyient).fit().centerInside().into((ImageView) view.findViewById(R.id.title));
+        Picasso.with(getActivity()).load(R.drawable.wat).fit().centerInside().into((ImageView) view.findViewById(R.id.cotitle1));
+        Picasso.with(getActivity()).load(R.drawable.prodigy).fit().centerInside().into((ImageView) view.findViewById(R.id.cotitle2));
+        Picasso.with(getActivity()).load(R.drawable.sbi).fit().centerInside().into((ImageView) view.findViewById(R.id.association));
 
     }
 }

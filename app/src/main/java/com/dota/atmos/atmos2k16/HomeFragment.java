@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
         LayoutInflater inflater;
         RecyclerClickListener clickListener = new RecyclerClickListener() {
             @Override
-            public void onClick(View v, int pos) {
+            public boolean onClick(View v, int pos) {
                 switch (pos) {
                     case 0:
                         break;
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment {
 
 
                 }
+                return false;
             }
         };
         int prev = -1;

@@ -74,19 +74,16 @@ public class EventPagerFragment extends Fragment {
         mAdapter.setDefaultImage(EventsFragment.resources[mType]);
         mAdapter.setClickListener(new RecyclerClickListener() {
             @Override
-            public void onClick(View v, int pos) {
+            public boolean onClick(View v, int pos) {
                 if (v.getId() == R.id.favourite_icon) {
                     //execute fav
                     boolean fav = eventTableManager.toggleFavourite(eventData.get(pos).getId());
                     eventData.get(pos).setFav(fav);
-                    //todo animation heart
-                    mAdapter.notifyItemChanged(pos);
 
                 } else if (v.getId() == R.id.share_icon) {
                     Share.shareData(eventData.get(pos), getActivity());
-                } else {
-
                 }
+                return true;
             }
         });
         mAdapter.setEvents(eventData);

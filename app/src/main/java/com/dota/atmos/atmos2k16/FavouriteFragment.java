@@ -49,13 +49,14 @@ public class FavouriteFragment extends Fragment {
         final EventListingAdapter mAdapter = new EventListingAdapter(getActivity());
         mAdapter.setClickListener(new RecyclerClickListener() {
             @Override
-            public void onClick(View v, int pos) {
+            public boolean onClick(View v, int pos) {
                 if (v.getId() == R.id.favourite_icon) {
                     //execute fav
                     eventTableManager.toggleFavourite(eventData.get(pos).getId());
                     eventData.remove(pos);
                     mAdapter.notifyItemRemoved(pos);
                     checkIfEmpty();
+                    return false;
 
                 } else if (v.getId() == R.id.share_icon) {
                     Share.shareData(eventData.get(pos), getActivity());
@@ -65,6 +66,7 @@ public class FavouriteFragment extends Fragment {
                     intent.putExtra("event_id", eventData.get(pos).getId());
                     startActivity(intent);
                 }
+                return true;
             }
         });
 

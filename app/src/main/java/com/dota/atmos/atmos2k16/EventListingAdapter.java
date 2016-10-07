@@ -1,5 +1,7 @@
 package com.dota.atmos.atmos2k16;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -13,11 +15,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dota.atmos.atmos2k16.Set.EventSet;
 import com.dota.atmos.atmos2k16.TableManagers.EventTableManager;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -42,6 +49,7 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
     LayoutInflater inflater;
 
     int defaultImage = R.drawable.atmosmono;
+    int offset = 0;
 
     public EventListingAdapter(Context context) {
         this.context = context;
@@ -60,7 +68,6 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
 
     }
 
-
     public void setClickListener(RecyclerClickListener clickListener) {
         this.clickListener = clickListener;
     }
@@ -75,9 +82,9 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
         final EventSet event = events.get(position);
         holder.name.setText(event.getName());
         if (event.isFavourite())
-            holder.favourite.setImageResource(R.drawable.ic_favorite_black_24dp);
+            holder.favourite.setFavorite(true);
         else
-            holder.favourite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            holder.favourite.setFavorite(false);
 
         if (!event.isImage_downloaded()) {
             if (event.getImg_link() == null || event.getImg_link().isEmpty()) {
@@ -105,6 +112,22 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
             holder.image.setImageBitmap(loadImageFromStorage(event.getImg_link(), event.getName()));
         }
 
+
+        Animation animation = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(300);
+        animation.setInterpolator(new DecelerateInterpolator(1.5f));
+        animation.setFillAfter(true);
+        animation.setStartOffset(offset);
+        holder.itemView.startAnimation(animation);
+        offset = offset + 40;
+
+    }
+
+    @Override
+    public void onViewRecycled(MyViewHolder holder) {
+        super.onViewRecycled(holder);
+        offset = 0;
     }
 
     private String saveToInternalSorage(Bitmap bitmapImage, String name) {
@@ -150,20 +173,26 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView image, favourite, share;
+        ImageView image, share;
         TextView name;
+        MaterialFavoriteButton favourite;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.main_events);
             name = (TextView) itemView.findViewById(R.id.event_name);
-            favourite = (ImageView) itemView.findViewById(R.id.favourite_icon);
+            favourite = (MaterialFavoriteButton) itemView.findViewById(R.id.favourite_icon);
             share = (ImageView) itemView.findViewById(R.id.share_icon);
             if (clickListener != null) {
                 favourite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        clickListener.onClick(v, getLayoutPosition());
+                        if (clickListener.onClick(v, getLayoutPosition()))
+                            if (events.get(getLayoutPosition()).isFavourite()) {
+                                favourite.setFavorite(true, true);
+                            } else {
+                                favourite.setFavorite(false, true);
+                            }
                     }
                 });
                 itemView.setOnClickListener(new View.OnClickListener() {
@@ -182,8 +211,34 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
                 });
                 share.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        clickListener.onClick(view, getLayoutPosition());
+                    public void onClick(final View view) {
+                        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "rotationX", 0.0f, 360f);
+                        animation.setDuration(500);
+                        animation.setRepeatCount(0);
+                        animation.setInterpolator(new AccelerateDecelerateInterpolator());
+                        animation.addListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                clickListener.onClick(view, getLayoutPosition());
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animator) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animator) {
+
+                            }
+                        });
+                        animation.start();
+
                     }
                 });
             }

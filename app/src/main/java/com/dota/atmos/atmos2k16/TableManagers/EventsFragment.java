@@ -28,15 +28,16 @@ import Helper.RecyclerClickListener;
  */
 public class EventsFragment extends Fragment {
 
+    public static int[] resources;
     RecyclerView recyclerView;
     FragmentManager manager;
     FragmentTransaction transaction;
     private String Tag = "EventsFragment";
 
+
     public EventsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +57,7 @@ public class EventsFragment extends Fragment {
         recyclerView.setNestedScrollingEnabled(false);
         manager = getActivity().getSupportFragmentManager();
     }
-    public static int[] resources;
+
     private class EventsAdapter extends RecyclerView.Adapter<EventsFragment.EventsAdapter.MyViewHolder> {
 
 
@@ -66,20 +67,21 @@ public class EventsFragment extends Fragment {
         int layoutRes = R.layout.headliners_row;
         RecyclerClickListener clickListener = new RecyclerClickListener() {
             @Override
-            public void onClick(View v, int pos) {
+            public boolean onClick(View v, int pos) {
                 transaction = manager.beginTransaction();
                 Fragment Events = EventListFragment.newInstance(pos);
                 Log.e(Tag, "pos=" + pos);
                 transaction.replace(R.id.container, Events, "events");
                 transaction.addToBackStack("events");
                 transaction.commit();
+                return true;
             }
         };
 
         public EventsAdapter(EventsFragment context) {
             this.context = context;
             inflater = LayoutInflater.from(getActivity());
-            resources = new int[]{ R.drawable.technical,R.drawable.workshop, R.drawable.sciences,R.drawable.others,R.drawable.initiatives};
+            resources = new int[]{R.drawable.technical, R.drawable.workshop, R.drawable.sciences, R.drawable.others, R.drawable.initiatives};
 
         }
 

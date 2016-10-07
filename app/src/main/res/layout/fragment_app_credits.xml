@@ -1,0 +1,158 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context="com.dota.atmos.atmos2k16.AppCredits">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="App Developers"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/developer1Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/atmos16"
+                app:civ_border_color="#000"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/developer2Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/atmos16"
+                app:civ_border_color="#000"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/developer1Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/developer1Image"
+                android:layout_alignRight="@+id/developer1Image"
+                android:layout_below="@+id/developer1Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Rajat"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/developer2Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/developer2Image"
+                android:layout_alignRight="@+id/developer2Image"
+                android:layout_below="@+id/developer2Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Shreeda"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/developer3Image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/atmos16"
+            app:civ_border_color="#000"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/developer3Image"
+            android:layout_alignRight="@+id/developer3Image"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Shravani"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="UI/UX Designers"
+            android:textColor="#000"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/designer1Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/atmos16"
+                app:civ_border_color="#000"
+                app:civ_border_width="2dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/designer2Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/atmos16"
+                app:civ_border_color="#000"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/designer1Image"
+                android:layout_alignRight="@+id/designer1Image"
+                android:layout_below="@+id/designer1Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Rajat"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/designer2Image"
+                android:layout_alignRight="@+id/designer2Image"
+                android:layout_below="@+id/designer2Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Shreeda"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</ScrollView>

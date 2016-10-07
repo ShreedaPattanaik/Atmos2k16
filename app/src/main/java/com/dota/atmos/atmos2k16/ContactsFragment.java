@@ -71,7 +71,7 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
 
 
     @Override
-    public void onClick(View view, int position) {
+    public boolean onClick(View view, int position) {
         if (view.getId() == R.id.call) {
             Uri number = Uri.parse("tel:" + data.get(position).getMobile());
             startActivity(new Intent(Intent.ACTION_DIAL, number));
@@ -85,5 +85,6 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
 
 
         }
+        return true;
     }
 }

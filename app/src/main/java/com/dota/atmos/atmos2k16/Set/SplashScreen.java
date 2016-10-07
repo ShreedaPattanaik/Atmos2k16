@@ -41,18 +41,6 @@ public class SplashScreen extends AppCompatActivity {
                 .fit().centerInside()
                 .into((ImageView) findViewById(R.id.association));
 
-//        GifClass gifClass= (GifClass) findViewById(R.id.logoContainer);
-//        if (gifClass!=null) {
-//            gifClass.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    final Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-//                    startActivity(intent);
-//                    overridePendingTransition(0, 0);
-////                ActivityTransition.with(intent).duration(200).start(savedInstanceState);
-//                }
-//            });
-//        }
         View[] v = {findViewById(R.id.logoContainer), findViewById(R.id.title), findViewById(R.id.titleText),
                 findViewById(R.id.coPoweredText),
                 findViewById(R.id.coPower1), findViewById(R.id.coPower2),
@@ -73,22 +61,7 @@ public class SplashScreen extends AppCompatActivity {
 
         for (int i = 1; i < v.length; i++)
             v[i].startAnimation(animation[i]);
-           /* v[1].startAnimation(animation[1]);
-        animation[2].setStartOffset(0);
-        animation[2].setDuration(400);
-        v[2].startAnimation(animation[2]);
-        animation[3].setStartOffset(1800);
-        v[3].startAnimation(animation[3]);
-        animation[4].setStartOffset(1950);
-        v[4].startAnimation(animation[4]);
-        animation[5].setStartOffset(2150);
-        v[5].startAnimation(animation[5]);
-        animation[6].setStartOffset(2900);
-        v[6].startAnimation(animation[6]);
-        animation[7].setStartOffset(3100);
-        v[7].startAnimation(animation[7]);*/
-       /* animation.setStartOffset(1500);
-        v[6].startAnimation(animation);*/
+
 
         new Handler().postDelayed(new Runnable() {
 

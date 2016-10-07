@@ -62,13 +62,14 @@ public class FeedFragment extends Fragment implements RecyclerClickListener {
     }
 
     @Override
-    public void onClick(View v, int pos) {
+    public boolean onClick(View v, int pos) {
         if (v.getId() == R.id.feed_row) {
             Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
             intent.putExtra("event_id", feedSets.get(pos).getEvent_id());
             startActivity(intent);
             Log.e("started", pos + " ");
-
+            return true;
         }
+        return false;
     }
 }
