@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.shreeda.atmos2k16.EventListFragment">
+    tools:context="com.dota.atmos.atmos2k16.EventListFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

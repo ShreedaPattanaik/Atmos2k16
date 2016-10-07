@@ -6,5 +6,5 @@
     class="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.example.shreeda.atmos2k16.MainActivity"
+    android:name="com.dota.atmos.atmos2k16.MainActivity"
      />

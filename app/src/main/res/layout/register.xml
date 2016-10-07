@@ -84,7 +84,7 @@
             <!--</ScrollView>-->
 
 
-            <com.example.shreeda.atmos2k16.MultiSelectionSpinner
+            <com.dota.atmos.atmos2k16.MultiSelectionSpinner
                 android:id="@+id/myevents"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.shreeda.atmos2k16.ContactsFragment">
+    tools:context="com.dota.atmos.atmos2k16.ContactsFragment">
     <item
         android:id="@+id/phone"
         android:orderInCategory="100"

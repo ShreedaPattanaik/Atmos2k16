@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
     defaultConfig {
-        applicationId "com.example.shreeda.atmos2k16"
+        applicationId "com.dota.atmos.atmos2k16"
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 1

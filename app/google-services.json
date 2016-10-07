@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198959728532:android:dee1f2026cd57787",
+        "android_client_info": {
+          "package_name": "com.dota.atmos.atmos2k16"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198959728532-abu4si2uiuao3t4ggo5efmq8g5cd2uf3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dota.atmos.atmos2k16",
+            "certificate_hash": "A1CEFA9F5E6BEB40114F5BAD9A6DF9C768A8EEAD"
+          }
+        },
+        {
+          "client_id": "198959728532-i5vek632akss70jjv7ebhcd1qp3fpc18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcUNfMXagvKMUVO-3HTeknEOkKdZ1LkY4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198959728532-i5vek632akss70jjv7ebhcd1qp3fpc18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
