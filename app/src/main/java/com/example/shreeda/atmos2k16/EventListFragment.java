@@ -19,15 +19,15 @@ import java.util.ArrayList;
 
 public class EventListFragment extends Fragment {
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private static final String ARG_PARAM1 = "type";
     int mType;
-    private ViewPager mViewPager;
-    private TabLayout tabLayout;
     LinearLayout onHaveEvents, onNoEvents;
     EventTableManager eventTableManager;
     ArrayList<String> tab;
-    private String Tag="EventListFragment";
-    private static final String ARG_PARAM1 = "type";
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+    private TabLayout tabLayout;
+    private String Tag = "EventListFragment";
 
     public static EventListFragment newInstance(int type) {
         EventListFragment fragment = new EventListFragment();
@@ -42,7 +42,7 @@ public class EventListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mType = getArguments().getInt(ARG_PARAM1);
-            Log.e(Tag,"mtype="+mType);
+            Log.e(Tag, "mtype=" + mType);
         }
     }
 
@@ -60,7 +60,7 @@ public class EventListFragment extends Fragment {
         tab = new ArrayList<String>();
         eventTableManager = new EventTableManager(getActivity());
         tab = eventTableManager.getDistinctTabs(mType); //todo changed
-        Log.e(Tag+"tabv",tab.toString());
+        Log.e(Tag + "tabv", tab.toString());
         if (tab.isEmpty()) {
             onNoEvents.setVisibility(View.VISIBLE);
             onHaveEvents.setVisibility(View.GONE);
@@ -70,6 +70,9 @@ public class EventListFragment extends Fragment {
             mViewPager = (ViewPager) view.findViewById(R.id.container);
             mViewPager.setAdapter(mSectionsPagerAdapter);
             tabLayout.setupWithViewPager(mViewPager);
+            if (tab.size() == 1) {
+                tabLayout.setVisibility(View.GONE);
+            }
         }
     }
 

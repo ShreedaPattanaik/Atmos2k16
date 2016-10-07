@@ -60,6 +60,10 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
         eventTableManager = new EventTableManager(this);
         data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
+        if(data==null){
+            finish();
+            return;
+        }
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
@@ -185,11 +189,4 @@ public class EventDetailsActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    @Override
-    protected void onDestroy() {
-        eventTableManager.close();
-        super.onDestroy();
-    }
 }
-
-

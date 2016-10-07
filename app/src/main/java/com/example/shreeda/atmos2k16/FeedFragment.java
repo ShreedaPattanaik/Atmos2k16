@@ -65,7 +65,7 @@ public class FeedFragment extends Fragment implements RecyclerClickListener {
     public void onClick(View v, int pos) {
         if (v.getId() == R.id.feed_row) {
             Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
-            intent.putExtra("Event_id", feedSets.get(pos).getEvent_id());
+            intent.putExtra("event_id", feedSets.get(pos).getEvent_id());
             startActivity(intent);
             Log.e("started", pos + " ");
 
