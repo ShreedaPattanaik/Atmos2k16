@@ -2,8 +2,10 @@ package com.dota.atmos.atmos2k16;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -83,11 +85,7 @@ public class EventPagerFragment extends Fragment {
                 } else if (v.getId() == R.id.share_icon) {
                     Share.shareData(eventData.get(pos), getActivity());
                 } else {
-                    //exec open event detail
-                    Log.e(Tag, "eventData.get(pos).getId()");
-                    Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
-                    intent.putExtra("event_id", eventData.get(pos).getId());
-                    startActivity(intent);
+
                 }
             }
         });

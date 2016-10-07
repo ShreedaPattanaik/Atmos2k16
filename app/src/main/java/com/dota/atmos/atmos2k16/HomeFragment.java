@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,14 +95,14 @@ public class HomeFragment extends Fragment {
             } else {
                 return;
             }
+
             Animation animation = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f,
                     Animation.RELATIVE_TO_SELF, 0.5f);
             animation.setDuration(200);
-            animation.setInterpolator(new DecelerateInterpolator());
+            animation.setInterpolator(new DecelerateInterpolator(1.5f));
             animation.setFillAfter(true);
-            animation.setStartOffset(150+position * 150);
+            animation.setStartOffset(150 + position * 150);
             holder.itemView.startAnimation(animation);
-
         }
 
         @Override

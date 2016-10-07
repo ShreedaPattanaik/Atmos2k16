@@ -79,7 +79,7 @@ public class EventsFragment extends Fragment {
         public EventsAdapter(EventsFragment context) {
             this.context = context;
             inflater = LayoutInflater.from(getActivity());
-            resources = new int[]{ R.drawable.technical,R.drawable.workshop, R.drawable.initiatives};
+            resources = new int[]{ R.drawable.technical,R.drawable.workshop, R.drawable.sciences,R.drawable.others,R.drawable.initiatives};
 
         }
 

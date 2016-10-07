@@ -87,9 +87,6 @@ public class EventDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setTitle(data.getName());
-            /*collapsingToolbarLayout.setTitle(data.getName());
-            collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
-            collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);*/
         }
 
         contacts_card = (CardView) findViewById(R.id.card_contact);
