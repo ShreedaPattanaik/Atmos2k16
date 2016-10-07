@@ -2,12 +2,15 @@ package com.dota.atmos.atmos2k16;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dota.atmos.atmos2k16.Set.EventSet;
@@ -33,18 +37,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
+import Helper.Share;
+
 /**
  * Created by SHREEDA on 27-09-2016.
  */
 
 public class EventDetailsActivity extends AppCompatActivity {
     EventTableManager eventTableManager;
+    FloatingActionButton fab;
+    CardView linkLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
     TextView description, contact, prize, problem;
     ImageView Iv;
     EventSet data;
     ExitActivityTransition exitTransition;
-    CardView contacts_card;
+    CardView contacts_card, prize_card, description_card, problem_card;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +62,24 @@ public class EventDetailsActivity extends AppCompatActivity {
 /*
         exitTransition = ActivityTransition.with(getIntent()).to(findViewById(R.id.view_parent)).duration(200).start(savedInstanceState);
 */
+        linkLayout=(CardView) findViewById(R.id.linklayout);
         if (getIntent().getIntExtra("event_id", -1) == -1) {
             finish();
             return;
         }
         eventTableManager = new EventTableManager(this);
         data = eventTableManager.getEventData(getIntent().getIntExtra("event_id", 1));
-        if(data==null){
+        if (data == null) {
             finish();
             return;
         }
+        fab=(FloatingActionButton)findViewById(R.id.fab_share);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Share.shareData(data,EventDetailsActivity.this);
+            }
+        });
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
         setSupportActionBar(toolbar);
@@ -77,6 +93,9 @@ public class EventDetailsActivity extends AppCompatActivity {
         }
 
         contacts_card = (CardView) findViewById(R.id.card_contact);
+        prize_card = (CardView) findViewById(R.id.card_prize);
+        problem_card = (CardView) findViewById(R.id.card_problem);
+        description_card = (CardView) findViewById(R.id.card_description);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         Iv = (ImageView) findViewById(R.id.kens_image);
         description = (TextView) findViewById(R.id.event_descrption);
@@ -85,9 +104,31 @@ public class EventDetailsActivity extends AppCompatActivity {
         contact = (TextView) findViewById(R.id.event_contact);
 
         //todo checker insertion
-        description.setText(Html.fromHtml(data.getDescription()));
-        prize.setText(data.getPrize());
-        problem.setText(Html.fromHtml(data.getProbSt()));
+
+        if (data.getDescription().equals("")) {
+            description_card.setVisibility(View.GONE);
+        } else description.setText(Html.fromHtml(data.getDescription()));
+
+        if (data.getPrize()==null|| data.getPrize().equals("")) {
+            prize_card.setVisibility(View.GONE);
+        } else prize.setText(data.getPrize());
+        if (data.getProbSt()==null||data.getProbSt().equals("")) {
+            problem_card.setVisibility(View.GONE);
+        } /*else if(data.getPdfLink()==null||data.getPdfLink().equals("")){
+            problem.setText(Html.fromHtml(data.getProbSt()));
+        }*/else {
+            problem.setText(Html.fromHtml(data.getProbSt()));
+            linkLayout.setVisibility(View.VISIBLE);
+            linkLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.bits-atmos.org/Events/PDF/robowars.pdf"));
+                    startActivity(browserIntent);
+                }
+            });
+        }
+
+
         JSONArray jsonArray = data.getContacts();
         if (jsonArray != null) {
             contacts_card.setVisibility(View.VISIBLE);
@@ -97,7 +138,10 @@ public class EventDetailsActivity extends AppCompatActivity {
                     JSONObject jsonObj = jsonArray.getJSONObject(i);
                     String name = jsonObj.getString("name");
                     String phone = jsonObj.getString("number");
-                    contact.setText(contact.getText() + name + " : " + phone + "\n");
+                    if(name.equals("") || phone.equals("")){
+
+                    }else  contact.setText(contact.getText() + name + " : " + phone + "\n");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

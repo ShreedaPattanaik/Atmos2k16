@@ -20,6 +20,7 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="130dp"
+
             android:background="@drawable/guideicon"
             app:cardBackgroundColor="#2856A1"
             app:cardCornerRadius="65dp">

@@ -68,16 +68,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif"
-                        android:padding="8dp"
-                        android:text="Event Description"
-                        android:textColor="#000000"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:id="@+id/event_descrption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.schedule:
+                        getSupportActionBar().setTitle("Schedule");
                         transaction = manager.beginTransaction();
                         Fragment fragment3 = new ScheduleFragment();
                         transaction.replace(R.id.container, fragment3, "Timeline");
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.register:
+                        getSupportActionBar().setTitle("Registration");
                         transaction = manager.beginTransaction();
                         Fragment fragment2 = new RegisterFragment();
                         transaction.replace(R.id.container, fragment2, "campusmap");
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.events:
+
                         transaction = manager.beginTransaction();
                         Fragment Events = new EventsFragment();
                         transaction.replace(R.id.container, Events, "events");
@@ -94,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.feed:
+                        getSupportActionBar().setTitle("Feed");
                         transaction = manager.beginTransaction();
                         Fragment Feed = new FeedFragment();
                         transaction.replace(R.id.container, Feed, "feed");
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.Guide:
-
+                        getSupportActionBar().setTitle("Guide");
                         transaction = manager.beginTransaction();
 
                         fragment = new Guidefragment();
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.AppCredits:
-
+                        getSupportActionBar().setTitle("Credits");
                        /* transaction = manager.beginTransaction();
                         transaction.commit();
                         menuItem.setChecked(true);*/
@@ -126,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.Contactus:
+                        getSupportActionBar().setTitle("Contact us");
                         transaction = manager.beginTransaction();
                         fragment = new ContactsFragment();
                         transaction.replace(R.id.container, fragment, "ContactUs");
@@ -136,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.Sponsors:
+                        getSupportActionBar().setTitle("Sponsors");
                         transaction = manager.beginTransaction();
                         fragment = new SponsorsFragment();
                         transaction.replace(R.id.container, fragment, "Sponsors");
@@ -145,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case  R.id.favourites:
+                        getSupportActionBar().setTitle("Favourites");
                         transaction = manager.beginTransaction();
                         fragment = new FavouriteFragment();
                         transaction.replace(R.id.container, fragment, "favourite");
@@ -161,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setHomeFragment() {
+        getSupportActionBar().setTitle("Atmos");
         Fragment fragment = new HomeFragment();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.container, fragment, "home");
