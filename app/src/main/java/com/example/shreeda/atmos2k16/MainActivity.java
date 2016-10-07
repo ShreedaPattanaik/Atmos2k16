@@ -16,6 +16,8 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.shreeda.atmos2k16.TableManagers.EventsFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.events:
                         transaction = manager.beginTransaction();
-                        Fragment Events = new EventListFragment();
+                        Fragment Events = new EventsFragment();
                         transaction.replace(R.id.container, Events, "events");
                         transaction.commit();
                         menuItem.setChecked(true);
