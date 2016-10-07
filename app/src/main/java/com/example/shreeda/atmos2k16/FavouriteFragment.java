@@ -22,14 +22,16 @@ import Helper.RecyclerClickListener;
  * Created by lakshmi sravani on 28-09-2016.
  */
 public class FavouriteFragment extends Fragment {
+    ArrayList<EventSet> eventData;
+    TextView textView;
+    RecyclerView recyclerView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.favourite, container, false);
     }
-    ArrayList<EventSet> eventData;
-    TextView textView;
-    RecyclerView recyclerView;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

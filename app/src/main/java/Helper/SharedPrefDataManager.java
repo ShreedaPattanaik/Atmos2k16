@@ -26,6 +26,14 @@ public class SharedPrefDataManager {
         return preferences.getLong("event", 0);
     }
 
+    public static void updateFeedTime(Context context, long time) {
+        if (getFeedTime(context) < time) {
+            SharedPreferences.Editor editor = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE).edit();
+            editor.putLong("feed", time);
+            editor.commit();
+        }
+    }
+
     public static void updateScheduleTime(Context context, long time) {
         if (getScheduleTime(context) < time) {
             SharedPreferences.Editor editor = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE).edit();
@@ -37,6 +45,13 @@ public class SharedPrefDataManager {
     public static long getScheduleTime(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
         return preferences.getLong("schedule", 0);
+    }
+
+
+    public static long getFeedTime(Context context) {
+
+        SharedPreferences preferences = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getLong("feed", 0);
     }
 
     public static void updateToken(Context context, String refreshedToken) {
@@ -73,4 +88,6 @@ public class SharedPrefDataManager {
         editor.commit();
 
     }
+
+
 }

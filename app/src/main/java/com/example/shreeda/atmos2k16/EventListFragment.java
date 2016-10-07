@@ -85,7 +85,7 @@ public class EventListFragment extends Fragment {
         public Fragment getItem(int position) {
             Bundle args = new Bundle();
             args.putString("tab", tab.get(position));
-            EventPagerFragment frag = new EventPagerFragment();
+            EventPagerFragment frag = EventPagerFragment.newInstance(mType);
             frag.setArguments(args);
             return frag;
         }

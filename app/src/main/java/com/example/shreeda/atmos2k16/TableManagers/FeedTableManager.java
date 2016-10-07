@@ -9,6 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.shreeda.atmos2k16.Set.FeedSet;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -46,6 +49,74 @@ public class FeedTableManager {
         ourDatabase.close();
     }
 
+    public long addEntry(JSONObject jsonObject) throws JSONException {
+        long success;
+        int id = 0;
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(KEY_EVENT_NAME, jsonObject.getString("title"));
+        cv.put(KEY_EVENT_ID, jsonObject.getInt("id"));
+        cv.put(KEY_RECEIVE_TIME, jsonObject.getLong("updated_at") * 1000);
+        cv.put(KEY_MESSAGE, jsonObject.getString("message"));
+        open();
+
+        try {
+            success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
+        } catch (SQLiteConstraintException e) {
+            cv.remove(KEY_MESSAGE);
+            success = ourDatabase.update(DATABASE_TABLE, cv, KEY_MESSAGE + "='" + jsonObject.getString("message") + "'", null);
+        }
+        close();
+        return success;
+    }
+
+    public long addEntry(int event_id,
+                         String name,
+                         Long posted_time,
+                         String message) {
+        long success = -1;
+        int id = 0;
+
+        ContentValues cv = new ContentValues();
+
+        cv.put(KEY_EVENT_NAME, name);
+        cv.put(KEY_EVENT_ID, event_id);
+        cv.put(KEY_RECEIVE_TIME, posted_time);
+        cv.put(KEY_MESSAGE, message);
+
+
+        try {
+            success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
+        } catch (SQLiteConstraintException e) {
+            success = ourDatabase.update(DATABASE_TABLE, cv, KEY_ID + "=" + id, null);
+        }
+
+        return success;
+    }
+
+    public ArrayList<FeedSet> getFeeds() {
+        open();
+        ArrayList<FeedSet> feeds = new ArrayList<>();
+        open();
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE + " order by " + KEY_RECEIVE_TIME + " desc ",
+                null);
+        if (cursor.moveToFirst())
+            do {
+
+                FeedSet feed = new FeedSet(
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getString(4),
+                        cursor.getLong(3)
+                );
+                feeds.add(feed);
+            } while (cursor.moveToNext());
+        cursor.close();
+        close();
+        return feeds;
+    }
+
     private static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {
@@ -56,11 +127,11 @@ public class FeedTableManager {
         public void onCreate(SQLiteDatabase db) {
 
             String query = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" +
-                    KEY_ID              + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    KEY_EVENT_ID        + " INTEGER NOT NULL, " +
-                    KEY_EVENT_NAME      + " TEXT NOT NULL, " +
-                    KEY_RECEIVE_TIME    + " TEXT NOT NULL, " +
-                    KEY_MESSAGE         + " TEXT UNIQUE NOT NULL);" ;
+                    KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    KEY_EVENT_ID + " INTEGER NOT NULL, " +
+                    KEY_EVENT_NAME + " TEXT NOT NULL, " +
+                    KEY_RECEIVE_TIME + " TEXT NOT NULL, " +
+                    KEY_MESSAGE + " TEXT UNIQUE NOT NULL);";
             db.execSQL(query);
         }
 
@@ -70,51 +141,5 @@ public class FeedTableManager {
             onCreate(db);
         }
     }
-
-    public long addEntry( int       event_id,
-                          String    name,
-                          Long      posted_time,
-                          String    message){
-        long success=-1;
-        int id=0;
-
-        ContentValues cv = new ContentValues();
-
-        cv.put(KEY_EVENT_NAME       ,name);
-        cv.put(KEY_EVENT_ID        ,event_id);
-        cv.put(KEY_RECEIVE_TIME    ,posted_time);
-        cv.put(KEY_MESSAGE         ,message);
-
-
-        try {
-            success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
-        }catch (SQLiteConstraintException e){
-            success=ourDatabase.update(DATABASE_TABLE,cv,KEY_ID+"="+id,null);
-        }
-
-        return success;
-    }
-
-    public ArrayList<FeedSet> getFeeds() {
-        open();
-        ArrayList<FeedSet> feeds=new ArrayList<>();
-        open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +" order by "+KEY_RECEIVE_TIME+" desc " ,
-                null);
-        if (cursor.moveToFirst())
-            do{
-
-                FeedSet feed=new FeedSet(
-                        cursor.getInt(1),
-                        cursor.getString(2),
-                        cursor.getString(4),
-                        cursor.getLong(3)
-                );
-                feeds.add(feed);
-            }while (cursor.moveToNext());
-        cursor.close();
-        close();
-        return feeds;
-    }
-    }
+}
 

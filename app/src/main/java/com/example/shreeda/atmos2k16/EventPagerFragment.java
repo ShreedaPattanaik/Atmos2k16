@@ -25,12 +25,31 @@ import Helper.RecyclerClickListener;
  */
 public class EventPagerFragment extends Fragment {
 
+    private static final String ARG_PARAM1 = "arg1";
     ArrayList<EventSet> eventData;
     EventTableManager eventTableManager;
-    String Tag="EventPagerFragment";
+    String Tag = "EventPagerFragment";
+    int mType;
+
 
     public EventPagerFragment() {
         // Required empty public constructor
+    }
+
+    public static EventPagerFragment newInstance(int type) {
+        EventPagerFragment fragment = new EventPagerFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_PARAM1, type);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mType = getArguments().getInt(ARG_PARAM1);
+        }
     }
 
 
@@ -45,23 +64,24 @@ public class EventPagerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.container);
         eventTableManager = new EventTableManager(getActivity());
-        eventData = eventTableManager.getEvents(getArguments().getString("tab"), 1);  //todo change
+        eventData = eventTableManager.getEvents(getArguments().getString("tab"), mType);
+
         final EventListingAdapter mAdapter = new EventListingAdapter(getActivity());
         mAdapter.setClickListener(new RecyclerClickListener() {
             @Override
             public void onClick(View v, int pos) {
                 if (v.getId() == R.id.favourite_icon) {
                     //execute fav
-                    boolean fav=eventTableManager.toggleFavourite(eventData.get(pos).getId());
+                    boolean fav = eventTableManager.toggleFavourite(eventData.get(pos).getId());
                     eventData.get(pos).setFav(fav);
                     //todo animation heart
                     mAdapter.notifyItemChanged(pos);
 
                 } else {
                     //exec open event detail
-                    Log.e(Tag,"eventData.get(pos).getId()");
-                    Intent intent=new Intent(getActivity(),EventDetailsActivity.class);
-                    intent.putExtra("event_id",eventData.get(pos).getId());
+                    Log.e(Tag, "eventData.get(pos).getId()");
+                    Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
+                    intent.putExtra("event_id", eventData.get(pos).getId());
                     startActivity(intent);
                 }
             }
@@ -69,7 +89,6 @@ public class EventPagerFragment extends Fragment {
         mAdapter.setEvents(eventData);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Log.e("" + getArguments().getInt("tab"), String.valueOf(eventData.size()));
     }
 
 

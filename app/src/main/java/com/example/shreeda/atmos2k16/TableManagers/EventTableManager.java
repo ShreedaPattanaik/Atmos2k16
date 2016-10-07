@@ -77,6 +77,7 @@ public class EventTableManager {
     }
 
     public ArrayList<EventSet> getEvents(String tab, int type) {
+        tab=tab.toLowerCase();
         ArrayList<EventSet> events = new ArrayList<>();
         open();
         Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
@@ -172,7 +173,7 @@ public class EventTableManager {
         cv.put(KEY_IMAGE_LINK, jsonObject.getString("image_link"));
         cv.put(KEY_FBURL, jsonObject.getString("fb_url"));
         cv.put(KEY_TYPE, jsonObject.getInt("type"));
-        cv.put(KEY_TAB, jsonObject.getString("tab"));
+        cv.put(KEY_TAB, jsonObject.getString("tab").toLowerCase());
         cv.put(KEY_NAME, jsonObject.getString("event_name"));
         cv.put(KEY_CONTACTS,jsonObject.getString("contacts"));
         cv.put(KEY_IMAGE_DOWNLOAD, 0);

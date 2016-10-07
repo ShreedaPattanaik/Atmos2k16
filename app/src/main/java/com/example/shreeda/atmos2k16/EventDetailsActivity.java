@@ -97,17 +97,15 @@ public class EventDetailsActivity extends AppCompatActivity {
             contacts_card.setVisibility(View.VISIBLE);
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObj = null;
                 try {
-                    jsonObj = jsonArray.getJSONObject(i);
+                    JSONObject jsonObj = jsonArray.getJSONObject(i);
                     String name = jsonObj.getString("name");
-                    String phone = jsonObj.getString("phone");
+                    String phone = jsonObj.getString("number");
                     contact.setText(contact.getText() + name + " : " + phone + "\n");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                System.out.println(jsonObj);
             }
 
         }

@@ -57,6 +57,7 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
 
     public void setEvents(ArrayList<EventSet> events) {
         this.events = events;
+        notifyDataSetChanged();
     }
 
     @Override

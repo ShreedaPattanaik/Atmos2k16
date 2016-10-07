@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.shreeda.atmos2k16.TableManagers.EventTableManager;
+import com.example.shreeda.atmos2k16.TableManagers.FeedTableManager;
 import com.example.shreeda.atmos2k16.TableManagers.ScheduleTableManager;
 
 import org.json.JSONArray;
@@ -43,10 +44,51 @@ public class ScheduleUpdateService extends IntentService {
         eventTableManager = new EventTableManager(this);
         sendEventRequest();
         sendTokenToServer();
-        addDummyData();
+        sendFeedUpdateReq();
+//        addDummyData();
     }
 
-    private void addDummyData() {
+    private void sendFeedUpdateReq() {
+        final FeedTableManager feedTableManager=new FeedTableManager(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ControllerConstant.url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+//                {"title":"EVENT NAME","message":"hey, starting in 5 mins","id":"4","updated_at":"65432165"}
+                Log.e("feed", s);
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("error")) {
+                        JSONArray array=jsonObject.getJSONArray("data");
+                        for(int i=0; i<array.length(); i++){
+                            feedTableManager.addEntry(array.getJSONObject(i));
+                            SharedPrefDataManager.updateFeedTime(ScheduleUpdateService.this, array.getJSONObject(i).getLong("updated_at"));
+                        }
+                    }
+                } catch (JSONException e) {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("tag", "get_feed");
+                params.put("updated_at", String.valueOf(SharedPrefDataManager.getFeedTime(ScheduleUpdateService.this)));
+
+                return params;
+
+            }
+        };
+        VolleySingleton.getInstance().getRequestQueue().add(stringRequest);
+    }
+
+ /*   private void addDummyData() {
         EventTableManager tableManager = new EventTableManager(this);
 
         JSONObject jsonObject = new JSONObject();
@@ -60,19 +102,19 @@ public class ScheduleUpdateService extends IntentService {
             jsonObject.put("type", 1);
             jsonObject.put("tab", "Economics");
             jsonObject.put("event_name", "The Court Room");
-            JSONArray array=new JSONArray();
-            JSONObject object=new JSONObject();
-            object.put("name","harshit");
-            object.put("phone","1234567890");
+            JSONArray array = new JSONArray();
+            JSONObject object = new JSONObject();
+            object.put("name", "harshit");
+            object.put("phone", "1234567890");
             array.put(object);
-            Log.e("ScheduleUpdateService",array.toString());
-            JSONObject object1=new JSONObject();
-            object1.put("name","Rajat");
-            object1.put("phone","0987456321");
+            Log.e("ScheduleUpdateService", array.toString());
+            JSONObject object1 = new JSONObject();
+            object1.put("name", "Rajat");
+            object1.put("phone", "0987456321");
             array.put(object1);
-            Log.e("ScheduleUpdateService",array.toString());
-            jsonObject.put("contacts",array);
-            Log.e("ScheduleUpdateService",jsonObject.getString("contacts"));
+            Log.e("ScheduleUpdateService", array.toString());
+            jsonObject.put("contacts", array);
+            Log.e("ScheduleUpdateService", jsonObject.getString("contacts"));
 
             tableManager.addEntry(jsonObject);
 
@@ -85,7 +127,7 @@ public class ScheduleUpdateService extends IntentService {
             jsonObject.put("event_id", 4);
             tableManager.addEntry(jsonObject);
 
-            jsonObject.put("tab","Computer Science");
+            jsonObject.put("tab", "Computer Science");
             jsonObject.put("event_id", 5);
             tableManager.addEntry(jsonObject);
             jsonObject.put("event_id", 6);
@@ -99,7 +141,7 @@ public class ScheduleUpdateService extends IntentService {
 
         }
 
-    }
+    }*/
 
     private void sendTokenToServer() {
         if (SharedPrefDataManager.tokenNeedToBeSent(this)) {
