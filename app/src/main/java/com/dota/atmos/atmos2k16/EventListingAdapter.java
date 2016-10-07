@@ -34,14 +34,20 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
     EventTableManager tableManager;
     ArrayList<EventSet> events;
     RecyclerClickListener clickListener;
-    int previousPos;
     Context context;
     LayoutInflater inflater;
+
+    int defaultImage = R.drawable.atmosmono;
 
     public EventListingAdapter(Context context) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         tableManager = new EventTableManager(context);
+
+    }
+
+    public void setDefaultImage(int defaultImage) {
+        this.defaultImage = defaultImage;
     }
 
     @Override
@@ -70,23 +76,26 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
             holder.favourite.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
         if (!event.isImage_downloaded()) {
-            Picasso.with(context).load(event.getImg_link()).centerCrop().placeholder(context.getResources().getDrawable(R.drawable.chemecar))///todo default image
-                    .resize(300, 200)
-                    .centerCrop()
+            if (event.getImg_link() == null || event.getImg_link().isEmpty()) {
+                Picasso.with(context).load(defaultImage).centerCrop();
+            } else {
+                Picasso.with(context).load(event.getImg_link()).centerCrop().placeholder(context.getResources().getDrawable(defaultImage))
+                        .resize(300, 200)
+                        .centerCrop()
 
-                    .into(holder.image, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            String path = saveToInternalSorage(((BitmapDrawable) holder.image.getDrawable()).getBitmap(), event.getName());
-                            tableManager.imageDownloaded(event.getId(), path);
-                        }
+                        .into(holder.image, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                String path = saveToInternalSorage(((BitmapDrawable) holder.image.getDrawable()).getBitmap(), event.getName());
+                                tableManager.imageDownloaded(event.getId(), path);
+                            }
 
-                        @Override
-                        public void onError() {
+                            @Override
+                            public void onError() {
 
-                        }
-                    });
-
+                            }
+                        });
+            }
         } else {
 
             holder.image.setImageBitmap(loadImageFromStorage(event.getImg_link(), event.getName()));
@@ -150,13 +159,19 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
                 favourite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        clickListener.onClick(v, getAdapterPosition());
+                        clickListener.onClick(v, getLayoutPosition());
                     }
                 });
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        clickListener.onClick(v, getAdapterPosition());
+                        clickListener.onClick(v, getLayoutPosition());
+                    }
+                });
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        clickListener.onClick(view, getLayoutPosition());
                     }
                 });
             }

@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:overScrollMode="never"
+    android:background="#fff"
     tools:context="com.dota.atmos.atmos2k16.HomeFragment">
     <!--android:background="@drawable/gradient_background"-->
 

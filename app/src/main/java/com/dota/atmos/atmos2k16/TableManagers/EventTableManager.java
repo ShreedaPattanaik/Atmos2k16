@@ -12,6 +12,7 @@ import com.dota.atmos.atmos2k16.Set.EventSet;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.KeyFactory;
 import java.util.ArrayList;
 
 import Helper.SharedPrefDataManager;
@@ -184,6 +185,7 @@ public class EventTableManager {
             success = ourDatabase.insertOrThrow(DATABASE_TABLE, null, cv);
         } catch (SQLiteConstraintException e) {
             cv.remove(KEY_EVENT_ID);
+            cv.remove(KEY_FAVOURITE);
             success = ourDatabase.update(DATABASE_TABLE, cv, KEY_EVENT_ID + "=" + jsonObject.getInt("event_id"), null);
         }
         close();

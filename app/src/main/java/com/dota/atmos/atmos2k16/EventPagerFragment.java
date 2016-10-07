@@ -14,10 +14,12 @@ import android.view.ViewGroup;
 
 import com.dota.atmos.atmos2k16.Set.EventSet;
 import com.dota.atmos.atmos2k16.TableManagers.EventTableManager;
+import com.dota.atmos.atmos2k16.TableManagers.EventsFragment;
 
 import java.util.ArrayList;
 
 import Helper.RecyclerClickListener;
+import Helper.Share;
 
 
 /**
@@ -67,6 +69,7 @@ public class EventPagerFragment extends Fragment {
         eventData = eventTableManager.getEvents(getArguments().getString("tab"), mType);
 
         final EventListingAdapter mAdapter = new EventListingAdapter(getActivity());
+        mAdapter.setDefaultImage(EventsFragment.resources[mType]);
         mAdapter.setClickListener(new RecyclerClickListener() {
             @Override
             public void onClick(View v, int pos) {
@@ -77,6 +80,8 @@ public class EventPagerFragment extends Fragment {
                     //todo animation heart
                     mAdapter.notifyItemChanged(pos);
 
+                } else if (v.getId() == R.id.share_icon) {
+                    Share.shareData(eventData.get(pos), getActivity());
                 } else {
                     //exec open event detail
                     Log.e(Tag, "eventData.get(pos).getId()");

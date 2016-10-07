@@ -17,6 +17,7 @@ import com.dota.atmos.atmos2k16.TableManagers.EventTableManager;
 import java.util.ArrayList;
 
 import Helper.RecyclerClickListener;
+import Helper.Share;
 
 /**
  * Created by lakshmi sravani on 28-09-2016.
@@ -56,6 +57,8 @@ public class FavouriteFragment extends Fragment {
                     mAdapter.notifyItemRemoved(pos);
                     checkIfEmpty();
 
+                } else if (v.getId() == R.id.share_icon) {
+                    Share.shareData(eventData.get(pos), getActivity());
                 } else {
                     //exec open event detail
                     Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
