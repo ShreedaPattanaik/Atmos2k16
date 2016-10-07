@@ -20,17 +20,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="com.dota.atmos.atmos2k16.EventDetailsActivity"
+            android:name=".EventDetailsActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-
-        </activity>
-
-
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name="com.dota.atmos.atmos2k16.Set.SplashScreen"
+            android:name=".Set.SplashScreen"
             android:label="Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,25 +34,22 @@
             </intent-filter>
         </activity>
 
-
         <service
-            android:name="com.dota.atmos.atmos2k16.Services.ScheduleUpdateService"
-            android:exported="false"></service>
-
-        <service android:name="com.dota.atmos.atmos2k16.Services.MyFirebaseMessagingService">
+            android:name=".Services.ScheduleUpdateService"
+            android:exported="false" />
+        <service android:name=".Services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name="com.dota.atmos.atmos2k16.Services.MyInstanceIDListenerService">
+        <service android:name=".Services.MyInstanceIDListenerService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
-
-        <activity android:name="com.dota.atmos.atmos2k16.MainActivity" />
-        <activity android:name="com.dota.atmos.atmos2k16.ScheduleFragment" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ScheduleFragment" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -78,11 +70,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
         <activity
-            android:name="com.dota.atmos.atmos2k16.EventListFragment"
+            android:name=".EventListFragment"
             android:label="@string/title_activity_event_list"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".HeadlinerDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.dota.atmos.atmos2k16;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -100,22 +101,9 @@ public class HomeFragment extends Fragment {
         RecyclerClickListener clickListener = new RecyclerClickListener() {
             @Override
             public void onClick(View v, int pos) {
-                switch (pos) {
-                    case 0:
-                        break;
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-
-
-                }
+                Intent intent=new Intent(getActivity(),HeadlinerDetailActivity.class);
+                intent.putExtra("pos",pos);
+                startActivity(intent);
             }
         };
     }
