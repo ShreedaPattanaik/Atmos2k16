@@ -36,8 +36,8 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
-        android:padding="8dp"
-        android:src="@drawable/landinglogo" />
+        android:src="@drawable/ic_directions_black_24dp"
+        android:tint="#fff" />
 
 </android.support.design.widget.CoordinatorLayout>
 

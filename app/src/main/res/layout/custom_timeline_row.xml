@@ -39,7 +39,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp">
 
-        <TextView
+        <View
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -55,7 +55,7 @@
         android:layout_below="@+id/timelineCard"
         android:layout_marginLeft="30dp">
 
-        <TextView
+        <View
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"

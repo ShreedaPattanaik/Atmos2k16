@@ -51,12 +51,12 @@ public class SplashScreen extends AppCompatActivity {
             animation[i] = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f,
                     Animation.RELATIVE_TO_SELF, 0.5f);
             animation[i].setDuration(300);
-            animation[i].setStartOffset(800);
+            animation[i].setStartOffset(0);
             animation[i].setInterpolator(new DecelerateInterpolator(1.5f));
             animation[i].setFillAfter(true);
         }
-        animation[0].setDuration(400);
-        animation[0].setStartOffset(0);
+        animation[0].setDuration(300);
+        animation[0].setStartOffset(1000);
         v[0].startAnimation(animation[0]);
 
         for (int i = 1; i < v.length; i++)
