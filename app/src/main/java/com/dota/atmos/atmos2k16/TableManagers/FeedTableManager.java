@@ -104,7 +104,7 @@ public class FeedTableManager {
         open();
         ArrayList<FeedSet> feeds = new ArrayList<>();
         open();
-        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE + " order by " + KEY_RECEIVE_TIME + " desc ",
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE + " order by cast (" + KEY_RECEIVE_TIME + " as integer) desc ",
                 null);
         if (cursor.moveToFirst())
             do {

@@ -60,12 +60,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.MyViewHolder> 
         holder.message.setText(feeds.get(position).getMessage());
     }
 
-    private String getTime(Long time) {
+    private String getTime(long time) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
-        SimpleDateFormat format1 = new SimpleDateFormat("hh:mm a");
-        String temp = format1.format(calendar.getTime());
-        return temp;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("d MMM hh:mm a");
+        return dateFormat.format(calendar.getTime());
 
     }
 
