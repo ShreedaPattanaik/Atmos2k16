@@ -74,7 +74,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     @Override
     public void onViewRecycled(MyViewHolder holder) {
         super.onViewRecycled(holder);
-        offset=0;
+        offset = 0;
     }
 
     private void showpopupmenu(View view, final int pos) {
@@ -94,8 +94,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                         break;
 
 
-
-                    case  R.id.email:
+                    case R.id.email:
                         Intent emailIntent = new Intent(Intent.ACTION_SEND);
                         emailIntent.setType("text/html").putExtra(Intent.EXTRA_EMAIL, new String[]{arrayList.get(pos).getEmail()});
                         context.startActivity(emailIntent);
@@ -106,22 +105,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
         TextView name, designation;
         ImageButton more;
-//        RelativeLayout email,mobile;
+
+        //        RelativeLayout email,mobile;
         public MyViewHolder(View itemView) {
             super(itemView);
-            imageView= (ImageView) itemView.findViewById(R.id.pic_left);
-            name=(TextView) itemView.findViewById(R.id.name_left);
-            designation=(TextView)itemView.findViewById(R.id.post_left);
+            imageView = (ImageView) itemView.findViewById(R.id.pic_left);
+            name = (TextView) itemView.findViewById(R.id.name_left);
+            designation = (TextView) itemView.findViewById(R.id.post_left);
             more = (ImageButton) itemView.findViewById(R.id.menu_left);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -153,7 +154,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 //                        clickListener.onClick(v, getAdapterPosition());
 //                    }
 //                });
-            }
         }
     }
+}
 
