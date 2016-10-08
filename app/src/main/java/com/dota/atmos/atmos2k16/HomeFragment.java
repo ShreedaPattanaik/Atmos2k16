@@ -1,5 +1,6 @@
 package com.dota.atmos.atmos2k16;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ public class HomeFragment extends Fragment {
 
     ImageView logo;
     RecyclerView recyclerView;
+    int[] event_id={9,8,11,6,10,19,23};
 
     public HomeFragment() {
 
@@ -64,24 +66,10 @@ public class HomeFragment extends Fragment {
         LayoutInflater inflater;
         RecyclerClickListener clickListener = new RecyclerClickListener() {
             @Override
-            public boolean onClick(View v, int pos) {
-                switch (pos) {
-                    case 0:
-                        break;
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        break;
-                    case 3:
-
-                        break;
-                    case 4:
-
-
-                }
-                return false;
+            public void onClick(View v, int pos) {
+                Intent intent= new Intent(getActivity(),EventDetailsActivity.class);
+                intent.putExtra("event_id",event_id[pos]);
+                startActivity(intent);
             }
         };
         int prev = -1;
