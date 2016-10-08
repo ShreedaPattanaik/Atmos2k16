@@ -48,7 +48,7 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
     Context context;
     LayoutInflater inflater;
 
-    int defaultImage = R.drawable.atmosmono;
+    int defaultImage = R.drawable.landinglogo;
     int offset = 0;
 
     public EventListingAdapter(Context context) {
@@ -82,9 +82,9 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
         final EventSet event = events.get(position);
         holder.name.setText(event.getName());
         if (event.isFavourite())
-            holder.favourite.setFavorite(true);
+            holder.favourite.setFavorite(true,false);
         else
-            holder.favourite.setFavorite(false);
+            holder.favourite.setFavorite(false,false);
 
         if (!event.isImage_downloaded()) {
             if (event.getImg_link() == null || event.getImg_link().isEmpty()) {

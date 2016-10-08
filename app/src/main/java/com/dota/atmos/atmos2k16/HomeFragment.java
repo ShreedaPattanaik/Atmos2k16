@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         logo = (ImageView) view.findViewById(R.id.logo);
-        Picasso.with(getActivity()).load(R.drawable.latestmonochrome2).fit().centerInside().into(logo);
+        Picasso.with(getActivity()).load(R.drawable.latest_logo).fit().centerInside().into(logo);
         recyclerView = (RecyclerView) view.findViewById(R.id.headlinersRecycler);
         recyclerView.setAdapter(new HeadlinersAdapter(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
