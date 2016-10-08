@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.events:
-
+                        getSupportActionBar().setTitle("Events");
                         transaction = manager.beginTransaction();
                         Fragment Events = new EventsFragment();
                         transaction.replace(R.id.container, Events, "events");

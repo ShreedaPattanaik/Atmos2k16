@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.dota.atmos.atmos2k16.R;
 import com.dota.atmos.atmos2k16.Set.Contacts;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,7 +56,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder myViewHolder, final int i) {
         myViewHolder.name.setText(arrayList.get(i).getName());
         myViewHolder.designation.setText((arrayList.get(i).getDesignation()));
-        myViewHolder.imageView.setImageResource(arrayList.get(i).getImage());
+        //myViewHolder.imageView.setImageResource(arrayList.get(i).getImage());
+        Picasso.with(context).load(arrayList.get(i).getImage()).into(myViewHolder.imageView);
 
     }
 
@@ -73,6 +75,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                         Uri number = Uri.parse("tel:" + arrayList.get(pos).getMobile());
                         Intent intent = new Intent(Intent.ACTION_DIAL, number);
                         context.startActivity(intent);
+                        break;
 
 
 
@@ -80,6 +83,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                         Intent emailIntent = new Intent(Intent.ACTION_SEND);
                         emailIntent.setType("text/html").putExtra(Intent.EXTRA_EMAIL, new String[]{arrayList.get(pos).getEmail()});
                         context.startActivity(emailIntent);
+                        break;
 
                 }
                 return false;

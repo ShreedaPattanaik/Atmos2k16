@@ -59,7 +59,7 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
         Contacts temp7 = new Contacts("Akshay Borude", "Hospitality & Accom", "+919912366272","akshaykborude@gmail.comgmail.com", R.drawable.akshay);
         Contacts temp8 = new Contacts("Monil Shah", "Website & Creatives", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.monil);
         Contacts temp9 = new Contacts("Ayush Beria", "Visual Effects", "+91 9553324287","ayush.beria@gmail.com", R.drawable.ayush);
-        Contacts temp10 = new Contacts("Sajal Bansal", "Photography", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.sajal);
+        Contacts temp10 = new Contacts("Sajal Bansal", "Photography", "+91 9912293891","sajaldineshbansal@gmail.com", R.drawable.sajal);
 
         data.add(temp1);
         data.add(temp2);
