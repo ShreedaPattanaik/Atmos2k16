@@ -13,7 +13,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name="App.AppController"
@@ -28,7 +28,7 @@
             android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Set.SplashScreen"
-            android:label="Splash">
+            android:label="Atmos 16">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -10,6 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,15 +34,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
     LayoutInflater inflater;
 
     RecyclerClickListener clickListener;
-
-    public void setClickListener(RecyclerClickListener clickListener) {
-        this.clickListener = clickListener;
-    }
+    int offset = 0;
 
     public ContactAdapter(Context context) {
         inflater = LayoutInflater.from(context);
         arrayList = new ArrayList<>();
         this.context = context;
+    }
+
+    public void setClickListener(RecyclerClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     public void setArrayList(ArrayList<Contacts> arrayList) {
@@ -56,7 +60,20 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
         myViewHolder.name.setText(arrayList.get(i).getName());
         myViewHolder.designation.setText((arrayList.get(i).getDesignation()));
         myViewHolder.imageView.setImageResource(arrayList.get(i).getImage());
+        Animation animation = new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        animation.setDuration(300);
+        animation.setInterpolator(new DecelerateInterpolator(1.5f));
+        animation.setFillAfter(true);
+        animation.setStartOffset(offset);
+        myViewHolder.itemView.startAnimation(animation);
+        offset = offset + 40;
+    }
 
+    @Override
+    public void onViewRecycled(MyViewHolder holder) {
+        super.onViewRecycled(holder);
+        offset=0;
     }
 
     private void showpopupmenu(View view, final int pos) {
@@ -75,8 +92,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
                         context.startActivity(intent);
 
 
-
-                    case  R.id.email:
+                    case R.id.email:
                         Intent emailIntent = new Intent(Intent.ACTION_SEND);
                         emailIntent.setType("text/html").putExtra(Intent.EXTRA_EMAIL, new String[]{arrayList.get(pos).getEmail()});
                         context.startActivity(emailIntent);
@@ -86,22 +102,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
             }
         });
     }
+
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name,designation,numberTV,emailTV;
+        TextView name, designation;
         ImageButton more;
-//        RelativeLayout email,mobile;
+
+        //        RelativeLayout email,mobile;
         public MyViewHolder(View itemView) {
             super(itemView);
-            imageView= (ImageView) itemView.findViewById(R.id.pic_left);
-            name=(TextView) itemView.findViewById(R.id.name_left);
-            designation=(TextView)itemView.findViewById(R.id.post_left);
+            imageView = (ImageView) itemView.findViewById(R.id.pic_left);
+            name = (TextView) itemView.findViewById(R.id.name_left);
+            designation = (TextView) itemView.findViewById(R.id.post_left);
             more = (ImageButton) itemView.findViewById(R.id.menu_left);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,7 +151,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.MyViewHo
 //                        clickListener.onClick(v, getAdapterPosition());
 //                    }
 //                });
-            }
         }
     }
+}
 
