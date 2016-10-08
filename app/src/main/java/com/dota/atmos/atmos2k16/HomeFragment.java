@@ -66,10 +66,11 @@ public class HomeFragment extends Fragment {
         LayoutInflater inflater;
         RecyclerClickListener clickListener = new RecyclerClickListener() {
             @Override
-            public void onClick(View v, int pos) {
+            public boolean onClick(View v, int pos) {
                 Intent intent= new Intent(getActivity(),EventDetailsActivity.class);
                 intent.putExtra("event_id",event_id[pos]);
                 startActivity(intent);
+                return true;
             }
         };
         int prev = -1;

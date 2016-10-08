@@ -249,7 +249,7 @@
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/darkblue"
+
         android:src="@drawable/ic_share_black_24dp">
     </android.support.design.widget.FloatingActionButton>
 </android.support.design.widget.CoordinatorLayout>
