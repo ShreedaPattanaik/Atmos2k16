@@ -2,23 +2,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
     android:overScrollMode="never"
+    android:scrollbars="none"
     tools:context="com.dota.atmos.atmos2k16.HomeFragment">
     <!--android:background="@drawable/gradient_background"-->
 
     <LinearLayout
-        android:orientation="vertical"
-        android:descendantFocusability="blocksDescendants"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
 
         <ImageView
-            android:transitionName="logo"
             android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="270dp"
-            android:scaleType="centerInside" />
+            android:layout_marginTop="16dp"
+            android:scaleType="centerInside"
+            android:transitionName="logo" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/headlinersRecycler"
