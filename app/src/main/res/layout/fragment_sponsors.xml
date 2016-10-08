@@ -83,7 +83,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="8dp"
             android:gravity="center"
-            android:text="@string/civil_expo_title_sponsor"
+            android:text="IN ASSOCIATION WITH"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp" />
 

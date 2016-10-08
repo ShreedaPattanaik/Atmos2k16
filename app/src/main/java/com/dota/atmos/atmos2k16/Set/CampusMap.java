@@ -4,9 +4,13 @@ package com.dota.atmos.atmos2k16.Set;
  * Created by lakshmi sravani on 26-09-2016.
  */
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,9 +28,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
 
-
 public class CampusMap extends Fragment implements OnMapReadyCallback {
 
+    private static final int LOCATION_PERMISSION = 1002;
     private GoogleMap mMap;
 
     @Nullable
@@ -52,6 +56,13 @@ public class CampusMap extends Fragment implements OnMapReadyCallback {
         factory.setStyle(factory.STYLE_BLUE);
         mMap = googleMap;
 
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, LOCATION_PERMISSION);
+
+        } else {
+            showLocationOnMap();
+        }
+
 
         for (int i = 0; i < ControllerConstants.names.length; i++) {
             Bitmap icon = factory.makeIcon(ControllerConstants.names[i]);
@@ -69,6 +80,24 @@ public class CampusMap extends Fragment implements OnMapReadyCallback {
                 .build();
         mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION) {
+
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                showLocationOnMap();
+            }
+        }
+    }
+
+    private void showLocationOnMap() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
     }
 }
 

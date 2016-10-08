@@ -59,7 +59,7 @@ public class EventListFragment extends Fragment {
         onNoEvents = (LinearLayout) view.findViewById(R.id.noevent);
         tab = new ArrayList<String>();
         eventTableManager = new EventTableManager(getActivity());
-        tab = eventTableManager.getDistinctTabs(mType); //todo changed
+        tab = eventTableManager.getDistinctTabs(mType);
         Log.e(Tag + "tabv", tab.toString());
         if (tab.isEmpty()) {
             onNoEvents.setVisibility(View.VISIBLE);

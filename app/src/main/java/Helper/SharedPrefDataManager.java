@@ -90,4 +90,15 @@ public class SharedPrefDataManager {
     }
 
 
+    public static void neverShowAgain(Context context, boolean b) {
+        SharedPreferences.Editor editor = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE).edit();
+        editor.putBoolean("never", b);
+        editor.commit();
+
+    }
+
+    public static boolean neverShowAgain(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(SHAR_PREF_NAME, Context.MODE_PRIVATE);
+        return preferences.getBoolean("never", false);
+    }
 }

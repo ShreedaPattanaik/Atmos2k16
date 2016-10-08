@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <!--
@@ -12,6 +13,7 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name="App.AppController"
@@ -49,7 +51,6 @@
         </service>
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".ScheduleFragment" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -70,10 +71,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".EventListFragment"
-            android:label="@string/title_activity_event_list"
-            android:theme="@style/AppTheme" />
         <activity android:name=".HeadlinerDetailActivity"></activity>
     </application>
 

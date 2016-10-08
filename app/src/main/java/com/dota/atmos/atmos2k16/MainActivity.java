@@ -1,6 +1,7 @@
 package com.dota.atmos.atmos2k16;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -16,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.dota.atmos.atmos2k16.TableManagers.EventsFragment;
+
+import Helper.SharedPrefDataManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawer.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
+        showDialog();
+
 
         manager = getSupportFragmentManager();
         setHomeFragment();
@@ -56,10 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.home_menu:
                         setHomeFragment();
-
                         break;
-
-
                     case R.id.schedule:
                         transaction = manager.beginTransaction();
                         Fragment fragment3 = new ScheduleFragment();
@@ -67,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-
                         break;
 
                     case R.id.register:
@@ -77,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                         transaction.commit();
                         menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
-
 
 
                         break;
@@ -118,9 +119,11 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.AppCredits:
 
-                       /* transaction = manager.beginTransaction();
+                        transaction = manager.beginTransaction();
+                        fragment = new AppCredits();
+                        transaction.replace(R.id.container, fragment, "AppCredits");
                         transaction.commit();
-                        menuItem.setChecked(true);*/
+                        menuItem.setChecked(true);
                         mDrawer.closeDrawer(Gravity.LEFT);
 
                         break;
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         mDrawer.closeDrawer(Gravity.LEFT);
 
                         break;
-                    case  R.id.favourites:
+                    case R.id.favourites:
                         transaction = manager.beginTransaction();
                         fragment = new FavouriteFragment();
                         transaction.replace(R.id.container, fragment, "favourite");
@@ -158,6 +161,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showDialog() {
+        if (SharedPrefDataManager.neverShowAgain(this))
+            return;
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Auto update");
+        dialog.setMessage("The Event List, Schedule and Feeds are automatically updated on every App startup.");
+        dialog.setPositiveButton("OK", null);
+        dialog.setNegativeButton("Never show again", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                SharedPrefDataManager.neverShowAgain(MainActivity.this, true);
+            }
+        });
+        dialog.show();
     }
 
     private void setHomeFragment() {

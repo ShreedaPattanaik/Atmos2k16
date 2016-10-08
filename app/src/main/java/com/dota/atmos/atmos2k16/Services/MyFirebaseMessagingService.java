@@ -41,7 +41,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 sendEventNotif(jsonObject);
             }
         } catch (JSONException e) {
-            Log.e("Notification",e.toString());
+            Log.e("Notification", e.toString());
         }
 
     }

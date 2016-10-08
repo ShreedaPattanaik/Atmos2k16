@@ -67,6 +67,7 @@ public class TimelinePagerFragment extends Fragment {
 
         View topLine, bottomLine;
         TextView time;
+        View circuarTop,circularBottom;
         //        RecyclerView recyclerView;
         LinearLayout linearLayout;
         View itemView;
@@ -78,6 +79,8 @@ public class TimelinePagerFragment extends Fragment {
             bottomLine = itemView.findViewById(R.id.bottomLine);
 //            recyclerView= (RecyclerView) itemView.findViewById(R.id.container);
             linearLayout=(LinearLayout) itemView.findViewById(R.id.timelineCard);
+            circuarTop=itemView.findViewById(R.id.imageTop);
+            circularBottom=itemView.findViewById(R.id.imageBottom);
             this.itemView=itemView;
         }
 
@@ -124,13 +127,17 @@ public class TimelinePagerFragment extends Fragment {
             holder.time.setText(getTime(times.get(position)) );
             if (position == times.size()-1) {
                 holder.bottomLine.setVisibility(View.GONE);
+                holder.circularBottom.setVisibility(View.GONE);
             } else {
                 holder.bottomLine.setVisibility(View.VISIBLE);
+                holder.circularBottom.setVisibility(View.VISIBLE);
             }
             if (position == 0) {
                 holder.topLine.setVisibility(View.GONE);
+                holder.circuarTop.setVisibility(View.GONE);
             } else {
                 holder.topLine.setVisibility(View.VISIBLE);
+                holder.circuarTop.setVisibility(View.VISIBLE);
             }
             holder.bindRecycler(times.get(position));
 
