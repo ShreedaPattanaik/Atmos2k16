@@ -20,6 +20,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 /**
  * Created by admin on 03-10-2016.
  */
@@ -30,13 +32,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Map<String, String> a=remoteMessage.getData();
 
-        String message = remoteMessage.getData().get("data");
-        Log.d(TAG, "Notification Message Body: " + message);
-//        {"message":"Hello5","title":"Test5"}
-        //todo test
+        Log.e("Message",a.get("message"));
         try {
-            JSONObject jsonObject = new JSONObject(message);
+            JSONObject jsonObject = new JSONObject(a.get("message"));
             if (!jsonObject.has("type") || jsonObject.getInt("type") == 1) {
                 sendEventNotif(jsonObject);
             }

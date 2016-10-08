@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by SHREEDA on 26-09-2016.
@@ -57,7 +58,11 @@ public class FeedTableManager {
 
         cv.put(KEY_EVENT_NAME, jsonObject.getString("title"));
         cv.put(KEY_EVENT_ID, jsonObject.getInt("id"));
-        cv.put(KEY_RECEIVE_TIME, jsonObject.getLong("updated_at") * 1000);
+        if (jsonObject.has("updated_at") && !jsonObject.isNull("updated_at"))
+            cv.put(KEY_RECEIVE_TIME, jsonObject.getLong("updated_at") * 1000);
+        else{
+            cv.put(KEY_RECEIVE_TIME, Calendar.getInstance().getTimeInMillis());
+        }
         cv.put(KEY_MESSAGE, jsonObject.getString("message"));
         open();
 

@@ -138,8 +138,8 @@ public class HeadlinerDetailActivity extends AppCompatActivity {
         String link = imgURL[pos];
 
         Picasso.with(this).load(imgURL[pos])
-                .placeholder(this.getResources().getDrawable(R.drawable.atmos16))
-                .error(this.getResources().getDrawable(R.drawable.atmos16))
+                .placeholder(this.getResources().getDrawable(R.drawable.default_card_image))
+                .error(this.getResources().getDrawable(R.drawable.default_card_image))
                 .resize(300, 200)
                 .centerCrop()
                 .into(Iv, new Callback() {

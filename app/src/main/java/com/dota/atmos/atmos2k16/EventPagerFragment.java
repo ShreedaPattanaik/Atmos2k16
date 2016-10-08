@@ -71,7 +71,7 @@ public class EventPagerFragment extends Fragment {
         eventData = eventTableManager.getEvents(getArguments().getString("tab"), mType);
 
         final EventListingAdapter mAdapter = new EventListingAdapter(getActivity());
-        mAdapter.setDefaultImage(EventsFragment.resources[mType]);
+        mAdapter.setDefaultImage(R.drawable.default_card_image);
         mAdapter.setClickListener(new RecyclerClickListener() {
             @Override
             public boolean onClick(View v, int pos) {

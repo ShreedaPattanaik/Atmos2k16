@@ -48,7 +48,7 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
     Context context;
     LayoutInflater inflater;
 
-    int defaultImage = R.drawable.landinglogo;
+    int defaultImage = R.drawable.default_card_image;
     int offset = 0;
 
     public EventListingAdapter(Context context) {

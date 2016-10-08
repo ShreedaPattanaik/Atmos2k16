@@ -95,6 +95,22 @@ public class ScheduleTableManager {
         return sets;
     }
 
+    public ArrayList<ScheduleSet> getSchedule(int event_id) {
+        open();
+        ArrayList<ScheduleSet> sets = new ArrayList<>();
+        Cursor cursor = ourDatabase.rawQuery("SELECT * FROM " + DATABASE_TABLE +
+                " WHERE " + KEY_EVENT_ID + "=" + event_id, null);
+        if (cursor.moveToFirst()) {
+            do {
+                ScheduleSet set = new ScheduleSet(cursor.getString(3), cursor.getString(2), cursor.getString(5), cursor.getLong(4), cursor.getInt(1));
+                sets.add(set);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        close();
+        return sets;
+    }
+
     public ArrayList<Long> getDistinctTime(int day) {
 
         Calendar start = Calendar.getInstance(), end = Calendar.getInstance();
