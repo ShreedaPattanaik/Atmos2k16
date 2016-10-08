@@ -2,6 +2,7 @@ package com.dota.atmos.atmos2k16;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.dota.atmos.atmos2k16.TableManagers.ScheduleTableManager;
 import com.dota.atmos.atmos2k16.Set.ScheduleSet;
+import com.dota.atmos.atmos2k16.TableManagers.ScheduleTableManager;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.Calendar;
 
 public class TimelinePagerFragment extends Fragment {
     ArrayList<Long> times;
-
+    ScheduleTableManager mTableManager;
 
     public TimelinePagerFragment() {
         // Required empty public constructor
@@ -40,26 +41,33 @@ public class TimelinePagerFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_timeline, container, false);
     }
 
-    ScheduleTableManager mTableManager;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.container);
-        TextView textView=(TextView)view.findViewById(R.id.notpresent);
+        TextView textView = (TextView) view.findViewById(R.id.notpresent);
         mTableManager = new ScheduleTableManager(getActivity());
 
         times = mTableManager.getDistinctTime(getArguments().getInt("day"));
-        Log.e("TimelineFrag",times.toString());
-        if(times.isEmpty()){
+        Log.e("TimelineFrag", times.toString());
+        if (times.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             textView.setVisibility(View.VISIBLE);
-        }else{
-            MyAdapter mAdapter=new MyAdapter(getActivity());
+        } else {
+            MyAdapter mAdapter = new MyAdapter(getActivity());
             mAdapter.setTimes(times);
             recyclerView.setAdapter(mAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            Log.e("Day "+getArguments().getInt("day"), String.valueOf(times.size()));
+            Log.e("Day " + getArguments().getInt("day"), String.valueOf(times.size()));
         }
+
+    }
+
+    private String getTime(long time) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        return sdf.format(calendar.getTime());
 
     }
 
@@ -67,7 +75,7 @@ public class TimelinePagerFragment extends Fragment {
 
         View topLine, bottomLine;
         TextView time;
-        View circuarTop,circularBottom;
+        View circuarTop, circularBottom;
         //        RecyclerView recyclerView;
         LinearLayout linearLayout;
         View itemView;
@@ -78,32 +86,39 @@ public class TimelinePagerFragment extends Fragment {
             topLine = itemView.findViewById(R.id.topLine);
             bottomLine = itemView.findViewById(R.id.bottomLine);
 //            recyclerView= (RecyclerView) itemView.findViewById(R.id.container);
-            linearLayout=(LinearLayout) itemView.findViewById(R.id.timelineCard);
-            circuarTop=itemView.findViewById(R.id.imageTop);
-            circularBottom=itemView.findViewById(R.id.imageBottom);
-            this.itemView=itemView;
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.timelineCard);
+            circuarTop = itemView.findViewById(R.id.imageTop);
+            circularBottom = itemView.findViewById(R.id.imageBottom);
+            this.itemView = itemView;
         }
 
         public void bindRecycler(Long time) {
 
-            ArrayList<ScheduleSet> sets=mTableManager.getSchedule(time);
+            final ArrayList<ScheduleSet> sets = mTableManager.getSchedule(time);
             linearLayout.removeAllViews();
-            for(int i=0; i<sets.size(); i++) {
-                View v =LayoutInflater.from(getActivity()).inflate( R.layout.custom_component_timeline_row, linearLayout,false);
-                ((TextView)v.findViewById(R.id.event_name)).setText(sets.get(i).getName());
-                ((TextView)v.findViewById(R.id.round_name)).setText(sets.get(i).getRound());
-                ((TextView)v.findViewById(R.id.venue)).setText(sets.get(i).getVenue());
+            for ( int i = 0; i < sets.size(); i++) {
+                final ScheduleSet set = sets.get(i);
+                View v = LayoutInflater.from(getActivity()).inflate(R.layout.custom_component_timeline_row, linearLayout, false);
+                ((TextView) v.findViewById(R.id.event_name)).setText(set.getName());
+                ((TextView) v.findViewById(R.id.round_name)).setText(set.getRound());
+                ((TextView) v.findViewById(R.id.venue)).setText(set.getVenue());
+                v.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getActivity(), EventDetailsActivity.class);
+                        intent.putExtra("event_id", set.getEvent_id());
+                        startActivity(intent);
+                    }
+                });
                 linearLayout.addView(v);
-                if(i!=sets.size()-1){
-                    View divider=LayoutInflater.from(getActivity()).inflate( R.layout.divider, linearLayout,false);
+                if (i != sets.size() - 1) {
+                    View divider = LayoutInflater.from(getActivity()).inflate(R.layout.divider, linearLayout, false);
                     linearLayout.addView(divider);
                 }
             }
+
         }
     }
-
-
-
 
     class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
@@ -124,8 +139,8 @@ public class TimelinePagerFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            holder.time.setText(getTime(times.get(position)) );
-            if (position == times.size()-1) {
+            holder.time.setText(getTime(times.get(position)));
+            if (position == times.size() - 1) {
                 holder.bottomLine.setVisibility(View.GONE);
                 holder.circularBottom.setVisibility(View.GONE);
             } else {
@@ -152,14 +167,6 @@ public class TimelinePagerFragment extends Fragment {
         public int getItemCount() {
             return times.size();
         }
-    }
-
-    private String getTime(long time) {
-        Calendar calendar=Calendar.getInstance();
-        calendar.setTimeInMillis(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-        return sdf.format(calendar.getTime());
-
     }
 
 
