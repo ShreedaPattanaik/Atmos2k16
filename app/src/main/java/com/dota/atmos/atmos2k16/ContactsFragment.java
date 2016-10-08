@@ -50,14 +50,17 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
     }
 
     private void feedData() {
-        Contacts temp1 = new Contacts("Keshav Kedarnath", "President", "+917997030001", "president@hyderabad.bits-pilani.ac.in", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp2 = new Contacts("Sampath Balineni", "General Secretary", "+91 7997030002", "gensec@hyderabad.bits-pilani.ac.in", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp3 = new Contacts("Prashant Balana", "Sponsorship and Marketing", "+919912248413","prashant.balana@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp4 = new Contacts("Rahul Somu", "Publicity and Social Media Relations", "+918499966778","rahulsomu9@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp5 = new Contacts("Rajat Bansal", "Technical Convener", "+919912283346","rajatbansal427@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp6 = new Contacts("Prudthviraj", "Logistics & Operations", "+918096765563","prudthviraj666@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp7 = new Contacts("Akshay Borude", "Hospitality & Accom", "+919912366272","akshaykborude@gmail.comgmail.com", R.drawable.ic_insert_emoticon_black_24dp);
-        Contacts temp8 = new Contacts("Monil Shah", "Website & Creatives", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.ic_insert_emoticon_black_24dp);
+        Contacts temp1 = new Contacts("Keshav Kedarnath", "President", "+917997030001", "president@hyderabad.bits-pilani.ac.in", R.drawable.keshav);
+        Contacts temp2 = new Contacts("Sampath Balineni", "General Secretary", "+91 7997030002", "gensec@hyderabad.bits-pilani.ac.in", R.drawable.sampath);
+        Contacts temp3 = new Contacts("Prashant Balana", "Sponsorship and Marketing", "+919912248413","prashant.balana@gmail.com", R.drawable.balana);
+        Contacts temp4 = new Contacts("Rahul Somu", "Publicity and Social Media Relations", "+918499966778","rahulsomu9@gmail.com", R.drawable.somu);
+        Contacts temp5 = new Contacts("Rajat Bansal", "Technical Convener", "+919912283346","rajatbansal427@gmail.com", R.drawable.rajat);
+        Contacts temp6 = new Contacts("Prudthviraj", "Logistics & Operations", "+918096765563","prudthviraj666@gmail.com", R.drawable.pruthvi);
+        Contacts temp7 = new Contacts("Akshay Borude", "Hospitality & Accom", "+919912366272","akshaykborude@gmail.comgmail.com", R.drawable.akshay);
+        Contacts temp8 = new Contacts("Monil Shah", "Website & Creatives", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.monil);
+        Contacts temp9 = new Contacts("Ayush Beria", "Visual Effects", "+91 9553324287","ayush.beria@gmail.com", R.drawable.ayush);
+        Contacts temp10 = new Contacts("Sajal Bansal", "Photography", "+91 9553305670","shahmonil1996@gmail.com", R.drawable.sajal);
+
         data.add(temp1);
         data.add(temp2);
         data.add(temp3);
@@ -66,6 +69,8 @@ public class ContactsFragment extends android.support.v4.app.Fragment implements
         data.add(temp6);
         data.add(temp7);
         data.add(temp8);
+        data.add(temp9);
+        data.add(temp10);
         contactAdapter.notifyItemRangeInserted(0, data.size() - 1);
     }
 

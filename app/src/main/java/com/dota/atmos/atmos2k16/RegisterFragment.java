@@ -183,7 +183,7 @@ public class RegisterFragment extends Fragment {
                         manager = getActivity().getSupportFragmentManager();
                         Fragment fragment;
                         Log.e("Register", spinner.getSelectedItemsAsString());
-                        fragment = OnRegisteredFragment.newInstance(spinner.getSelectedItemsAsString(), object.getString("id"), object.getString("email"));
+                        fragment = OnRegisteredFragment.newInstance(object.getString("events"), object.getString("id"), object.getString("email"));
                         FragmentTransaction transaction = manager.beginTransaction();
                         transaction.replace(R.id.container, fragment, "registered");
                         transaction.commit();
@@ -191,7 +191,6 @@ public class RegisterFragment extends Fragment {
 
                     }
 
-                    Toast.makeText(getActivity(), object.toString(), Toast.LENGTH_LONG).show();
                     Log.e(TAG, "onResponse: Data received" + object.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
