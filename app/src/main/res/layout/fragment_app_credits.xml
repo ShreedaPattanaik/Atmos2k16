@@ -129,7 +129,51 @@
             android:textColor="#000"
             android:textSize="22sp"
             android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/designer3Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:civ_border_color="#000"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/designer4Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentRight="true"
+                app:civ_border_color="#000"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/designer3Image"
+                android:layout_alignRight="@+id/designer3Image"
+                android:layout_below="@+id/designer3Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Anshuman"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/designer4Image"
+                android:layout_alignRight="@+id/designer4Image"
+                android:layout_below="@+id/designer4Image"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Vardhan"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -175,51 +219,7 @@
                 android:textSize="20sp" />
 
         </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/designer3Image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:civ_border_color="#000"
-                 />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/designer4Image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_alignParentRight="true"
-                app:civ_border_color="#000"
-                 />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/designer3Image"
-                android:layout_alignRight="@+id/designer3Image"
-                android:layout_below="@+id/designer3Image"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="Anshuman"
-                android:textColor="#000"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/designer4Image"
-                android:layout_alignRight="@+id/designer4Image"
-                android:layout_below="@+id/designer4Image"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="Vardhan"
-                android:textColor="#000"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
 
 
     </LinearLayout>

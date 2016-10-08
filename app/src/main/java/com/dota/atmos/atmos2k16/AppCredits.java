@@ -1,6 +1,8 @@
 package com.dota.atmos.atmos2k16;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -50,5 +52,62 @@ public class AppCredits extends Fragment {
         Picasso.with(getActivity()).load(R.drawable.nithya).into(desg4);
         Picasso.with(getActivity()).load(R.drawable.gagan).into(desg2);
         Picasso.with(getActivity()).load(R.drawable.anshuman).into(desg3);
+        dev1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/harshit-agarwal-32aba1101?authType=NAME_SEARCH&authToken=TjEm&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A435914386%2CauthType%3ANAME_SEARCH%2Cidx%3A1-2-2%2CtarId%3A1475933853069%2Ctas%3Aharshit"));
+                startActivity(browserIntent);
+            }
+        });
+        dev2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/rajat-jain-796772126?trk=nav_responsive_tab_profile_pic"));
+                        startActivity(browserIntent);
+            }
+        });
+        dev3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/shreeda.pattanaik?fref=ts"));
+                startActivity(browserIntent);
+            }
+        });
+        dev4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/jagini.sravs?ref=br_rs"));
+                startActivity(browserIntent);
+            }
+        });
+        desg1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/SaiRajivKrishna"));
+                startActivity(browserIntent);
+            }
+        });
+        desg2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/gagan.aditya.5?fref=ts"));
+                startActivity(browserIntent);
+            }
+        });
+        desg3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/anshuman.das.9678?hc_ref=NEWSFEED"));
+                startActivity(browserIntent);
+            }
+        });
+        desg4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/nithyavardhan?fref=ts"));
+                startActivity(browserIntent);
+            }
+        });
+
     }
 }
