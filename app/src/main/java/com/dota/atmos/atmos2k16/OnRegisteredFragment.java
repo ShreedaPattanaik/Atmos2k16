@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by SHREEDA on 01-10-2016.
  */
@@ -18,11 +21,10 @@ public class OnRegisteredFragment extends Fragment {
     private static final String ARG_PARAM1 = "eventname";
     private static final String ARG_PARAM2 = "atmosId";
     private static final String ARG_PARAM3 = "email";
-    private String mEvents,mID,mEmail;
+    TextView event_tv, atmodId_tv, email_tv;
+    private String mEvents, mID, mEmail;
 
-    TextView event_tv,atmodId_tv,email_tv;
-
-    public static OnRegisteredFragment newInstance(String eventnames,String atmosId,String email) {
+    public static OnRegisteredFragment newInstance(String eventnames, String atmosId, String email) {
         OnRegisteredFragment fragment = new OnRegisteredFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, eventnames);
@@ -37,7 +39,14 @@ public class OnRegisteredFragment extends Fragment {
         super.onCreate(savedIntanceState);
         if (getArguments() != null) {
             mEvents = getArguments().getString(ARG_PARAM1);
-            Log.e("OnRegister",mEvents);
+            String[] array = mEvents.split(",");
+            Set<String> set = new HashSet<>();
+            for (int i = 0; i < array.length; i++) {
+                set.add(array[i].toUpperCase().trim());
+            }
+            mEvents = set.toString();
+            mEvents=mEvents.substring(1,mEvents.length()-1);
+            Log.e("OnRegister", mEvents);
             mID = getArguments().getString(ARG_PARAM2);
             mEmail = getArguments().getString(ARG_PARAM3);
         }
@@ -53,8 +62,8 @@ public class OnRegisteredFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         event_tv = (TextView) view.findViewById(R.id.EVENTList);
-        atmodId_tv=(TextView)view.findViewById(R.id.REGID);
-        email_tv=(TextView)view.findViewById(R.id.EMAIL);
+        atmodId_tv = (TextView) view.findViewById(R.id.REGID);
+        email_tv = (TextView) view.findViewById(R.id.EMAIL);
         event_tv.setText(mEvents);
         atmodId_tv.setText(mID);
         email_tv.setText(mEmail);

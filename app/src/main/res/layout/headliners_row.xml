@@ -11,6 +11,7 @@
     app:cardCornerRadius="30dp">
 
     <ImageView
+        android:clickable="false"
         android:id="@+id/main_events"
         android:layout_width="match_parent"
         android:layout_height="140dp"
