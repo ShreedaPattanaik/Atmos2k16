@@ -88,10 +88,10 @@ public class EventListingAdapter extends RecyclerView.Adapter<EventListingAdapte
 
         if (!event.isImage_downloaded()) {
             if (event.getImg_link() == null || event.getImg_link().isEmpty()) {
-                Picasso.with(context).load(defaultImage).centerCrop();
+                Picasso.with(context).load(defaultImage).fit().centerCrop().into(holder.image);
             } else {
                 Picasso.with(context).load(event.getImg_link()).centerCrop().placeholder(context.getResources().getDrawable(defaultImage))
-                        .resize(300, 200)
+                        .fit()
                         .centerCrop()
 
                         .into(holder.image, new Callback() {
